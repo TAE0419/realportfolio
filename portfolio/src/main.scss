@@ -1,0 +1,63 @@
+@use './styles/variable' as *;
+
+@font-face {
+  font-family: 'Nasalization';
+  src: url('./assets/font/Nasalization Rg.otf') format('opentype');
+  font-weight: $font-weight-regular;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'NanumSquare';
+  src: url('./assets/font/nanum-square/NanumSquareR.otf') format('opentype');
+  font-weight: $font-weight-regular;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'NanumSquare';
+  src: url('./assets/font/nanum-square/NanumSquareB.otf') format('opentype');
+  font-weight: $font-weight-bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --sub-color: #{$sub-color};
+  --main-color: #{$main-color};
+  --point-color: #{$point-color};
+  --dark-color: #{$dark-color};
+  --white-color: #{$white-color};
+  --title-font: 'Nasalization', system-ui, sans-serif;
+  --body-font: 'NanumSquare', system-ui, sans-serif;
+
+  font: #{$font-size-base}/1.45 var(--body-font);
+  color: var(--white-color);
+  background: var(--white-color);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  overflow-x: hidden;
+}
+
+#root {
+  min-height: 100svh;
+}
+
+h1,
+h2,
+p {
+  margin: 0;
+}
