@@ -1,22 +1,43 @@
 @use './styles/variable' as *;
 
 .main-page {
+  position: relative;
+  isolation: isolate;
   --hard-shadow-x: 6px;
   --hard-shadow-y: 6px;
+  --radial-transparent: color-mix(in srgb, var(--main-color) 0%, transparent);
+  --radial-top: radial-gradient(
+    ellipse 55vw 55vw at 50% 0%,
+    var(--sub-color) 0%,
+    var(--main-color) 58%,
+    var(--radial-transparent) 99%
+  );
+  --radial-about-top: radial-gradient(
+    ellipse 60vw 50vw at 50% 0%,
+    var(--dark-color) 0%,
+    var(--main-color) 70%,
+    var(--radial-transparent) 99%
+  );
+  --radial-about-bottom: radial-gradient(
+    ellipse 60vw 50vw at 50% 100%,
+    var(--dark-color) 0%,
+    var(--main-color) 70%,
+    var(--radial-transparent) 99%
+  );
 
   width: 100%;
   min-height: 100svh;
-  overflow-x: hidden;
+  overflow-x: clip;
   background: var(--white-color);
 }
 
 .hero-section {
   position: relative;
   min-height: 2500px;
-  background: linear-gradient(
+  background: var(--radial-top), var(--radial-about-bottom), linear-gradient(
     180deg,
     var(--sub-color) 0,
-    var(--main-color) 26%,
+    var(--main-color) 20%,
     var(--main-color) 100%
   );
   color: var(--white-color);
@@ -32,6 +53,17 @@
   pointer-events: none;
   transform: translateY(-50%);
   z-index: 1;
+}
+
+.fish-shadows {
+  position: absolute;
+  top: -200px;
+  left: 0;
+  z-index: 0;
+  display: block;
+  width: 100%;
+  height: calc(100% + 400px);
+  pointer-events: none;
 }
 
 .wave-field.is-stopped {
@@ -87,7 +119,7 @@
   align-items: center;
   width: max-content;
   font-family: var(--title-font);
-  font-size: $font-size-hero-title;
+  font-size: var(--font-size-hero-title);
   font-weight: $font-weight-regular;
   line-height: 0.82;
   letter-spacing: 0;
@@ -101,7 +133,7 @@
   position: relative;
   z-index: 2;
   font-family: var(--title-font);
-  font-size: $font-size-section-title;
+  font-size: var(--font-size-section-title);
   font-weight: $font-weight-regular;
   line-height: 1;
   letter-spacing: 0;
@@ -117,14 +149,14 @@
   gap: 7px;
   color: var(--point-color);
   font-family: var(--body-font);
-  font-size: $font-size-sparkle-label;
+  font-size: var(--font-size-body);
   font-weight: $font-weight-regular;
   line-height: 1;
   text-transform: uppercase;
 
   &__icon {
-    width: clamp(17px, 2.45vw, 31px);
-    height: clamp(17px, 2.45vw, 31px);
+    width: $sparkle-size;
+    height: $sparkle-size;
     filter: drop-shadow(var(--hard-shadow-x) var(--hard-shadow-y) 0 var(--dark-color));
   }
 }
@@ -189,10 +221,22 @@
 }
 
 .about-section {
+  --about-space-closed-height: 56px;
+  --about-space-open-height: 1290px;
+  --about-space-transition-duration: 0.5s;
+
   position: relative;
-  height: 1580px;
-  background: var(--main-color);
-  overflow: hidden;
+  height: 1290px;
+  overflow: visible;
+
+  &::before {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: var(--radial-about-top), var(--radial-about-bottom), var(--main-color);
+    pointer-events: none;
+    content: '';
+  }
 }
 
 .about-space {
@@ -201,65 +245,40 @@
   left: 0;
   z-index: 1;
   width: 100%;
-  height: 56px;
+  height: var(--about-space-closed-height);
   overflow: hidden;
-  transition: height 1s ease;
+  transition: height var(--about-space-transition-duration) ease;
 }
 
 .about-section.is-open .about-space {
-  height: 100%;
+  height: var(--about-space-open-height);
 }
 
-.about-space__body {
+.about-space__fill {
   position: absolute;
-  top: 56px;
-  bottom: 56px;
-  z-index: 1;
-  left: 0;
-  width: 100%;
-  background: var(--white-color);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0s linear;
-}
-
-.about-space__mask {
-  position: absolute;
-  left: 0;
-  z-index: 3;
-  width: 100%;
-  height: 56px;
-  color: var(--main-color);
-  pointer-events: none;
-}
-
-.about-space__mask--top {
   top: 0;
-}
-
-.about-space__cap {
-  position: absolute;
   left: 0;
-  z-index: 2;
+  z-index: 1;
   width: 100%;
-  height: 56px;
+  height: 100%;
   color: var(--white-color);
   opacity: 0;
   pointer-events: none;
 }
 
-.about-section.is-open .about-space__body,
-.about-section.is-open .about-space__cap {
+.about-section.is-open .about-space__fill {
   opacity: 1;
 }
 
-.about-space__cap--top {
-  z-index: 4;
-  top: 0;
+.about-space__holes {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.25s ease;
 }
 
-.about-space__cap--bottom {
-  bottom: 0;
+.about-section.is-content-visible .about-space__holes {
+  opacity: 1;
+  visibility: visible;
 }
 
 .about-space__top-wave,
@@ -283,28 +302,31 @@
 
 .section-word--about {
   position: absolute;
-  top: 125px;
-  left: 10.5%;
+  top: 120px;
+  left: 50%;
   z-index: 2;
+  width: 79%;
+  max-width: 1280px;
   color: var(--main-color);
   opacity: 0;
-  transition: opacity 1s ease;
+  transform: translateX(-50%);
+  transition: opacity 0.25s ease;
 }
 
-.about-section.is-open .section-word--about {
+.about-section.is-content-visible .section-word--about {
   opacity: 1;
 }
 
 .preview-section {
   position: relative;
-  min-height: 3300px;
-  padding-top: 265px;
-  background: linear-gradient(
+  min-height: 3000px;
+  padding-top: 200px;
+  background: var(--radial-about-top), linear-gradient(
     180deg,
     var(--main-color) 0%,
     var(--dark-color) 70%
   );
-  overflow: hidden;
+  overflow: visible;
 }
 
 .preview-heading {
@@ -318,12 +340,14 @@
   p {
     color: var(--white-color);
     font-family: var(--body-font);
-    font-size: $font-size-preview-body;
+    font-size: var(--font-size-body);
     font-weight: $font-weight-bold;
   }
 }
 
 .tile-strip {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: repeat(6, minmax(128px, 1fr));
   gap: 18px;
@@ -343,6 +367,8 @@
 }
 
 .preview-card {
+  position: relative;
+  z-index: 1;
   width: min(70vw, 1340px);
   height: clamp(430px, 36vw, 830px);
   margin: 105px auto 0;
@@ -395,6 +421,9 @@
   }
 
   .about-section {
+    --about-space-closed-height: 42px;
+    --about-space-open-height: 980px;
+
     height: 980px;
   }
 
@@ -403,30 +432,8 @@
     height: 42px;
   }
 
-  .about-space__body {
-    top: 42px;
-    bottom: 42px;
-  }
-
-  .about-space__cap {
-    height: 42px;
-  }
-
-  .about-space__mask {
-    height: 42px;
-  }
-
-  .about-space {
-    height: 42px;
-  }
-
-  .about-section.is-open .about-space {
-    height: 100%;
-  }
-
   .section-word--about {
     top: 90px;
-    left: 11%;
   }
 
   .preview-section {

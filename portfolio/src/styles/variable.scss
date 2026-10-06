@@ -1,14 +1,18 @@
 $sub-color: #46DDFF;
 $main-color: #2D3CDE;
 $point-color: #74ff58;
+$skill-color: #74ff58;
 $dark-color: #000000;
 $white-color: #ffffff;
 
-$font-size-base: 16px;
 $font-size-hero-title: clamp(5.2rem, 20vw, 20rem);
-$font-size-section-title: clamp(2.4rem, 7vw, 6rem);
-$font-size-sparkle-label: clamp(0.52rem, 0.74vw, 0.92rem);
-$font-size-preview-body: clamp(0.72rem, 1.2vw, 1.15rem);
+$font-size-section-title: 76px;
+$font-size-heading: 24px;
+$font-size-body: 16px;
+$font-size-section-title-small: 32px;
+$font-size-heading-small: 18px;
+$font-size-body-small: 12px;
+$sparkle-size: clamp(17px, 2.45vw, 31px);
 
 $font-weight-regular: 300;
 $font-weight-bold: 700;

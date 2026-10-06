@@ -1,0 +1,35 @@
+{
+  "projects": [
+    {
+      "id": "project01",
+      "pages": {
+        "project": {
+            "name":"프로젝트",
+            "title": "프로젝트 제목",
+            "summary": "설명 요약",
+            "detail": "자세한 설명",
+            "thumbnail":"/",
+            "thumbnail2":"/"
+        },
+        "wireframe": {
+          "name":"와이어프레임",
+          "images": [
+            {
+              "caption": "메인 페이지 와이어프레임",
+              "url": "/images/projects/wireframe-main.png"
+            },
+            {
+              "caption": "상세 페이지 레이아웃",
+              "url": "/images/projects/wireframe-detail.png"
+            }
+          ]
+        },
+        "link":{
+            "name":"이동",
+            "url":"/"
+        }
+
+      }
+    }
+  ]
+}

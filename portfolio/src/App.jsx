@@ -1,5 +1,7 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useId, useLayoutEffect, useRef } from 'react'
 import SparkleShape from './components/SparkleShape'
+import About from './components/About'
+import FishShadows from './components/FishShadows'
 import './App.scss'
 
 const waveRows = Array.from({ length: 5 }, (_, index) => index)
@@ -29,20 +31,108 @@ function WaveRow({ className = '', showShadow = true }) {
   )
 }
 
-function WaveCapFill({ className = '', side = 'top' }) {
-  const fillPath =
-    side === 'top'
-      ? `${wavePath} L2080 52 L-96 52 Z`
-      : `${wavePath} L2080 -12 L-96 -12 Z`
+function WaveSpaceFill() {
+  const id = useId()
+  const fillRef = useRef(null)
+  const topClipRef = useRef(null)
+  const bottomClipRef = useRef(null)
+  const holesRef = useRef(null)
+
+  useLayoutEffect(() => {
+    const fill = fillRef.current
+    const space = fill.parentElement
+    const updateClips = () => {
+      const height = space.getBoundingClientRect().height
+      const waveHeight = space.querySelector('.about-space__top-wave').getBoundingClientRect().height
+      const scaleY = waveHeight / 64
+
+      // Keep the wave amplitude fixed while the distance between boundaries grows.
+      fill.setAttribute('viewBox', `0 0 1920 ${height}`)
+      topClipRef.current.setAttribute('d', `${wavePath} L2080 ${height / scaleY} L-96 ${height / scaleY} Z`)
+      topClipRef.current.setAttribute('transform', `translate(0 ${12 * scaleY}) scale(1 ${scaleY})`)
+      bottomClipRef.current.setAttribute('d', `${wavePath} L2080 ${-height / scaleY} L-96 ${-height / scaleY} Z`)
+      bottomClipRef.current.setAttribute('transform', `translate(0 ${height - waveHeight + 12 * scaleY}) scale(1 ${scaleY})`)
+
+      const fillMatrix = fill.getScreenCTM()?.inverse()
+      if (!fillMatrix) {
+        return
+      }
+
+      const toFillPoint = (x, y) => {
+        const point = fill.createSVGPoint()
+        point.x = x
+        point.y = y
+        return point.matrixTransform(fillMatrix)
+      }
+
+      const holes = [...space.querySelectorAll('.about-content__donut')].map((donut) => {
+        const bounds = donut.getBoundingClientRect()
+        const center = toFillPoint(
+          bounds.left + bounds.width / 2,
+          bounds.top + bounds.height / 2,
+        )
+        const horizontalEdge = toFillPoint(
+          bounds.left + bounds.width * 0.94,
+          bounds.top + bounds.height / 2,
+        )
+        const verticalEdge = toFillPoint(
+          bounds.left + bounds.width / 2,
+          bounds.top + bounds.height * 0.94,
+        )
+        const hole = document.createElementNS('http://www.w3.org/2000/svg', 'ellipse')
+        hole.setAttribute('cx', String(center.x))
+        hole.setAttribute('cy', String(center.y))
+        hole.setAttribute('rx', String(Math.abs(horizontalEdge.x - center.x)))
+        hole.setAttribute('ry', String(Math.abs(verticalEdge.y - center.y)))
+        return hole
+      })
+      holesRef.current.replaceChildren(...holes)
+    }
+
+    updateClips()
+    const observer = new ResizeObserver(updateClips)
+    observer.observe(space)
+    observer.observe(space.querySelector('.about-space__top-wave'))
+    space.querySelectorAll('.about-content__donut, .about-content').forEach((element) => observer.observe(element))
+    window.addEventListener('resize', updateClips)
+    space.addEventListener('transitionend', updateClips)
+
+    return () => {
+      observer.disconnect()
+      window.removeEventListener('resize', updateClips)
+      space.removeEventListener('transitionend', updateClips)
+    }
+  }, [])
 
   return (
     <svg
-      className={className}
-      viewBox="0 -12 1920 64"
+      className="about-space__fill"
+      ref={fillRef}
+      viewBox="0 0 1920 56"
       preserveAspectRatio="none"
       aria-hidden="true"
     >
-      <path d={fillPath} fill="currentColor" />
+      <defs>
+        <mask id={`${id}-skills`} maskUnits="userSpaceOnUse" x="0" y="0" width="1920" height="100%" style={{ maskType: 'luminance' }}>
+          <rect width="100%" height="100%" fill="var(--white-color)" />
+          <g
+            ref={holesRef}
+            className="about-space__holes"
+            fill="var(--dark-color)"
+          />
+        </mask>
+        <clipPath id={`${id}-top`} clipPathUnits="userSpaceOnUse">
+          <path ref={topClipRef} />
+        </clipPath>
+        <clipPath id={`${id}-bottom`} clipPathUnits="userSpaceOnUse">
+          <path ref={bottomClipRef} />
+        </clipPath>
+      </defs>
+      <g clipPath={`url(#${id}-top)`}>
+        <g clipPath={`url(#${id}-bottom)`}>
+          <rect width="100%" height="100%" fill="currentColor" mask={`url(#${id}-skills)`} />
+        </g>
+      </g>
     </svg>
   )
 }
@@ -62,6 +152,31 @@ function App() {
   const aboutRef = useRef(null)
 
   useEffect(() => {
+    const aboutSection = aboutRef.current
+    const aboutSpace = aboutSection?.querySelector('.about-space')
+    let revealTimer = 0
+
+    const syncAboutSpaceHeight = () => {
+      if (!aboutSection) {
+        return
+      }
+
+      aboutSection.style.setProperty(
+        '--about-space-open-height',
+        `${aboutSection.getBoundingClientRect().height}px`,
+      )
+    }
+
+    const revealAboutContent = (event) => {
+      if (
+        event.target === aboutSpace &&
+        event.propertyName === 'height' &&
+        aboutSection.classList.contains('is-open')
+      ) {
+        aboutSection.classList.add('is-content-visible')
+      }
+    }
+
     const updateWaveState = () => {
       if (!heroRef.current || !waveFieldRef.current || !aboutRef.current) {
         return
@@ -83,15 +198,24 @@ function App() {
         window.scrollY >= stopScrollY,
       )
       if (window.scrollY >= splitStartScrollY) {
+        syncAboutSpaceHeight()
         aboutRef.current.classList.add('is-open')
+        window.clearTimeout(revealTimer)
+        revealTimer = window.setTimeout(() => {
+          aboutRef.current?.classList.add('is-content-visible')
+        }, 550)
       }
     }
 
+    syncAboutSpaceHeight()
+    aboutSpace?.addEventListener('transitionend', revealAboutContent)
     updateWaveState()
     window.addEventListener('scroll', updateWaveState, { passive: true })
     window.addEventListener('resize', updateWaveState)
 
     return () => {
+      window.clearTimeout(revealTimer)
+      aboutSpace?.removeEventListener('transitionend', revealAboutContent)
       window.removeEventListener('scroll', updateWaveState)
       window.removeEventListener('resize', updateWaveState)
     }
@@ -104,6 +228,7 @@ function App() {
         aria-labelledby="main-title"
         ref={heroRef}
       >
+        <FishShadows seed={17} />
         <div
           className="wave-field"
           aria-hidden="true"
@@ -139,23 +264,20 @@ function App() {
         aria-labelledby="about-title"
         ref={aboutRef}
       >
+        <FishShadows seed={31} areaSelector=".about-content__skill-grid" bottomBoundarySelector=".about-space__bottom-wave" />
         <div className="about-space">
-          <WaveCapFill className="about-space__mask about-space__mask--top" />
-          <WaveCapFill className="about-space__cap about-space__cap--top" />
-          <div className="about-space__body" aria-hidden="true" />
-          <WaveCapFill
-            className="about-space__cap about-space__cap--bottom"
-            side="bottom"
-          />
+          <WaveSpaceFill />
           <WaveRow className="about-space__top-wave" showShadow={false} />
           <h2 id="about-title" className="section-word section-word--about">
             ABOUT
           </h2>
+          <About />
           <WaveRow className="about-space__bottom-wave" />
         </div>
       </section>
 
       <section className="preview-section" aria-labelledby="preview-title">
+        <FishShadows seed={53} />
         <div className="preview-heading">
           <h2 id="preview-title" className="section-word">
             PREVIEW

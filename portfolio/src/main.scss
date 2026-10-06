@@ -18,7 +18,7 @@
 
 @font-face {
   font-family: 'NanumSquare';
-  src: url('./assets/font/nanum-square/NanumSquareB.otf') format('opentype');
+  src: url('./assets/font/nanum-square/NanumSquareEB.otf') format('opentype');
   font-weight: $font-weight-bold;
   font-style: normal;
   font-display: swap;
@@ -28,12 +28,22 @@
   --sub-color: #{$sub-color};
   --main-color: #{$main-color};
   --point-color: #{$point-color};
+  --skill-color: #{$skill-color};
   --dark-color: #{$dark-color};
   --white-color: #{$white-color};
   --title-font: 'Nasalization', system-ui, sans-serif;
   --body-font: 'NanumSquare', system-ui, sans-serif;
+  --font-size-hero-title: #{$font-size-hero-title};
+  --font-size-section-title: #{$font-size-section-title};
+  --font-size-heading: #{$font-size-heading};
+  --font-size-body: #{$font-size-body};
+  --font-size-section-title-small: #{$font-size-section-title-small};
+  --font-size-heading-small: #{$font-size-heading-small};
+  --font-size-body-small: #{$font-size-body-small};
+  --font-size-hero: var(--font-size-hero-title);
+  --font-size-section: var(--font-size-section-title);
 
-  font: #{$font-size-base}/1.45 var(--body-font);
+  font: var(--font-size-body)/1.45 var(--body-font);
   color: var(--white-color);
   background: var(--white-color);
   font-synthesis: none;
@@ -46,10 +56,18 @@
   box-sizing: border-box;
 }
 
+@media (max-width: 900px) {
+  :root {
+    --font-size-section-title: var(--font-size-section-title-small);
+    --font-size-heading: var(--font-size-heading-small);
+    --font-size-body: var(--font-size-body-small);
+  }
+}
+
 body {
   margin: 0;
   min-width: 320px;
-  overflow-x: hidden;
+  overflow-x: clip;
 }
 
 #root {
