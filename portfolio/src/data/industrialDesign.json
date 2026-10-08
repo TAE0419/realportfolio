@@ -1,0 +1,50 @@
+{
+  "projects": [
+    {
+      "id": "project01",
+      "category": "javascript",
+      "teamProject": false,
+
+      "pages": {
+        "project": {
+            "pageName":"프로젝트",
+            "title": "calculator",
+            "summary": "설명 요약",
+
+            "detail1": "자세한 설명",
+            "detail2": "자세한 설명",
+
+            "thumbnail":"/",
+            "thumbnail2":"/"
+        },
+        "presentation":{
+            "pageName":"발표 자료",
+            "images": [
+            {
+              "caption": "1",
+              "url": "/images/projects/wireframe-main.png"
+            },
+            {
+              "caption": "2",
+              "url": "/images/projects/wireframe-detail.png"
+            }
+          ]
+        },
+        "leaflet":{
+            "pageName":"리플렛",
+            "images": [
+            {
+              "caption": "1",
+              "url": "/images/projects/wireframe-main.png"
+            },
+            {
+              "caption": "2",
+              "url": "/images/projects/wireframe-detail.png"
+            }
+          ]
+        }
+
+      }
+    }
+  ]
+}
