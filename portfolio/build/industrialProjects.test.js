@@ -39,6 +39,14 @@ test('keeps the requested project order without separate product image pages', (
   }
 })
 
+test('marks only industrial team project summaries with the TEAM suffix', () => {
+  for (const project of projects) {
+    const summary = project.pages.project.summary
+    assert.equal(summary.endsWith('(TEAM)'), project.teamProject === true, project.id)
+    assert.equal((summary.match(/\(TEAM\)/g) || []).length, project.teamProject === true ? 1 : 0, project.id)
+  }
+})
+
 test('connects existing thumbnails and numerically ordered gallery images', async () => {
   const references = new Set()
   const collator = new Intl.Collator('ko', { numeric: true })

@@ -193,7 +193,7 @@
         {
             "pageName":"프로젝트",
             "title": "PORLOG",
-            "summary": "식물 모티브 잡화 & 마스코트 굿즈 쇼핑몰",
+            "summary": "식물 모티브 잡화 & 마스코트 굿즈 쇼핑몰(TEAM)",
 
             "explain":
             {
@@ -447,7 +447,7 @@
         {
             "pageName":"프로젝트",
             "title": "MIDNIGHTCHORD",
-            "summary": "음원 콘텐츠 플랫폼",
+            "summary": "음원 콘텐츠 플랫폼(TEAM)",
 
             "explain":
             {
@@ -512,6 +512,7 @@
         {
       "id": "front14",
       "category": "react",
+      "category2": "canvas",
       "teamProject": true,
 
       "pages":
@@ -520,12 +521,12 @@
         {
             "pageName":"프로젝트",
             "title": "JAJAK",
-            "summary": "전통주 AI 큐레이션 및 경품 추첨 플랫폼",
+            "summary": "전통주 AI 큐레이션 및 경품 추첨 플랫폼(TEAM)",
 
             "explain":
             {
               "detail": "5명이 참여한 팀 프로젝트로, 제품/이벤트 페이지 구현 및 전반적 관리를 수행했습니다. 회원가입/로그인, 취향 소집 및 AI 큐레이션, 주막 영업 게임, 룰렛/카드 맞추기/OX퀴즈 이벤트, 찜/장바구니 추가, 공지사항/문의 등의 기능이 있습니다.",
-              "detail2": "HTML, SASS, React 활용"
+              "detail2": "HTML, SASS, React, Canvas 활용"
             },
 
             "thumbnail":"/frontend/jajak/product.png",
@@ -683,20 +684,21 @@
         {
             "pageName":"프로젝트",
             "title": "AI STUDY",
-            "summary": "AI STUDY & CHATBOT",
+            "summary": "리액트 학습 AI STUDY & CHATBOT",
 
             "explain": 
             {
-              "detail2": "코드펜에 업로드 되어있는 모션을 활용한 페이지로, 물방울이 마우스의 클릭과 움직임에 반응합니다.",
+              "detail2": "React 중심 AI 학습 사이트입니다. React 개념 설명, 문제 만들기, 정답 보기, 힌트 받기, 도시별 현재 날씨 검색, 페이지 가이드 챗봇 기능이 있습니다.",
               "detail": "HTML, SASS, React, Next 활용"
             },
 
-            "thumbnail":"/frontend/gshap/product.png"
+            "thumbnail":"/frontend/aichat/product.png",
+            "thumbnail2":"/frontend/aichat/product2.png"
         },
         "link":
         {
             "pageName":"사이트",
-            "url":"https://gsap-five-xi.vercel.app/"
+            "url":"https://aistudy-smoky.vercel.app/"
         }
 
       }

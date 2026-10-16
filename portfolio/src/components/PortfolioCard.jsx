@@ -33,7 +33,7 @@ export default function PortfolioCard({ project, index, visible }) {
   return (
     <li className={`${styles.slot} ${visible ? styles.revealing : ''}`} data-project-id={project.id} style={{ '--card-order': index }}>
       <figure
-        className={`${styles.card} ${visible ? styles.visible : ''} ${flipped ? styles.flipped : ''}`}
+        className={`${styles.card} ${project.teamProject === true ? styles.team : ''} ${visible ? styles.visible : ''} ${flipped ? styles.flipped : ''}`}
         aria-label={title}
         tabIndex={visible ? 0 : -1}
         onPointerEnter={(event) => { if (event.pointerType !== 'touch') setFlipped(true) }}

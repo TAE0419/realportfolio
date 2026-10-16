@@ -357,7 +357,7 @@ function App() {
         <FishShadows seed={53} />
         <div className="preview-heading">
           <h2 id="preview-title" className="section-word">PREVIEW</h2>
-          <p>분야별 대표 작업물을 확인해보세요</p>
+          <p>분야별 프로젝트를 클릭하여 상세 내용을 확인해보세요.</p>
         </div>
         <PortfolioPreview projects={frontendData.projects} label="FRONTEND PROJECT" href="/frontend" />
         <PortfolioPreview projects={industrialData.projects} label="INDUSTRIAL DESIGN PROJECT" href="/industrial-design" mirrored />

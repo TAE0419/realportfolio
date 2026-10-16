@@ -59,6 +59,9 @@ export default function FishShadows({ seed = 1, areaSelector, bottomBoundarySele
     let clipGeometry = ''
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
     const darkColor = window.getComputedStyle(canvas).getPropertyValue('--dark-color').trim()
+    const bubbleColor = window.getComputedStyle(canvas).getPropertyValue('--white-color').trim()
+    const bubbles = []
+    const maxBubbles = 280
     let width = 0
     let height = 0
     let canvasTop = 0
@@ -97,6 +100,7 @@ export default function FishShadows({ seed = 1, areaSelector, bottomBoundarySele
           group,
           position: formation[index],
           phase: random() * Math.PI * 2,
+          bubbleDelay: 0.22 + random() * 0.38,
         })
       }
       remaining -= groupSize
@@ -120,6 +124,25 @@ export default function FishShadows({ seed = 1, areaSelector, bottomBoundarySele
         context.translate(0, -clipOffset)
       }
       const scale = Math.max(0.45, Math.min(1, width / 1000))
+      for (let index = bubbles.length - 1; index >= 0; index -= 1) {
+        const bubble = bubbles[index]
+        bubble.age += delta
+        if (bubble.age >= bubble.lifetime) {
+          bubbles.splice(index, 1)
+          continue
+        }
+        bubble.y -= bubble.rise * delta
+        bubble.x += bubble.drift * delta
+        if (bubble.y < top - 8 || bubble.y > top + visibleHeight + 8) continue
+        const progress = bubble.age / bubble.lifetime
+        context.globalAlpha = 0.8 * (1 - progress) ** 1.5
+        context.strokeStyle = bubbleColor
+        context.lineWidth = Math.max(0.4, scale * 0.65)
+        context.beginPath()
+        context.arc(bubble.x, bubble.y, bubble.radius * (1 + progress * 0.25), 0, Math.PI * 2)
+        context.stroke()
+      }
+      context.globalAlpha = 1
       groups.forEach((item) => {
         if (delta) {
           item.x += Math.cos(item.heading) * item.speed * scale * delta / swimmingArea.width
@@ -143,6 +166,28 @@ export default function FishShadows({ seed = 1, areaSelector, bottomBoundarySele
         const x = swimmingArea.x + group.x * swimmingArea.width + along * cos - across * sin
         const y = swimmingArea.y + group.y * swimmingArea.height + along * sin + across * cos
         if (x < -item.size || x > width + item.size || y < top - item.size || y > top + visibleHeight + item.size) return
+        if (delta) {
+          item.bubbleDelay -= delta
+          if (item.bubbleDelay <= 0) {
+            item.bubbleDelay = 0.32 + random() * 0.42
+            if (bubbles.length < maxBubbles) {
+              const tail = item.size * scale * 0.3
+              const spreadAngle = random() * Math.PI * 2
+              const spreadRadius = Math.sqrt(random()) * item.size * scale * 0.28
+              const spreadAlong = Math.cos(spreadAngle) * spreadRadius * 0.7
+              const spreadAcross = Math.sin(spreadAngle) * spreadRadius
+              bubbles.push({
+                x: x - cos * tail + spreadAlong * cos - spreadAcross * sin,
+                y: y - sin * tail + spreadAlong * sin + spreadAcross * cos,
+                radius: (0.55 + random() ** 1.5 * 1.85) * scale,
+                rise: (20 + random() * 16) * scale,
+                drift: (random() - 0.5) * 10 * scale,
+                age: 0,
+                lifetime: 3.4 + random() * 1.6,
+              })
+            }
+          }
+        }
         context.save()
         context.translate(x, y)
         context.rotate(group.heading)

@@ -25,13 +25,16 @@
   transform: perspective(1400px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
 }
 .image {
+  position: relative;
   display: block;
   aspect-ratio: 1.96;
   overflow: hidden;
   border-radius: var(--image-radius);
   background: var(--white-color);
   img { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .incoming { position: absolute; inset: 0; animation: imageReveal 300ms ease both; }
 }
+@keyframes imageReveal { from { opacity: 0; } to { opacity: 1; } }
 .detail {
   position: absolute;
   top: calc(var(--detail-size) * 0.04);
@@ -131,6 +134,7 @@
   .summary, .mirrored .summary { grid-column: 1; grid-row: 2; line-height: 1.35; }
 }
 @media (prefers-reduced-motion: reduce) {
+  .image .incoming { animation-duration: 1ms; }
   .detail { transition: none; }
 }
 @media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) {
