@@ -1,25 +1,25 @@
 import { useEffect, useRef } from 'react'
-import './About.scss'
+import styles from './About.module.scss'
 import face from '../assets/face.jpg'
 import SparkleShape from './SparkleShape'
 
 const experiences = [
   '2023.03 숙명여자대학교 산업디자인과 입학',
   '2024 - 2025 숙명여자대학교 산업디자인과 학생회 활동',
-  '2024 - 2027 숙명여자대학교 숙묵지교 동아리 활동',
+  '2024 - 2027 숙명여자대학교 숙묘지교 동아리 활동',
   '2026.04 - 2026.10 이젠아카데미 프론트엔드 수강',
-  '2026.06 - 2026.10 아라후 서포터즈 활동',
+  '2026.06 - 2026.10 아리수 서포터즈 활동',
 ]
 
 const skills = [
-  { name: 'Illustrator', label: ['Ai'], value: 90 },
+  { name: 'Illustrator', label: ['Ai'], value: 85 },
   { name: 'After Effects', label: ['Ae'], value: 80 },
-  { name: 'Clip Studio Paint', label: ['ClipSt', 'udio'], value: 85 },
-  { name: 'Clip Studio Modeler', label: ['ClipSt', 'udio'], value: 75 },
-  { name: 'Rhino', label: ['Rhi', 'no'], value: 75 },
-  { name: 'KeyShot', label: ['KeyS', 'hot'], value: 95 },
-  { name: 'Figma', label: ['Figma'], value: 75 },
-  { name: '', label: [], value: 75 },
+  { name: 'Clip Studio Paint', label: ['Figma'], value: 90 },
+  { name: 'Clip Studio Modeler', label: ['ClipStudio'], value: 90 },
+  { name: 'Rhino', label: ['Rhino'], value: 85 },
+  { name: 'KeyShot', label: ['KeyShot'], value: 90 },
+  { name: 'Figma', label: ['Javascript'], value: 75 },
+  { name: '', label: ['React'], value: 70 },
 ]
 
 export default function About() {
@@ -28,17 +28,19 @@ export default function About() {
   useEffect(() => {
     const content = contentRef.current
     const section = content.closest('.about-section')
+    const space = content.closest('.about-space')
     const targets = [...content.querySelectorAll('.about-content__experiences, .about-content__skills')]
     let frame = 0
 
     const checkVisibility = () => {
       frame = 0
-      if (!section.classList.contains('is-content-visible')) return
+      if (!section.classList.contains('is-open')) return
+      const spaceBounds = space.getBoundingClientRect()
 
       targets.forEach((target) => {
         if (target.classList.contains('is-revealed')) return
         const bounds = target.getBoundingClientRect()
-        const visibleHeight = Math.max(0, Math.min(bounds.bottom, window.innerHeight) - Math.max(bounds.top, 0))
+        const visibleHeight = Math.max(0, Math.min(bounds.bottom, spaceBounds.bottom, window.innerHeight) - Math.max(bounds.top, spaceBounds.top, 0))
         if (visibleHeight >= Math.min(bounds.height, window.innerHeight) * 0.85) {
           target.classList.add('is-revealed')
         }
@@ -51,6 +53,7 @@ export default function About() {
     observer.observe(section, { attributes: true, attributeFilter: ['class'] })
     const resizeObserver = new ResizeObserver(scheduleCheck)
     resizeObserver.observe(content)
+    resizeObserver.observe(space)
     window.addEventListener('scroll', scheduleCheck, { passive: true })
     window.addEventListener('resize', scheduleCheck)
     scheduleCheck()
@@ -65,7 +68,7 @@ export default function About() {
   }, [])
 
   return (
-    <div className="about-content" ref={contentRef}>
+    <div className={styles.content} ref={contentRef}>
       <img className="about-content__portrait" src={face} alt="김태은 프로필 사진" />
       <div className="about-content__profile">
         <h3 className="about-content__name">KIM TAE EUN <span>김태은</span></h3>
@@ -99,7 +102,7 @@ export default function About() {
                 <circle className="about-content__donut-track" cx="50" cy="50" r="46" />
                 <circle className="about-content__donut-progress" cx="50" cy="50" r="46" pathLength="100" strokeDasharray="100 100" style={{ '--skill-offset': 100 - skill.value }} />
               </svg>
-              <span className="about-content__skill-label">
+              <span className="about-content__skill-label" style={['ClipStudio', 'Javascript'].includes(skill.label.join('')) ? { '--skill-label-scale': 0.85 } : undefined}>
                 {skill.label.map((line) => <span key={line}>{line}</span>)}
               </span>
             </li>

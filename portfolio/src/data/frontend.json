@@ -1,48 +1,702 @@
 {
   "projects": [
     {
-      "id": "project01",
-      "pages": {
-        "project": {
+      "id": "front01",
+      "category": "javascript",
+      "teamProject": false,
+
+      "pages": 
+      {
+        "project": 
+        {
             "pageName":"프로젝트",
-            "title": "프로젝트 제목",
-            "summary": "설명 요약",
+            "title": "CALCULATOR",
+            "summary": "계산기 기능 구현 페이지",
 
-            "detail1": "자세한 설명",
-            "detail2": "자세한 설명",
+            "explain": 
+            {
+              "detail": "HTML, CSS, Javascript 활용"
+            },
 
-            "thumbnail":"/",
-            "thumbnail2":"/"
+            "thumbnail":"/frontend/calculator/product.png"
         },
-        "wireframe": {
+        "link":
+        {
+            "pageName":"사이트",
+            "url":"https://tae0419.github.io/test2/js043001calculator.html"
+        }
+
+      }
+    },
+
+    {
+      "id": "front02",
+      "category": "javascript",
+      "teamProject": false,
+
+      "pages": 
+      {
+        "project": 
+        {
+            "pageName":"프로젝트",
+            "title": "DRAWING",
+            "summary": "그림판 기능 구현 페이지",
+
+            "explain": 
+            {
+              "detail1": "펜 색상 변경, 배경 색상 변경, 선 굵기 조절, 지우기, 저장하기 기능이 구현되어 있습니다.",
+              "detail2": "HTML, CSS, Javascript 활용"
+            },
+
+            "thumbnail":"/frontend/drawing/product.png"
+        },
+        "link":
+        {
+            "pageName":"사이트",
+            "url":"https://tae0419.github.io/test/canvas060902drawing.html"
+        }
+
+      }
+    },
+
+    {
+      "id": "front03",
+      "category": "javascript",
+      "teamProject": false,
+
+      "pages": 
+      {
+        "project": 
+        {
+            "pageName":"프로젝트",
+            "title": "WEATHER",
+            "summary": "날씨 API 기능 구현 페이지",
+
+            "explain": 
+            {
+              "detail1": "서울, 부산, 인천, 대구의 실시간 날씨 정보와 이미지가 표시됩니다.",
+              "detail2": "HTML, CSS, Javascript, API 활용"
+            },
+
+            "thumbnail":"/frontend/weather/product.png"
+        },
+        "link":
+        {
+            "pageName":"사이트",
+            "url":"https://tae0419.github.io/test/js052902.html"
+        }
+
+      }
+    },
+    
+    {
+      "id": "front04",
+      "category": "javascript",
+      "teamProject": false,
+
+      "pages":
+      {
+        "project":
+        {
+            "pageName":"프로젝트",
+            "title": "MAP",
+            "summary": "지도 API 구현 페이지",
+
+            "explain":
+            {
+              "detail1": "검색 기능 및 매장 확인 가능한 지도 페이지입니다.",
+              "detail2": "HTML, CSS, Javascript, KAKAOMAP API 활용"
+            },
+
+            "thumbnail":"/frontend/map/product.png"
+        },
+        "link":
+        {
+            "pageName":"사이트",
+            "url":"https://tae0419.github.io/test/js060101kakaoAPI.html"
+        }
+
+      }
+    },
+
+    {
+      "id": "front05",
+      "category": "javascript",
+      "teamProject": false,
+
+      "pages":
+      {
+        "project":
+        {
+            "pageName":"프로젝트",
+            "title": "LIV",
+            "summary": "식물 판매 쇼핑몰 페이지",
+
+            "explain":
+            {
+              "detail": "LIV는 싱그러운 식물과 차분한 오브제로 일상에 작은 숲을 들이는 플랜트 쇼핑몰입니다.",
+              "detail2": "HTML, CSS, Javascript 활용"
+            },
+
+            "thumbnail":"/frontend/liv/product.png",
+            "thumbnail2":"/frontend/liv/product2.png"
+        },
+        "link":
+        {
+            "pageName":"사이트",
+            "url":"https://tae0419.github.io/LIV/index.html"
+        }
+
+      }
+    },
+
+    {
+      "id": "front06",
+      "category": "javascript",
+      "teamProject": false,
+
+      "pages":
+      {
+        "project":
+        {
+            "pageName":"프로젝트",
+            "title": "WOODIN",
+            "summary": "우딘 카피 사이트",
+
+            "explain":
+            {
+              "detail": "특수목 전문 기업, 우딘의 웹페이지 구성을 모방하여 만든 사이트입니다.",
+              "detail2": "HTML, CSS, Javascript 활용"
+            },
+
+            "thumbnail":"/frontend/woodin/product.png",
+            "thumbnail2":"/frontend/woodin/product2.png"
+        },
+        "link":
+        {
+            "pageName":"사이트",
+            "url":"https://tae0419.github.io/copy/"
+        }
+
+      }
+    },
+
+    {
+      "id": "front07",
+      "category": "javascript",
+      "category2": "canvas",
+      "teamProject": true,
+
+      "pages":
+      {
+        "project":
+        {
+            "pageName":"프로젝트",
+            "title": "PORLOG",
+            "summary": "식물 모티브 잡화 & 마스코트 굿즈 쇼핑몰",
+
+            "explain":
+            {
+              "detail": "4명이 참여한 팀 프로젝트로, 웹디자인 컨셉 구축과 브랜드스토리 페이지 구현 및 팀장으로서의 팀원 매니징을 맡았습니다. 찜/장바구니 추가, 회원가입/로그인, 지도 API, 스크롤 애니메이션 등의 기능이 있습니다.",
+              "detail2": "HTML, CSS, Javascript, Canvas 활용"
+            },
+
+            "thumbnail":"/frontend/forlog/product3.png",
+            "thumbnail2":"/frontend/forlog/product2.png"
+        },
+        "wireframe":
+        {
           "pageName":"와이어프레임",
-          "images": [
+          "images":
+          [
             {
               "caption": "메인 페이지 와이어프레임",
-              "url": "/images/projects/wireframe-main.png"
-            },
-            {
-              "caption": "상세 페이지 레이아웃",
-              "url": "/images/projects/wireframe-detail.png"
+              "url": "/frontend/forlog/wireframe.png"
             }
           ]
         },
-        "presentation":{
+        "presentation":
+        {
             "pageName":"발표 자료",
             "images": [
             {
               "caption": "1",
-              "url": "/images/projects/wireframe-main.png"
+              "url": "/frontend/forlog/ppt/1.png"
             },
             {
               "caption": "2",
-              "url": "/images/projects/wireframe-detail.png"
+              "url": "/frontend/forlog/ppt/2.png"
+            },
+            {
+              "caption": "3",
+              "url": "/frontend/forlog/ppt/3.png"
+            },
+            { "caption": "4", "url": "/frontend/forlog/ppt/4.png" },
+            { "caption": "5", "url": "/frontend/forlog/ppt/5.png" },
+            { "caption": "6", "url": "/frontend/forlog/ppt/6.png" },
+            { "caption": "7", "url": "/frontend/forlog/ppt/7.png" },
+            { "caption": "8", "url": "/frontend/forlog/ppt/8.png" },
+            { "caption": "9", "url": "/frontend/forlog/ppt/9.png" },
+            { "caption": "10", "url": "/frontend/forlog/ppt/10.png" },
+            { "caption": "11", "url": "/frontend/forlog/ppt/11.png" },
+            { "caption": "12", "url": "/frontend/forlog/ppt/12.png" },
+            { "caption": "13", "url": "/frontend/forlog/ppt/13.png" },
+            { "caption": "14", "url": "/frontend/forlog/ppt/14.png" },
+            { "caption": "15", "url": "/frontend/forlog/ppt/15.png" },
+            { "caption": "16", "url": "/frontend/forlog/ppt/16.png" },
+            { "caption": "17", "url": "/frontend/forlog/ppt/17.png" },
+            { "caption": "18", "url": "/frontend/forlog/ppt/18.png" },
+            { "caption": "19", "url": "/frontend/forlog/ppt/19.png" },
+            { "caption": "20", "url": "/frontend/forlog/ppt/20.png" }
+          ]
+        },
+        "link":
+        {
+            "pageName":"사이트",
+            "url":"https://tae0419.github.io/forlog2/Home/index.html"
+        }
+
+      }
+    },
+
+    {
+      "id": "front08",
+      "category": "javascript",
+      "category2": "canvas",
+      "teamProject": false,
+
+      "pages":
+      {
+        "project":
+        {
+            "pageName":"프로젝트",
+            "title": "BRICK GAME",
+            "summary": "벽돌 깨기 게임",
+
+            "explain":
+            {
+              "detail": "캔버스를 활용하여 벽돌 깨기 게임을 구현한 페이지입니다.",
+              "detail2": "HTML, CSS, Javascript, Canvas 활용"
+            },
+
+            "thumbnail":"/frontend/brick/product.png"
+        },
+        "link":
+        {
+            "pageName":"사이트",
+            "url":"https://tae0419.github.io/portfolio/canvas061201.html"
+        }
+
+      }
+    },
+
+    {
+      "id": "front09",
+      "category": "react",
+      "teamProject": false,
+
+      "pages":
+      {
+        "project":
+        {
+            "pageName":"프로젝트",
+            "title": "BOARD",
+            "summary": "게시판",
+
+            "explain":
+            {
+              "detail": "리액트를 활용한 게시판 구현 페이지입니다. 회원가입/로그인, 글 게시/수정/삭제 기능이 있습니다.",
+              "detail2": "HTML, SASS, React 활용"
+            },
+
+            "thumbnail":"/frontend/board/product.png",
+            "thumbnail2":"/frontend/board/product2.png"
+        },
+        "link":
+        {
+            "pageName":"사이트",
+            "url":"https://board-alpha-fawn.vercel.app/"
+        }
+
+      }
+    },
+
+    {
+      "id": "front10",
+      "category": "react",
+      "teamProject": false,
+
+      "pages":
+      {
+        "project":
+        {
+            "pageName":"프로젝트",
+            "title": "GENTLEPLACE",
+            "summary": "게스트북",
+
+            "explain":
+            {
+              "detail": "아저씨가 될 수 있는 게스트북입니다. 회원가입/로그인, 글 게시/수정/삭제, 캐릭터/이모티콘 선택 기능이 있습니다.",
+              "detail2": "HTML, SASS, React 활용"
+            },
+
+            "thumbnail":"/frontend/guestbook/product.png",
+            "thumbnail2":"/frontend/guestbook/product2.png"
+        },
+        "wireframe":
+        {
+          "pageName":"와이어프레임",
+          "images":
+          [
+            {
+              "caption": "메인 페이지 와이어프레임",
+              "url": "/frontend/guestbook/wireframe.png"
             }
           ]
         },
-        "link":{
-            "pageName":"이동",
-            "url":"/"
+        "link":
+        {
+            "pageName":"사이트",
+            "url":"https://guestbook-mljz.vercel.app/"
+        }
+
+      }
+    },
+    
+    {
+      "id": "front11",
+      "category": "react",
+      "teamProject": false,
+
+      "pages":
+      {
+        "project":
+        {
+            "pageName":"프로젝트",
+            "title": "UNDERYOURBED",
+            "summary": "해충 방역 쇼핑몰",
+
+            "explain":
+            {
+              "detail": "'침대 밑 괴물'을 모티브로 만든 해충 방역 쇼핑몰입니다. 찜/장바구니 추가, 회원가입/로그인, 관리자, 공지사항, 해충 출몰 테스트 등의 기능이 있습니다.",
+              "detail2": "HTML, SASS, React 활용"
+            },
+
+            "thumbnail":"/frontend/underyourbed/product.png",
+            "thumbnail2":"/frontend/underyourbed/product2.png"
+        },
+        "wireframe":
+        {
+          "pageName":"와이어프레임",
+          "images":
+          [
+            {
+              "caption": "메인 페이지 와이어프레임",
+              "url": "/frontend/underyourbed/wireframe.png"
+            }
+          ]
+        },
+        "link":
+        {
+            "pageName":"사이트",
+            "url":"https://underthebed.vercel.app/"
+        }
+
+      }
+    },
+
+    {
+      "id": "front12",
+      "category": "react",
+      "teamProject": false,
+
+      "pages":
+      {
+        "project":
+        {
+            "pageName":"프로젝트",
+            "title": "DASHBOARD",
+            "summary": "온라인 출판 서비스 대시보드",
+
+            "explain":
+            {
+              "detail": "온라인 출판 서비스 플랫폼의 가상 대시보드를 다양한 그래프를 활용해 구현했습니다.",
+              "detail2": "HTML, SASS, React 활용"
+            },
+
+            "thumbnail":"/frontend/dashboard/product.png",
+            "thumbnail2":"/frontend/dashboard/product2.png"
+        },
+        "link":
+        {
+            "pageName":"사이트",
+            "url":"https://dash-board-three-nu.vercel.app"
+        }
+
+      }
+    },
+
+        {
+      "id": "front13",
+      "category": "javascript",
+      "teamProject": true,
+
+      "pages":
+      {
+        "project":
+        {
+            "pageName":"프로젝트",
+            "title": "MIDNIGHTCHORD",
+            "summary": "음원 콘텐츠 플랫폼",
+
+            "explain":
+            {
+              "detail": "4명이 참여한 팀 프로젝트로, 메인 페이지 구현 및 팀장으로서의 팀원 매니징을 맡았습니다. 회원가입/로그인, 팔로우/좋아요/다운로드, 음원 재생 등의 기능이 있습니다.",
+              "detail2": "HTML, CSS, Javascript 활용"
+            },
+
+            "thumbnail":"/frontend/midnightchord/product.png",
+            "thumbnail2":"/frontend/midnightchord/product2.png"
+        },
+        "wireframe":
+        {
+          "pageName":"와이어프레임",
+          "images":
+          [
+            {
+              "caption": "메인 페이지 와이어프레임",
+              "url": "/frontend/midnightchord/wireframe.png"
+            }
+          ]
+        },
+        "presentation":
+        {
+            "pageName":"발표 자료",
+            "images": [
+            {
+              "caption": "1",
+              "url": "/frontend/midnightchord/ppt/1.png"
+            },
+            {
+              "caption": "2",
+              "url": "/frontend/midnightchord/ppt/2.png"
+            },
+            {
+              "caption": "3",
+              "url": "/frontend/midnightchord/ppt/3.png"
+            },
+            { "caption": "4", "url": "/frontend/midnightchord/ppt/4.png" },
+            { "caption": "5", "url": "/frontend/midnightchord/ppt/5.png" },
+            { "caption": "6", "url": "/frontend/midnightchord/ppt/6.png" },
+            { "caption": "7", "url": "/frontend/midnightchord/ppt/7.png" },
+            { "caption": "8", "url": "/frontend/midnightchord/ppt/8.png" },
+            { "caption": "9", "url": "/frontend/midnightchord/ppt/9.png" },
+            { "caption": "10", "url": "/frontend/midnightchord/ppt/10.png" },
+            { "caption": "11", "url": "/frontend/midnightchord/ppt/11.png" },
+            { "caption": "12", "url": "/frontend/midnightchord/ppt/12.png" },
+            { "caption": "13", "url": "/frontend/midnightchord/ppt/13.png" },
+            { "caption": "14", "url": "/frontend/midnightchord/ppt/14.png" },
+            { "caption": "15", "url": "/frontend/midnightchord/ppt/15.png" },
+            { "caption": "16", "url": "/frontend/midnightchord/ppt/16.png" }
+          ]
+        },
+        "link":
+        {
+            "pageName":"사이트",
+            "url":"https://tae0419.github.io/midnightChord/pages/opening/"
+        }
+
+      }
+    },
+
+        {
+      "id": "front14",
+      "category": "react",
+      "teamProject": true,
+
+      "pages":
+      {
+        "project":
+        {
+            "pageName":"프로젝트",
+            "title": "JAJAK",
+            "summary": "전통주 AI 큐레이션 및 경품 추첨 플랫폼",
+
+            "explain":
+            {
+              "detail": "5명이 참여한 팀 프로젝트로, 제품/이벤트 페이지 구현 및 전반적 관리를 수행했습니다. 회원가입/로그인, 취향 소집 및 AI 큐레이션, 주막 영업 게임, 룰렛/카드 맞추기/OX퀴즈 이벤트, 찜/장바구니 추가, 공지사항/문의 등의 기능이 있습니다.",
+              "detail2": "HTML, SASS, React 활용"
+            },
+
+            "thumbnail":"/frontend/jajak/product.png",
+            "thumbnail2":"/frontend/jajak/product2.png"
+        },
+        "wireframe":
+        {
+          "pageName":"와이어프레임",
+          "images":
+          [
+            {
+              "caption": "메인 페이지 와이어프레임",
+              "url": "/frontend/jajak/wireframe.png"
+            }
+          ]
+        },
+        "presentation":
+        {
+            "pageName":"발표 자료",
+            "images": [
+            {"caption":"1","url":"/frontend/jajak/ppt/1-표지.png"},
+            {"caption":"2","url":"/frontend/jajak/ppt/2-목차.png"},
+            {"caption":"3","url":"/frontend/jajak/ppt/3-팀원 소개.png"},
+            {"caption":"4","url":"/frontend/jajak/ppt/4-중간페이지.png"},
+            {"caption":"5","url":"/frontend/jajak/ppt/5-기획 배경 및 프로젝트 주제.png"},
+            {"caption":"6","url":"/frontend/jajak/ppt/6-시장 트랜드 _ 사용자 문제 분석.png"},
+            {"caption":"7","url":"/frontend/jajak/ppt/7-주요 타겟층.png"},
+            {"caption":"8","url":"/frontend/jajak/ppt/8-페르소나.png"},
+            {"caption":"9","url":"/frontend/jajak/ppt/9-페르소나.png"},
+            {"caption":"10","url":"/frontend/jajak/ppt/10-경쟁사 분석.png"},
+            {"caption":"11","url":"/frontend/jajak/ppt/11-차별점 포지셔닝.png"},
+            {"caption":"12","url":"/frontend/jajak/ppt/12-swot.png"},
+            {"caption":"13","url":"/frontend/jajak/ppt/13-중간페이지.png"},
+            {"caption":"14","url":"/frontend/jajak/ppt/14-중간페이지.png"},
+            {"caption":"15","url":"/frontend/jajak/ppt/15-핵심 기능 정의.png"},
+            {"caption":"16","url":"/frontend/jajak/ppt/16-핵심 기능 정의.png"},
+            {"caption":"17","url":"/frontend/jajak/ppt/17-핵심 기능 정의.png"},
+            {"caption":"18","url":"/frontend/jajak/ppt/18-핵심 기능 정의.png"},
+            {"caption":"19","url":"/frontend/jajak/ppt/19-핵심 기능 정의.png"},
+            {"caption":"20","url":"/frontend/jajak/ppt/20-핵심 기능 정의.png"},
+            {"caption":"21","url":"/frontend/jajak/ppt/21-핵심 기능 정의.png"},
+            {"caption":"22","url":"/frontend/jajak/ppt/22-핵심 기능 정의.png"},
+            {"caption":"23","url":"/frontend/jajak/ppt/23-사용자 여정.png"},
+            {"caption":"24","url":"/frontend/jajak/ppt/24-플로우차트.png"},
+            {"caption":"25","url":"/frontend/jajak/ppt/25-개발 환경.png"},
+            {"caption":"26","url":"/frontend/jajak/ppt/26-시스템 설계 구성.png"},
+            {"caption":"27","url":"/frontend/jajak/ppt/27-중간페이지.png"},
+            {"caption":"28","url":"/frontend/jajak/ppt/28-디자인 컨셉.png"},
+            {"caption":"29","url":"/frontend/jajak/ppt/29-레퍼런스.png"},
+            {"caption":"30","url":"/frontend/jajak/ppt/30-화면 설계.png"},
+            {"caption":"31","url":"/frontend/jajak/ppt/31-와이어프레임.png"},
+            {"caption":"32","url":"/frontend/jajak/ppt/32-중간페이지.png"},
+            {"caption":"33","url":"/frontend/jajak/ppt/33-서비스 가치 요약.png"},
+            {"caption":"34","url":"/frontend/jajak/ppt/34-기대효과.png"},
+            {"caption":"35","url":"/frontend/jajak/ppt/35-실무 활용성.png"},
+            {"caption":"36","url":"/frontend/jajak/ppt/36-중간페이지.png"},
+            {"caption":"37","url":"/frontend/jajak/ppt/37-담당 업무.png"},
+            {"caption":"38","url":"/frontend/jajak/ppt/38-멘토 진행 내역.png"},
+            {"caption":"39","url":"/frontend/jajak/ppt/39-프로젝트 수행 절차.png"},
+            {"caption":"40","url":"/frontend/jajak/ppt/40-협업 방법.png"},
+            {"caption":"41","url":"/frontend/jajak/ppt/41-트러블 슈팅.png"},
+            {"caption":"42","url":"/frontend/jajak/ppt/42-자체평가.png"},
+            {"caption":"43","url":"/frontend/jajak/ppt/43-자체 평가.png"},
+            {"caption":"44","url":"/frontend/jajak/ppt/44-배포 링크.png"},
+            {"caption":"45","url":"/frontend/jajak/ppt/45-배포 링크.png"}
+          ]
+        },
+        "link":
+        {
+            "pageName":"사이트",
+            "url":"https://jajak-ten.vercel.app/"
+        }
+
+      }
+    },
+
+    {
+      "id": "front15",
+      "category": "react",
+      "teamProject": false,
+
+      "pages": 
+      {
+        "project": 
+        {
+            "pageName":"프로젝트",
+            "title": "WATER DROPLETS",
+            "summary": "코드펜 액체 모션",
+
+            "explain": 
+            {
+              "detail2": "코드펜에 업로드 되어있는 모션을 활용한 페이지로, 물방울이 마우스의 클릭과 움직임에 반응합니다.",
+              "detail": "HTML, SASS, React, CodePen 활용"
+            },
+
+            "thumbnail":"/frontend/gshap/product.png"
+        },
+        "link":
+        {
+            "pageName":"사이트",
+            "url":"https://gsap-five-xi.vercel.app/"
+        }
+
+      }
+    },
+    {
+      "id": "front16",
+      "category": "react",
+      "teamProject": false,
+
+      "pages":
+      {
+        "project":
+        {
+            "pageName":"프로젝트",
+            "title": "ARISU GAME",
+            "summary": "떨어지는 아리수 마시기 게임",
+
+            "explain":
+            {
+              "detail": "아리수 서포터즈 활동의 일환으로, 목이 마른 Mr.릭을 위해 하늘에서 떨어지는 아리수를 받아마시는 게임입니다.",
+              "detail2": "HTML, SASS, React 활용"
+            },
+
+            "thumbnail":"/frontend/arisu/product.png",
+            "thumbnail2":"/frontend/arisu/product3.png"
+        },
+        "wireframe":
+        {
+          "pageName":"와이어프레임",
+          "images":
+          [
+            {
+              "caption": "메인 페이지 와이어프레임",
+              "url": "/frontend/arisu/wireframe.png"
+            }
+          ]
+        },
+        "link":
+        {
+            "pageName":"사이트",
+            "url":"https://arisu-eta.vercel.app/"
+        }
+
+      }
+    },
+    {
+      "id": "front17",
+      "category": "next",
+      "teamProject": false,
+
+      "pages": 
+      {
+        "project": 
+        {
+            "pageName":"프로젝트",
+            "title": "AI STUDY",
+            "summary": "AI STUDY & CHATBOT",
+
+            "explain": 
+            {
+              "detail2": "코드펜에 업로드 되어있는 모션을 활용한 페이지로, 물방울이 마우스의 클릭과 움직임에 반응합니다.",
+              "detail": "HTML, SASS, React, Next 활용"
+            },
+
+            "thumbnail":"/frontend/gshap/product.png"
+        },
+        "link":
+        {
+            "pageName":"사이트",
+            "url":"https://gsap-five-xi.vercel.app/"
         }
 
       }

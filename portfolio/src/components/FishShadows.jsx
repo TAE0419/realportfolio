@@ -1,6 +1,20 @@
 import { useEffect, useRef } from 'react'
 
+const bodyPoints = [-1, 1].flatMap((side) => Array.from({ length: 65 }, (_, step) => {
+  const t = side === -1 ? step / 64 : 1 - step / 64
+  const x = 80 - t * 155
+  const weight = (80 - x) / 195
+  return {
+    x,
+    y: side * Math.sin(Math.PI * t) ** 0.6 * (22 - t * 16),
+    sin: Math.sin(weight * 2.2) * 14 * weight ** 2,
+    cos: Math.cos(weight * 2.2) * 14 * weight ** 2,
+  }
+}))
+
 function drawShadow(context, phase) {
+  const sin = Math.sin(phase)
+  const cos = Math.cos(phase)
   const bend = (x, y) => {
     const tailWeight = (80 - x) / 195
     return [x, y + Math.sin(phase - tailWeight * 2.2) * 14 * tailWeight ** 2]
@@ -8,16 +22,11 @@ function drawShadow(context, phase) {
 
   // The head stays steady while a travelling curve bends the narrowing body.
   context.beginPath()
-  for (const side of [-1, 1]) {
-    for (let step = 0; step <= 64; step += 1) {
-      const t = side === -1 ? step / 64 : 1 - step / 64
-      const x = 80 - t * 155
-      const halfWidth = Math.sin(Math.PI * t) ** 0.6 * (22 - t * 16)
-      const point = bend(x, side * halfWidth)
-      if (side === -1 && step === 0) context.moveTo(...point)
-      else context.lineTo(...point)
-    }
-  }
+  bodyPoints.forEach((point, index) => {
+    const y = point.y + sin * point.cos - cos * point.sin
+    if (index === 0) context.moveTo(point.x, y)
+    else context.lineTo(point.x, y)
+  })
   context.closePath()
   context.fill()
 
@@ -31,7 +40,7 @@ function drawShadow(context, phase) {
   context.fill()
 }
 
-export default function FishShadows({ seed = 1, areaSelector, bottomBoundarySelector }) {
+export default function FishShadows({ seed = 1, areaSelector, bottomBoundarySelector, schoolCount = Infinity }) {
   const canvasRef = useRef(null)
   const randomSeedRef = useRef(null)
 
@@ -43,11 +52,16 @@ export default function FishShadows({ seed = 1, areaSelector, bottomBoundarySele
     const area = areaSelector ? section.querySelector(areaSelector) : null
     const bottomBoundary = bottomBoundarySelector ? section.querySelector(bottomBoundarySelector) : null
     const boundaryPath = bottomBoundary?.querySelector('.wave-row__highlight')
+    const boundaryLength = boundaryPath?.getTotalLength()
+    const boundaryPoints = boundaryPath ? Array.from({ length: 385 }, (_, index) => boundaryPath.getPointAtLength(boundaryLength * index / 384)) : []
     let bottomClip = null
+    let clipOffset = 0
+    let clipGeometry = ''
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
     const darkColor = window.getComputedStyle(canvas).getPropertyValue('--dark-color').trim()
     let width = 0
     let height = 0
+    let canvasTop = 0
     const verticalBleed = 200
     let swimmingArea = { x: 0, y: 0, width: 1, height: 1 }
     let frame = 0
@@ -66,8 +80,9 @@ export default function FishShadows({ seed = 1, areaSelector, bottomBoundarySele
     const groups = []
     const fish = []
     let remaining = 10 + Math.floor(random() * 9)
-    while (remaining > 0) {
+    while (remaining > 0 && groups.length < schoolCount) {
       let groupSize = groups.length === 0 ? 4 : Math.min(remaining, 2 + Math.floor(random() * 2))
+      if (schoolCount === 1) groupSize = 2 + Math.floor(random() * 3)
       if (remaining - groupSize === 1) groupSize = remaining === 3 ? 3 : 2
       const group = groups.length
       groups.push({
@@ -91,9 +106,19 @@ export default function FishShadows({ seed = 1, areaSelector, bottomBoundarySele
     })
 
     const paint = (delta = 0) => {
-      context.clearRect(0, 0, width, height)
+      const top = Math.max(0, window.scrollY - canvasTop - 100)
+      const visibleHeight = Math.max(0, Math.min(height - top, window.innerHeight + 200))
+      // The preview canvas is several screens tall; only repaint the visible strip.
+      context.clearRect(0, top, width, visibleHeight)
       context.save()
-      if (bottomClip) context.clip(bottomClip)
+      context.beginPath()
+      context.rect(0, top, width, visibleHeight)
+      context.clip()
+      if (bottomClip) {
+        context.translate(0, clipOffset)
+        context.clip(bottomClip)
+        context.translate(0, -clipOffset)
+      }
       const scale = Math.max(0.45, Math.min(1, width / 1000))
       groups.forEach((item) => {
         if (delta) {
@@ -115,8 +140,11 @@ export default function FishShadows({ seed = 1, areaSelector, bottomBoundarySele
         const across = (item.position[1] + Math.sin(elapsed * 0.5 + item.phase) * 6) * scale
         const cos = Math.cos(group.heading)
         const sin = Math.sin(group.heading)
+        const x = swimmingArea.x + group.x * swimmingArea.width + along * cos - across * sin
+        const y = swimmingArea.y + group.y * swimmingArea.height + along * sin + across * cos
+        if (x < -item.size || x > width + item.size || y < top - item.size || y > top + visibleHeight + item.size) return
         context.save()
-        context.translate(swimmingArea.x + group.x * swimmingArea.width + along * cos - across * sin, swimmingArea.y + group.y * swimmingArea.height + along * sin + across * cos)
+        context.translate(x, y)
         context.rotate(group.heading)
         context.scale(item.size * scale * 0.7 / 195, item.size * scale / 195)
         context.fillStyle = darkColor
@@ -127,7 +155,7 @@ export default function FishShadows({ seed = 1, areaSelector, bottomBoundarySele
     }
     const tick = (timestamp) => {
       frame = 0
-      if (!visible || reducedMotion.matches || document.hidden) return
+      if (!visible || reducedMotion.matches || document.hidden || document.documentElement.hasAttribute('data-initial-loading')) return
       const delta = previous ? Math.min((timestamp - previous) / 1000, 0.05) : 0
       previous = timestamp
       elapsed += delta
@@ -139,10 +167,11 @@ export default function FishShadows({ seed = 1, areaSelector, bottomBoundarySele
       frame = 0
       previous = 0
       paint()
-      if (visible && !reducedMotion.matches && !document.hidden) frame = window.requestAnimationFrame(tick)
+      if (visible && !reducedMotion.matches && !document.hidden && !document.documentElement.hasAttribute('data-initial-loading')) frame = window.requestAnimationFrame(tick)
     }
     const resize = () => {
       width = section.clientWidth
+      canvasTop = canvas.getBoundingClientRect().top + window.scrollY
       const sectionHeight = section.clientHeight
       height = sectionHeight + verticalBleed * 2
       swimmingArea = { x: 0, y: verticalBleed, width, height: sectionHeight }
@@ -160,23 +189,27 @@ export default function FishShadows({ seed = 1, areaSelector, bottomBoundarySele
         }
       }
       const ratio = Math.min(window.devicePixelRatio || 1, 2)
-      canvas.width = Math.round(width * ratio)
-      canvas.height = Math.round(height * ratio)
+      const pixelWidth = Math.round(width * ratio)
+      const pixelHeight = Math.round(height * ratio)
+      if (canvas.width !== pixelWidth) canvas.width = pixelWidth
+      if (canvas.height !== pixelHeight) canvas.height = pixelHeight
       context.setTransform(ratio, 0, 0, ratio, 0, 0)
       if (boundaryPath) {
         const matrix = boundaryPath.getScreenCTM()
         if (matrix) {
           const canvasBounds = canvas.getBoundingClientRect()
-          const length = boundaryPath.getTotalLength()
-          bottomClip = new Path2D()
-          bottomClip.moveTo(0, 0)
-          for (let index = 0; index <= 384; index += 1) {
-            const point = boundaryPath.getPointAtLength(length * index / 384)
-            const screenPoint = new DOMPoint(point.x, point.y).matrixTransform(matrix)
-            bottomClip.lineTo(screenPoint.x - canvasBounds.left, screenPoint.y - canvasBounds.top)
+          clipOffset = matrix.f - canvasBounds.top
+          const geometry = [width, height, matrix.a, matrix.b, matrix.c, matrix.d, matrix.e - canvasBounds.left].join(',')
+          if (geometry !== clipGeometry) {
+            clipGeometry = geometry
+            bottomClip = new Path2D()
+            bottomClip.moveTo(0, -height * 2)
+            boundaryPoints.forEach((point) => {
+              bottomClip.lineTo(matrix.a * point.x + matrix.c * point.y + matrix.e - canvasBounds.left, matrix.b * point.x + matrix.d * point.y)
+            })
+            bottomClip.lineTo(width, -height * 2)
+            bottomClip.closePath()
           }
-          bottomClip.lineTo(width, 0)
-          bottomClip.closePath()
         }
       }
       paint()
@@ -198,6 +231,7 @@ export default function FishShadows({ seed = 1, areaSelector, bottomBoundarySele
     intersectionObserver.observe(section)
     reducedMotion.addEventListener('change', syncAnimation)
     document.addEventListener('visibilitychange', syncAnimation)
+    window.addEventListener('portfolio-ready', syncAnimation)
     resize()
 
     return () => {
@@ -206,8 +240,9 @@ export default function FishShadows({ seed = 1, areaSelector, bottomBoundarySele
       intersectionObserver.disconnect()
       reducedMotion.removeEventListener('change', syncAnimation)
       document.removeEventListener('visibilitychange', syncAnimation)
+      window.removeEventListener('portfolio-ready', syncAnimation)
     }
-  }, [seed, areaSelector, bottomBoundarySelector])
+  }, [seed, areaSelector, bottomBoundarySelector, schoolCount])
 
   return <canvas ref={canvasRef} className="fish-shadows" aria-hidden="true" />
 }

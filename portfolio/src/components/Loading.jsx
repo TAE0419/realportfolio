@@ -1,1 +1,1 @@
-import './Loading.scss'
+import './Loading.module.scss'

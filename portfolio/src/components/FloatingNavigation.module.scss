@@ -1,0 +1,85 @@
+.navigation {
+  position: fixed;
+  right: max(50px, env(safe-area-inset-right));
+  bottom: var(--navigation-bottom-offset);
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  width: 190px;
+  pointer-events: none;
+}
+
+.trigger {
+  order: 2;
+  display: grid;
+  place-items: center;
+  width: var(--navigation-button-size);
+  height: var(--navigation-button-size);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--point-color);
+  cursor: pointer;
+  pointer-events: auto;
+  transition: color 200ms ease;
+
+  svg > path {
+    stroke: currentColor;
+    stroke-width: 6;
+    stroke-linejoin: round;
+    transition: fill 200ms ease, stroke 200ms ease;
+  }
+
+  &:focus-visible { outline: 2px solid var(--white-color); outline-offset: 4px; }
+}
+
+.links {
+  order: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 18px;
+  width: 100%;
+  padding: 0 0 20px;
+  visibility: hidden;
+  transition: visibility 0s calc(300ms + (var(--link-count) - 1) * 90ms);
+
+  a {
+    color: var(--point-color);
+    font: var(--font-weight-normal) var(--font-size-16)/1.5 var(--body-font);
+    text-decoration: none;
+    white-space: nowrap;
+    overflow: clip;
+
+    span {
+      display: block;
+      transform: translateY(100%);
+      transition: transform 300ms ease;
+      transition-delay: calc((var(--link-count) - 1 - var(--order)) * 90ms);
+    }
+
+    &:hover { color: var(--white-color); }
+    &:focus-visible { outline: 2px solid var(--white-color); outline-offset: 4px; }
+  }
+}
+
+.open {
+  pointer-events: auto;
+  .trigger svg > path { fill: transparent; stroke: currentColor; }
+  .links { visibility: visible; transition-delay: 0s; }
+  .links a span {
+    transform: translateY(0);
+    transition-delay: calc(var(--order) * 90ms);
+  }
+}
+
+@media (max-width: 700px) {
+  .navigation { right: max(16px, env(safe-area-inset-right)); }
+  .trigger svg { width: 60px; height: 60px; }
+  .links { gap: 14px; padding-bottom: 18px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .trigger, .trigger svg > path, .links, .links a span { transition: none; }
+}

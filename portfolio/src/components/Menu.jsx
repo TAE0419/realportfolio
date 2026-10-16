@@ -1,1 +1,1 @@
-import './Menu.scss'
+import './Menu.module.scss'

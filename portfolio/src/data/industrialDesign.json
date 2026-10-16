@@ -1,49 +1,716 @@
 {
   "projects": [
     {
-      "id": "project01",
-      "category": "javascript",
+      "id": "industrial01",
+      "category": "product",
       "teamProject": false,
-
       "pages": {
         "project": {
-            "pageName":"프로젝트",
-            "title": "calculator",
-            "summary": "설명 요약",
-
-            "detail1": "자세한 설명",
-            "detail2": "자세한 설명",
-
-            "thumbnail":"/",
-            "thumbnail2":"/"
+          "pageName": "프로젝트",
+          "title": "BATGUY",
+          "summary": "긴귀박쥐 스피커 로봇",
+          "explain": {
+            "detail":"동물 로봇화 프로젝트로, 긴귀박쥐의 외형적, 성향적 특징을 참고해 블루투스 스피커를 디자인하였습니다.",
+            "detail2":"Rhino, Keyshot, Illustrator 활용"
+          },
+          "thumbnail": "/industrialdesign/industrialdesign/batguy/main.png"
         },
-        "presentation":{
-            "pageName":"발표 자료",
-            "images": [
-            {
-              "caption": "1",
-              "url": "/images/projects/wireframe-main.png"
-            },
-            {
-              "caption": "2",
-              "url": "/images/projects/wireframe-detail.png"
-            }
+        "main": {
+          "pageName": "배너",
+          "images": [
+            { "caption": "main", "url": "/industrialdesign/industrialdesign/batguy/main.png" }
           ]
         },
-        "leaflet":{
-            "pageName":"리플렛",
-            "images": [
-            {
-              "caption": "1",
-              "url": "/images/projects/wireframe-main.png"
-            },
-            {
-              "caption": "2",
-              "url": "/images/projects/wireframe-detail.png"
-            }
+        "sketch": {
+          "pageName": "스케치",
+          "images": [
+            { "caption": "sketch", "url": "/industrialdesign/industrialdesign/batguy/sketch.jpg" }
           ]
         }
-
+      }
+    },
+    {
+      "id": "industrial03",
+      "category": "product",
+      "category2": "branding",
+      "teamProject": true,
+      "pages": {
+        "project": {
+          "pageName": "프로젝트",
+          "title": "GOTBOB",
+          "summary": "1인 가구의 식생활을 돕는 브랜드",
+          "explain": {
+            "detail":"4명이 참여한 팀프로젝트로, '갓밥'은 바쁜 현대인들이 직접 만든 건강한 식사를 하도록 도울 수 있는 방법을 제안합니다. 개인 아이템으로 다용도 냉동 야채를 간편하게 보관/사용할 수 있는 컨테이너 '포레시'를 디자인했습니다.",
+            "detail2":"Rhino, Keyshot, Indesign, Figma 활용"
+          },
+          "thumbnail": "/industrialdesign/industrialdesign/gotbob/product3.png",
+          "thumbnail2": "/industrialdesign/industrialdesign/gotbob/product4.png",
+          "thumbnail3": "/industrialdesign/industrialdesign/gotbob/book27.png"
+        },
+        "book": {
+          "pageName": "책자",
+          "images": [
+            { "caption": "book", "url": "/industrialdesign/industrialdesign/gotbob/book/book.png" },
+            { "caption": "book2", "url": "/industrialdesign/industrialdesign/gotbob/book/book2.png" },
+            { "caption": "book3", "url": "/industrialdesign/industrialdesign/gotbob/book/book3.png" },
+            { "caption": "book4", "url": "/industrialdesign/industrialdesign/gotbob/book/book4.png" },
+            { "caption": "book5", "url": "/industrialdesign/industrialdesign/gotbob/book/book5.png" },
+            { "caption": "book6", "url": "/industrialdesign/industrialdesign/gotbob/book/book6.png" },
+            { "caption": "book7", "url": "/industrialdesign/industrialdesign/gotbob/book/book7.png" },
+            { "caption": "book8", "url": "/industrialdesign/industrialdesign/gotbob/book/book8.png" },
+            { "caption": "book9", "url": "/industrialdesign/industrialdesign/gotbob/book/book9.png" },
+            { "caption": "book10", "url": "/industrialdesign/industrialdesign/gotbob/book/book10.png" },
+            { "caption": "book11", "url": "/industrialdesign/industrialdesign/gotbob/book/book11.png" },
+            { "caption": "book12", "url": "/industrialdesign/industrialdesign/gotbob/book/book12.png" },
+            { "caption": "book13", "url": "/industrialdesign/industrialdesign/gotbob/book/book13.png" },
+            { "caption": "book14", "url": "/industrialdesign/industrialdesign/gotbob/book/book14.png" },
+            { "caption": "book15", "url": "/industrialdesign/industrialdesign/gotbob/book/book15.png" },
+            { "caption": "book16", "url": "/industrialdesign/industrialdesign/gotbob/book/book16.png" },
+            { "caption": "book17", "url": "/industrialdesign/industrialdesign/gotbob/book/book17.png" },
+            { "caption": "book18", "url": "/industrialdesign/industrialdesign/gotbob/book/book18.png" },
+            { "caption": "book19", "url": "/industrialdesign/industrialdesign/gotbob/book/book19.png" },
+            { "caption": "book20", "url": "/industrialdesign/industrialdesign/gotbob/book/book20.png" },
+            { "caption": "book21", "url": "/industrialdesign/industrialdesign/gotbob/book/book21.png" },
+            { "caption": "book22", "url": "/industrialdesign/industrialdesign/gotbob/book/book22.png" },
+            { "caption": "book23", "url": "/industrialdesign/industrialdesign/gotbob/book/book23.png" },
+            { "caption": "book24", "url": "/industrialdesign/industrialdesign/gotbob/book/book24.png" },
+            { "caption": "book25", "url": "/industrialdesign/industrialdesign/gotbob/book/book25.png" },
+            { "caption": "book26", "url": "/industrialdesign/industrialdesign/gotbob/book/book26.png" },
+            { "caption": "book27", "url": "/industrialdesign/industrialdesign/gotbob/book/book27.png" },
+            { "caption": "book28", "url": "/industrialdesign/industrialdesign/gotbob/book/book28.png" },
+            { "caption": "book29", "url": "/industrialdesign/industrialdesign/gotbob/book/book29.png" },
+            { "caption": "book30", "url": "/industrialdesign/industrialdesign/gotbob/book/book30.png" },
+            { "caption": "book31", "url": "/industrialdesign/industrialdesign/gotbob/book/book31.png" },
+            { "caption": "book32", "url": "/industrialdesign/industrialdesign/gotbob/book/book32.png" },
+            { "caption": "book33", "url": "/industrialdesign/industrialdesign/gotbob/book/book33.png" }
+          ]
+        },
+        "banner": {
+          "pageName": "배너",
+          "images": [
+            { "caption": "banner", "url": "/industrialdesign/industrialdesign/gotbob/banner.png" }
+          ]
+        }
+      }
+    },
+    {
+      "id": "industrial11",
+      "category": "product",
+      "teamProject": true,
+      "pages": {
+        "project": {
+          "pageName": "프로젝트",
+          "title": "SMIM",
+          "summary": "독서 보조 용품",
+          "explain": {
+            "detail":"3명이 참여한 팀프로젝트로, '스밈'은 리딩테인먼트를 주제로 즐거운 독서 환경을 조성할 수 있는 독서 보조 용품 세트를 제안합니다.",
+            "detail2":"Rhino, Keyshot, Illustrator, Figma 활용"
+          },
+          "thumbnail": "/industrialdesign/industrialdesign/smim/product2.png",
+          "thumbnail2": "/industrialdesign/industrialdesign/smim/product.png"
+        },
+        "presentation": {
+          "pageName": "발표 자료",
+          "images": [
+            { "caption": "1", "url": "/industrialdesign/industrialdesign/smim/ppt/1.png" },
+            { "caption": "2", "url": "/industrialdesign/industrialdesign/smim/ppt/2.png" },
+            { "caption": "3", "url": "/industrialdesign/industrialdesign/smim/ppt/3.png" },
+            { "caption": "4", "url": "/industrialdesign/industrialdesign/smim/ppt/4.png" },
+            { "caption": "5", "url": "/industrialdesign/industrialdesign/smim/ppt/5.png" },
+            { "caption": "6", "url": "/industrialdesign/industrialdesign/smim/ppt/6.png" },
+            { "caption": "7", "url": "/industrialdesign/industrialdesign/smim/ppt/7.png" },
+            { "caption": "8", "url": "/industrialdesign/industrialdesign/smim/ppt/8.png" },
+            { "caption": "9", "url": "/industrialdesign/industrialdesign/smim/ppt/9.png" },
+            { "caption": "10", "url": "/industrialdesign/industrialdesign/smim/ppt/10.png" },
+            { "caption": "11", "url": "/industrialdesign/industrialdesign/smim/ppt/11.png" },
+            { "caption": "12", "url": "/industrialdesign/industrialdesign/smim/ppt/12.png" },
+            { "caption": "13", "url": "/industrialdesign/industrialdesign/smim/ppt/13.png" },
+            { "caption": "14", "url": "/industrialdesign/industrialdesign/smim/ppt/14.png" },
+            { "caption": "15", "url": "/industrialdesign/industrialdesign/smim/ppt/15.png" },
+            { "caption": "16", "url": "/industrialdesign/industrialdesign/smim/ppt/16.png" },
+            { "caption": "17", "url": "/industrialdesign/industrialdesign/smim/ppt/17.png" },
+            { "caption": "18", "url": "/industrialdesign/industrialdesign/smim/ppt/18.png" },
+            { "caption": "19", "url": "/industrialdesign/industrialdesign/smim/ppt/19.png" },
+            { "caption": "20", "url": "/industrialdesign/industrialdesign/smim/ppt/20.png" },
+            { "caption": "21", "url": "/industrialdesign/industrialdesign/smim/ppt/21.png" },
+            { "caption": "22", "url": "/industrialdesign/industrialdesign/smim/ppt/22.png" },
+            { "caption": "23", "url": "/industrialdesign/industrialdesign/smim/ppt/23.png" },
+            { "caption": "24", "url": "/industrialdesign/industrialdesign/smim/ppt/24.png" },
+            { "caption": "25", "url": "/industrialdesign/industrialdesign/smim/ppt/25.png" },
+            { "caption": "26", "url": "/industrialdesign/industrialdesign/smim/ppt/26.png" },
+            { "caption": "27", "url": "/industrialdesign/industrialdesign/smim/ppt/27.png" },
+            { "caption": "28", "url": "/industrialdesign/industrialdesign/smim/ppt/28.png" },
+            { "caption": "29", "url": "/industrialdesign/industrialdesign/smim/ppt/29.png" },
+            { "caption": "30", "url": "/industrialdesign/industrialdesign/smim/ppt/30.png" },
+            { "caption": "31", "url": "/industrialdesign/industrialdesign/smim/ppt/31.png" },
+            { "caption": "32", "url": "/industrialdesign/industrialdesign/smim/ppt/32.png" },
+            { "caption": "33", "url": "/industrialdesign/industrialdesign/smim/ppt/33.png" },
+            { "caption": "34", "url": "/industrialdesign/industrialdesign/smim/ppt/34.png" },
+            { "caption": "35", "url": "/industrialdesign/industrialdesign/smim/ppt/35.png" },
+            { "caption": "36", "url": "/industrialdesign/industrialdesign/smim/ppt/36.png" },
+            { "caption": "37", "url": "/industrialdesign/industrialdesign/smim/ppt/37.png" },
+            { "caption": "38", "url": "/industrialdesign/industrialdesign/smim/ppt/38.png" },
+            { "caption": "39", "url": "/industrialdesign/industrialdesign/smim/ppt/39.png" }
+          ]
+        },
+        "leaflet": {
+          "pageName": "리플렛",
+          "images": [
+            { "caption": "1", "url": "/industrialdesign/industrialdesign/smim/leaflet/1.png" },
+            { "caption": "2", "url": "/industrialdesign/industrialdesign/smim/leaflet/2.png" }
+          ]
+        },
+        "banner": {
+          "pageName": "배너",
+          "images": [
+            { "caption": "banner", "url": "/industrialdesign/industrialdesign/smim/banner.png" }
+          ]
+        }
+      }
+    },
+    {
+      "id": "industrial12",
+      "category": "product",
+      "teamProject": true,
+      "pages": {
+        "project": {
+          "pageName": "프로젝트",
+          "title": "TEULM",
+          "summary": "직관적인 사용성의 정수기",
+          "explain": {
+            "detail":"5명이 참여한 팀프로젝트로, '틂'은 수도꼭지를 모티브로 누구나 쉽게 사용할 수 있는 1인 가구용 정수기를 제안합니다.",
+            "detail2":"Rhino, Keyshot, Illustrator 활용"
+          },
+          "thumbnail": "/industrialdesign/industrialdesign/tlm/product5.png",
+          "thumbnail2": "/industrialdesign/industrialdesign/tlm/product.png"
+        },
+        "book": {
+          "pageName": "책자",
+          "images": [
+            { "caption": "1", "url": "/industrialdesign/industrialdesign/tlm/book/1.png" },
+            { "caption": "2", "url": "/industrialdesign/industrialdesign/tlm/book/2.png" },
+            { "caption": "3", "url": "/industrialdesign/industrialdesign/tlm/book/3.png" },
+            { "caption": "4", "url": "/industrialdesign/industrialdesign/tlm/book/4.png" },
+            { "caption": "5", "url": "/industrialdesign/industrialdesign/tlm/book/5.png" },
+            { "caption": "6", "url": "/industrialdesign/industrialdesign/tlm/book/6.png" },
+            { "caption": "7", "url": "/industrialdesign/industrialdesign/tlm/book/7.png" },
+            { "caption": "8", "url": "/industrialdesign/industrialdesign/tlm/book/8.png" },
+            { "caption": "9", "url": "/industrialdesign/industrialdesign/tlm/book/9.png" },
+            { "caption": "10", "url": "/industrialdesign/industrialdesign/tlm/book/10.png" },
+            { "caption": "11", "url": "/industrialdesign/industrialdesign/tlm/book/11.png" },
+            { "caption": "12", "url": "/industrialdesign/industrialdesign/tlm/book/12.png" }
+          ]
+        }
+      }
+    },
+    {
+      "id": "industrial06",
+      "category": "video",
+      "teamProject": false,
+      "pages": {
+        "project": {
+          "pageName": "프로젝트",
+          "title": "XIAOMI",
+          "summary": "샤오미 프로모션 영상",
+          "explain": {
+            "detail":"샤오미의 깔끔하고 컴팩트한 외관, 간편한 성능을 강조한 프로모션 영상을 제작했습니다.",
+            "detail2":"Rhino, Keyshot, AfterEffect 활용"
+          },
+          "thumbnail": "/industrialdesign/industrialdesign/mi/product1.gif",
+          "thumbnail2": "/industrialdesign/industrialdesign/mi/product3.png"
+        },
+        "storyboard": {
+          "pageName": "스토리보드",
+          "images": [
+            { "caption": "storyboard", "url": "/industrialdesign/industrialdesign/mi/storyboard.png" }
+          ]
+        },
+        "video": {
+          "pageName": "영상",
+          "images": [
+            { "caption": "video", "url": "/industrialdesign/industrialdesign/mi/video.mp4" }
+          ]
+        }
+      }
+    },
+    {
+      "id": "industrial08",
+      "category": "ui",
+      "teamProject": false,
+      "pages": {
+        "project": {
+          "pageName": "프로젝트",
+          "title": "NALMADA",
+          "summary": "정신 질환 자가진단 어플리케이션",
+          "explain": {
+            "detail":"'날마다'는 기분 기록과 간단한 AI 질의응답으로 하루를 기록하고, 장기적으로 데이터를 모아 사용자가 가진 정신 질환을 도출합니다.",
+            "detail2":"Illustrator, Figma 활용"
+          },
+          "thumbnail": "/industrialdesign/industrialdesign/nalmada/product/1.png",
+          "thumbnail2": "/industrialdesign/industrialdesign/nalmada/product/대지 3@2x-8.png",
+          "thumbnail3": "/industrialdesign/industrialdesign/nalmada/product/대지 5@2x-8.png",
+          "thumbnail4": "/industrialdesign/industrialdesign/nalmada/product/대지 7@2x-8.png"
+        },
+        "presentation": {
+          "pageName": "발표 자료",
+          "images": [
+            { "caption": "Slide 16_9 - 1", "url": "/industrialdesign/industrialdesign/nalmada/ppt/Slide 16_9 - 1.png" },
+            { "caption": "Slide 16_9 - 2", "url": "/industrialdesign/industrialdesign/nalmada/ppt/Slide 16_9 - 2.png" },
+            { "caption": "Slide 16_9 - 3", "url": "/industrialdesign/industrialdesign/nalmada/ppt/Slide 16_9 - 3.png" },
+            { "caption": "Slide 16_9 - 4", "url": "/industrialdesign/industrialdesign/nalmada/ppt/Slide 16_9 - 4.png" },
+            { "caption": "Slide 16_9 - 5", "url": "/industrialdesign/industrialdesign/nalmada/ppt/Slide 16_9 - 5.png" },
+            { "caption": "Slide 16_9 - 6", "url": "/industrialdesign/industrialdesign/nalmada/ppt/Slide 16_9 - 6.png" },
+            { "caption": "Slide 16_9 - 7", "url": "/industrialdesign/industrialdesign/nalmada/ppt/Slide 16_9 - 7.png" },
+            { "caption": "Slide 16_9 - 8", "url": "/industrialdesign/industrialdesign/nalmada/ppt/Slide 16_9 - 8.png" }
+          ]
+        }
+      }
+    },
+    {
+      "id": "industrial09",
+      "category": "product",
+      "category2": "branding",
+      "category3": "video",
+      "teamProject": true,
+      "pages": {
+        "project": {
+          "pageName": "프로젝트",
+          "title": "NE",
+          "summary": "전자기기 의존도 저하를 돕는 디지털 디톡스 제품",
+          "explain": {
+            "detail":"5명이 참여한 팀프로젝트로, '네'는 디지털 중독 완화를 위해 일상 보조 기능을 탑제한 스마트폰 감옥을 제안합니다. 또한 개인 아이템으로 스마트폰 사용 루틴을 엄격히 관리하는 폭탄 AI 스피커, 'BOB'을 디자인하였습니다.",
+            "detail2":"Rhino, Keyshot, Illustrator, AfterEffect, Figma 활용"
+          },
+          "thumbnail": "/industrialdesign/industrialdesign/ne/product4.png",
+          "thumbnail2": "/industrialdesign/industrialdesign/ne/product3.png"
+        },
+        "presentation": {
+          "pageName": "발표 자료",
+          "images": [
+            { "caption": "1.표지", "url": "/industrialdesign/industrialdesign/ne/ppt/1.표지.png" },
+            { "caption": "2. 목차", "url": "/industrialdesign/industrialdesign/ne/ppt/2. 목차.png" },
+            { "caption": "3.조원소개", "url": "/industrialdesign/industrialdesign/ne/ppt/3.조원소개.png" },
+            { "caption": "4.트렌드리서치", "url": "/industrialdesign/industrialdesign/ne/ppt/4.트렌드리서치.png" },
+            { "caption": "5.소셜이슈", "url": "/industrialdesign/industrialdesign/ne/ppt/5.소셜이슈.png" },
+            { "caption": "6,리서치-1", "url": "/industrialdesign/industrialdesign/ne/ppt/6,리서치-1.png" },
+            { "caption": "7.리서치-2", "url": "/industrialdesign/industrialdesign/ne/ppt/7.리서치-2.png" },
+            { "caption": "8. 프로블럼 & 솔루션", "url": "/industrialdesign/industrialdesign/ne/ppt/8. 프로블럼 & 솔루션.png" },
+            { "caption": "9.아이템", "url": "/industrialdesign/industrialdesign/ne/ppt/9.아이템.png" },
+            { "caption": "10.중간페이지02", "url": "/industrialdesign/industrialdesign/ne/ppt/10.중간페이지02.png" },
+            { "caption": "11. 페르소나", "url": "/industrialdesign/industrialdesign/ne/ppt/11. 페르소나.png" },
+            { "caption": "12. 유저시나리오", "url": "/industrialdesign/industrialdesign/ne/ppt/12. 유저시나리오.png" },
+            { "caption": "13.마인드맵", "url": "/industrialdesign/industrialdesign/ne/ppt/13.마인드맵.png" },
+            { "caption": "14 인사이트, 니즈", "url": "/industrialdesign/industrialdesign/ne/ppt/14 인사이트, 니즈.png" },
+            { "caption": "15.로고", "url": "/industrialdesign/industrialdesign/ne/ppt/15.로고.png" },
+            { "caption": "17. 콜라주", "url": "/industrialdesign/industrialdesign/ne/ppt/17. 콜라주.png" },
+            { "caption": "18. 중간페이지03", "url": "/industrialdesign/industrialdesign/ne/ppt/18. 중간페이지03.png" },
+            { "caption": "19 브랜드 리서치", "url": "/industrialdesign/industrialdesign/ne/ppt/19 브랜드 리서치.png" },
+            { "caption": "20. 무드보드", "url": "/industrialdesign/industrialdesign/ne/ppt/20. 무드보드.png" },
+            { "caption": "21", "url": "/industrialdesign/industrialdesign/ne/ppt/21.png" },
+            { "caption": "23", "url": "/industrialdesign/industrialdesign/ne/ppt/23.png" },
+            { "caption": "26", "url": "/industrialdesign/industrialdesign/ne/ppt/26.png" },
+            { "caption": "27", "url": "/industrialdesign/industrialdesign/ne/ppt/27.png" },
+            { "caption": "28", "url": "/industrialdesign/industrialdesign/ne/ppt/28.png" },
+            { "caption": "29", "url": "/industrialdesign/industrialdesign/ne/ppt/29.png" },
+            { "caption": "30", "url": "/industrialdesign/industrialdesign/ne/ppt/30.png" },
+            { "caption": "31", "url": "/industrialdesign/industrialdesign/ne/ppt/31.png" },
+            { "caption": "32", "url": "/industrialdesign/industrialdesign/ne/ppt/32.png" },
+            { "caption": "35", "url": "/industrialdesign/industrialdesign/ne/ppt/35.png" },
+            { "caption": "36", "url": "/industrialdesign/industrialdesign/ne/ppt/36.png" },
+            { "caption": "37", "url": "/industrialdesign/industrialdesign/ne/ppt/37.png" },
+            { "caption": "38", "url": "/industrialdesign/industrialdesign/ne/ppt/38.png" },
+            { "caption": "39", "url": "/industrialdesign/industrialdesign/ne/ppt/39.png" },
+            { "caption": "40", "url": "/industrialdesign/industrialdesign/ne/ppt/40.png" },
+            { "caption": "42", "url": "/industrialdesign/industrialdesign/ne/ppt/42.png" },
+            { "caption": "43", "url": "/industrialdesign/industrialdesign/ne/ppt/43.png" },
+            { "caption": "44", "url": "/industrialdesign/industrialdesign/ne/ppt/44.png" },
+            { "caption": "45", "url": "/industrialdesign/industrialdesign/ne/ppt/45.png" },
+            { "caption": "46", "url": "/industrialdesign/industrialdesign/ne/ppt/46.png" },
+            { "caption": "47", "url": "/industrialdesign/industrialdesign/ne/ppt/47.png" },
+            { "caption": "48", "url": "/industrialdesign/industrialdesign/ne/ppt/48.png" },
+            { "caption": "49", "url": "/industrialdesign/industrialdesign/ne/ppt/49.png" },
+            { "caption": "50", "url": "/industrialdesign/industrialdesign/ne/ppt/50.png" },
+            { "caption": "51", "url": "/industrialdesign/industrialdesign/ne/ppt/51.png" },
+            { "caption": "52", "url": "/industrialdesign/industrialdesign/ne/ppt/52.png" },
+            { "caption": "53", "url": "/industrialdesign/industrialdesign/ne/ppt/53.png" },
+            { "caption": "54", "url": "/industrialdesign/industrialdesign/ne/ppt/54.png" },
+            { "caption": "55", "url": "/industrialdesign/industrialdesign/ne/ppt/55.png" },
+            { "caption": "56", "url": "/industrialdesign/industrialdesign/ne/ppt/56.png" }
+          ]
+        },
+        "leaflet": {
+          "pageName": "리플렛",
+          "images": [
+            { "caption": "1", "url": "/industrialdesign/industrialdesign/ne/leaflet/1.png" },
+            { "caption": "2", "url": "/industrialdesign/industrialdesign/ne/leaflet/2.png" }
+          ]
+        },
+        "video": {
+          "pageName": "영상",
+          "images": [
+            { "caption": "video", "url": "/industrialdesign/industrialdesign/ne/video.mp4" }
+          ]
+        }
+      }
+    },
+    {
+      "id": "industrial02",
+      "category": "product",
+      "teamProject": true,
+      "pages": {
+        "project": {
+          "pageName": "프로젝트",
+          "title": "DANCHEONG",
+          "summary": "단청 모티브 화병",
+          "explain": {
+            "detail":"4명이 참여한 팀프로젝트로, 한국의 단청 문양을 활용하여 화병을 디자인했습니다. 또한 한국적인 육각 구조와 단청이 연상되는 색감의 패키지를 제작했습니다.",
+            "detail2":"Rhino, Keyshot 활용"
+          },
+          "thumbnail": "/industrialdesign/industrialdesign/dancheong/product.jpg",
+          "thumbnail2": "/industrialdesign/industrialdesign/dancheong/product2.jpg"
+        },
+        "banner": {
+          "pageName": "배너",
+          "images": [
+            { "caption": "banner", "url": "/industrialdesign/industrialdesign/dancheong/banner.png" }
+          ]
+        },
+        "sketch": {
+          "pageName": "스케치",
+          "images": [
+            { "caption": "sketch", "url": "/industrialdesign/industrialdesign/dancheong/sketch.png" }
+          ]
+        }
+      }
+    },
+    {
+      "id": "industrial07",
+      "category": "product",
+      "category2": "branding",
+      "category3": "video",
+      "teamProject": true,
+      "pages": {
+        "project": {
+          "pageName": "프로젝트",
+          "title": "MUTE",
+          "summary": "'조용한'여행을 돕는 패키지",
+          "explain": {
+            "detail":"4명이 참여한 팀프로젝트로, '뮤트'는 심리적으로 평온한 여행을 돕는 여행 키트를 제안합니다. 그중 보안을 키워드로 정해, 여행 중 일어날 수 있는 다양한 위험들을 사용자 대신 감지하는 'LOCKI'를 디자인했습니다.",
+            "detail2":"Rhino, Keyshot, Illustrator, AfterEffect, Figma 활용"
+          },
+          "thumbnail": "/industrialdesign/industrialdesign/mute/product3.png",
+          "thumbnail2": "/industrialdesign/industrialdesign/mute/1.png"
+        },
+        "presentation": {
+          "pageName": "발표 자료",
+          "images": [
+            { "caption": "1", "url": "/industrialdesign/industrialdesign/mute/ppt/1.png" },
+            { "caption": "2", "url": "/industrialdesign/industrialdesign/mute/ppt/2.png" },
+            { "caption": "3", "url": "/industrialdesign/industrialdesign/mute/ppt/3.png" },
+            { "caption": "4", "url": "/industrialdesign/industrialdesign/mute/ppt/4.png" },
+            { "caption": "5", "url": "/industrialdesign/industrialdesign/mute/ppt/5.png" },
+            { "caption": "6", "url": "/industrialdesign/industrialdesign/mute/ppt/6.png" },
+            { "caption": "7", "url": "/industrialdesign/industrialdesign/mute/ppt/7.png" },
+            { "caption": "8", "url": "/industrialdesign/industrialdesign/mute/ppt/8.png" },
+            { "caption": "9.5", "url": "/industrialdesign/industrialdesign/mute/ppt/9.5.png" },
+            { "caption": "9", "url": "/industrialdesign/industrialdesign/mute/ppt/9.png" },
+            { "caption": "10", "url": "/industrialdesign/industrialdesign/mute/ppt/10.png" },
+            { "caption": "11", "url": "/industrialdesign/industrialdesign/mute/ppt/11.png" },
+            { "caption": "12", "url": "/industrialdesign/industrialdesign/mute/ppt/12.png" },
+            { "caption": "13", "url": "/industrialdesign/industrialdesign/mute/ppt/13.png" },
+            { "caption": "39", "url": "/industrialdesign/industrialdesign/mute/ppt/39.png" },
+            { "caption": "40", "url": "/industrialdesign/industrialdesign/mute/ppt/40.png" },
+            { "caption": "41", "url": "/industrialdesign/industrialdesign/mute/ppt/41.png" },
+            { "caption": "42", "url": "/industrialdesign/industrialdesign/mute/ppt/42.png" },
+            { "caption": "43", "url": "/industrialdesign/industrialdesign/mute/ppt/43.png" },
+            { "caption": "44", "url": "/industrialdesign/industrialdesign/mute/ppt/44.png" },
+            { "caption": "45", "url": "/industrialdesign/industrialdesign/mute/ppt/45.png" },
+            { "caption": "46", "url": "/industrialdesign/industrialdesign/mute/ppt/46.png" },
+            { "caption": "47", "url": "/industrialdesign/industrialdesign/mute/ppt/47.png" },
+            { "caption": "48", "url": "/industrialdesign/industrialdesign/mute/ppt/48.png" },
+            { "caption": "49", "url": "/industrialdesign/industrialdesign/mute/ppt/49.png" }
+          ]
+        },
+        "leaflet": {
+          "pageName": "리플렛",
+          "images": [
+            { "caption": "1", "url": "/industrialdesign/industrialdesign/mute/leaflet/1.png" },
+            { "caption": "2", "url": "/industrialdesign/industrialdesign/mute/leaflet/2.png" },
+            { "caption": "티켓", "url": "/industrialdesign/industrialdesign/mute/ticket/1.png" }
+          ]
+        },
+        "banner": {
+          "pageName": "배너",
+          "images": [
+            { "caption": "1", "url": "/industrialdesign/industrialdesign/mute/banner/1.png" },
+            { "caption": "2", "url": "/industrialdesign/industrialdesign/mute/banner/2.png" },
+            { "caption": "3", "url": "/industrialdesign/industrialdesign/mute/banner/3.png" },
+            { "caption": "4", "url": "/industrialdesign/industrialdesign/mute/banner/4.png" }
+          ]
+        },
+        "video": {
+          "pageName": "영상",
+          "images": [
+            { "caption": "video", "url": "/industrialdesign/industrialdesign/mute/video.mp4" }
+          ]
+        }
+      }
+    },
+    {
+      "id": "industrial04",
+      "category": "product",
+      "teamProject": true,
+      "pages": {
+        "project": {
+          "pageName": "프로젝트",
+          "title": "GYROBALL",
+          "summary": "아동용 흘림 방지 그릇 리디자인",
+          "explain": {
+            "detail":"4명이 참여한 팀프로젝트로 '그레이 그린'을 주제로 선정하고, 개인 아이템으로 아동용 흘림 방지 그릇을 시니어층에게 맞춰 적합한 CMF로 리디자인하는 작업을 진행했습니다. ",
+            "detail2":"Rhino, Keyshot, Photoshop, Figma 활용"
+          },
+          "thumbnail": "/industrialdesign/industrialdesign/gyroball/product.png",
+          "thumbnail2": "/industrialdesign/industrialdesign/gyroball/product4.png"
+        },
+        "presentation": {
+          "pageName": "발표 자료",
+          "images": [
+            { "caption": "1", "url": "/industrialdesign/industrialdesign/gyroball/ppt/1.png" },
+            { "caption": "38", "url": "/industrialdesign/industrialdesign/gyroball/ppt/38.png" },
+            { "caption": "39", "url": "/industrialdesign/industrialdesign/gyroball/ppt/39.png" },
+            { "caption": "40", "url": "/industrialdesign/industrialdesign/gyroball/ppt/40.png" },
+            { "caption": "41", "url": "/industrialdesign/industrialdesign/gyroball/ppt/41.png" },
+            { "caption": "42", "url": "/industrialdesign/industrialdesign/gyroball/ppt/42.png" },
+            { "caption": "43", "url": "/industrialdesign/industrialdesign/gyroball/ppt/43.png" },
+            { "caption": "44", "url": "/industrialdesign/industrialdesign/gyroball/ppt/44.png" },
+            { "caption": "45", "url": "/industrialdesign/industrialdesign/gyroball/ppt/45.png" },
+            { "caption": "46", "url": "/industrialdesign/industrialdesign/gyroball/ppt/46.png" },
+            { "caption": "47", "url": "/industrialdesign/industrialdesign/gyroball/ppt/47.png" },
+            { "caption": "48", "url": "/industrialdesign/industrialdesign/gyroball/ppt/48.png" }
+          ]
+        }
+      }
+    },
+    {
+      "id": "industrial13",
+      "category": "product",
+      "category2":"branding",
+      "category3": "video",
+      "teamProject": true,
+      "pages": {
+        "project": {
+          "pageName": "프로젝트",
+          "title": "URO",
+          "summary": "UFO 모티브 스피커 겸 독서등",
+          "explain": {
+            "detail":"4명이 참여한 팀프로젝트로, 아래 피규어를 넣어 UFO에게 납치되는 듯한 연출을 할 수 있는 독서용 투피스 스피커입니다. 패키지와 함께 디자인하여 실제로 작동하도록 목업을 진행했습니다.",
+            "detail2":"Rhino, Keyshot, Illustrator, AfterEffect, Figma 활용"
+          },
+          "thumbnail": "/industrialdesign/industrialdesign/uro/product2.png",
+          "thumbnail2": "/industrialdesign/industrialdesign/uro/product.png"
+        },
+        "presentation": {
+          "pageName": "발표 자료",
+          "images": [
+            { "caption": "1", "url": "/industrialdesign/industrialdesign/uro/ppt/1.png" },
+            { "caption": "2", "url": "/industrialdesign/industrialdesign/uro/ppt/2.png" },
+            { "caption": "3", "url": "/industrialdesign/industrialdesign/uro/ppt/3.png" },
+            { "caption": "4", "url": "/industrialdesign/industrialdesign/uro/ppt/4.png" },
+            { "caption": "5", "url": "/industrialdesign/industrialdesign/uro/ppt/5.png" },
+            { "caption": "6", "url": "/industrialdesign/industrialdesign/uro/ppt/6.png" },
+            { "caption": "7", "url": "/industrialdesign/industrialdesign/uro/ppt/7.png" },
+            { "caption": "8", "url": "/industrialdesign/industrialdesign/uro/ppt/8.png" },
+            { "caption": "9", "url": "/industrialdesign/industrialdesign/uro/ppt/9.png" },
+            { "caption": "10", "url": "/industrialdesign/industrialdesign/uro/ppt/10.png" },
+            { "caption": "11", "url": "/industrialdesign/industrialdesign/uro/ppt/11.png" },
+            { "caption": "12", "url": "/industrialdesign/industrialdesign/uro/ppt/12.png" },
+            { "caption": "13", "url": "/industrialdesign/industrialdesign/uro/ppt/13.png" },
+            { "caption": "14", "url": "/industrialdesign/industrialdesign/uro/ppt/14.png" },
+            { "caption": "15", "url": "/industrialdesign/industrialdesign/uro/ppt/15.png" },
+            { "caption": "16", "url": "/industrialdesign/industrialdesign/uro/ppt/16.png" },
+            { "caption": "17", "url": "/industrialdesign/industrialdesign/uro/ppt/17.png" },
+            { "caption": "18", "url": "/industrialdesign/industrialdesign/uro/ppt/18.png" },
+            { "caption": "19", "url": "/industrialdesign/industrialdesign/uro/ppt/19.png" },
+            { "caption": "20", "url": "/industrialdesign/industrialdesign/uro/ppt/20.png" },
+            { "caption": "21", "url": "/industrialdesign/industrialdesign/uro/ppt/21.png" },
+            { "caption": "22", "url": "/industrialdesign/industrialdesign/uro/ppt/22.png" },
+            { "caption": "23", "url": "/industrialdesign/industrialdesign/uro/ppt/23.png" },
+            { "caption": "24", "url": "/industrialdesign/industrialdesign/uro/ppt/24.png" },
+            { "caption": "25", "url": "/industrialdesign/industrialdesign/uro/ppt/25.png" },
+            { "caption": "26", "url": "/industrialdesign/industrialdesign/uro/ppt/26.png" },
+            { "caption": "27", "url": "/industrialdesign/industrialdesign/uro/ppt/27.png" },
+            { "caption": "28", "url": "/industrialdesign/industrialdesign/uro/ppt/28.png" },
+            { "caption": "29", "url": "/industrialdesign/industrialdesign/uro/ppt/29.png" },
+            { "caption": "30", "url": "/industrialdesign/industrialdesign/uro/ppt/30.png" },
+            { "caption": "31", "url": "/industrialdesign/industrialdesign/uro/ppt/31.png" },
+            { "caption": "32", "url": "/industrialdesign/industrialdesign/uro/ppt/32.png" },
+            { "caption": "33", "url": "/industrialdesign/industrialdesign/uro/ppt/33.png" },
+            { "caption": "34", "url": "/industrialdesign/industrialdesign/uro/ppt/34.png" },
+            { "caption": "35", "url": "/industrialdesign/industrialdesign/uro/ppt/35.png" },
+            { "caption": "36", "url": "/industrialdesign/industrialdesign/uro/ppt/36.png" },
+            { "caption": "37", "url": "/industrialdesign/industrialdesign/uro/ppt/37.png" },
+            { "caption": "38", "url": "/industrialdesign/industrialdesign/uro/ppt/38.png" },
+            { "caption": "39", "url": "/industrialdesign/industrialdesign/uro/ppt/39.png" },
+            { "caption": "40", "url": "/industrialdesign/industrialdesign/uro/ppt/40.png" },
+            { "caption": "41", "url": "/industrialdesign/industrialdesign/uro/ppt/41.png" },
+            { "caption": "42", "url": "/industrialdesign/industrialdesign/uro/ppt/42.png" },
+            { "caption": "43", "url": "/industrialdesign/industrialdesign/uro/ppt/43.png" }
+          ]
+        },
+        "video": {
+          "pageName": "영상",
+          "images": [
+            { "caption": "video", "url": "/industrialdesign/industrialdesign/uro/video.mp4" }
+          ]
+        }
+      }
+    },
+    {
+      "id": "industrial10",
+      "category": "product",
+      "category2": "video",
+      "teamProject": false,
+      "pages": {
+        "project": {
+          "pageName": "프로젝트",
+          "title": "POCKETPOOPY",
+          "summary": "반려견 배변 검사기",
+          "explain": {
+            "detail":"4명이 참여한 팀프로젝트로, '키트-잇'은 중소형 숙소 운영자가 해당 지역의 특색을 담아 어메니티의 형태로 투숙객에게 제공할 수 있는 DIY 키트를 제안합니다. 다양하게 조합하여 활용할 수 있는 모듈 세트 'UNIT-', 원하는 재료와 모양으로 만들 수 있는 왁스타블렛 틀 'MIX-It'으로 이루어져있습니다.",
+            "detail2":"Rhino, Keyshot, Illustrator, AfterEffect, Figma 활용"
+          },
+          "thumbnail": "/industrialdesign/industrialdesign/pocketpoopy/product.png",
+          "thumbnail2": "/industrialdesign/industrialdesign/pocketpoopy/product2.png"
+        },
+        "presentation": {
+          "pageName": "발표 자료",
+          "images": [
+            { "caption": "1", "url": "/industrialdesign/industrialdesign/pocketpoopy/ppt/1.png" },
+            { "caption": "2", "url": "/industrialdesign/industrialdesign/pocketpoopy/ppt/2.png" },
+            { "caption": "3", "url": "/industrialdesign/industrialdesign/pocketpoopy/ppt/3.png" },
+            { "caption": "4", "url": "/industrialdesign/industrialdesign/pocketpoopy/ppt/4.png" },
+            { "caption": "5", "url": "/industrialdesign/industrialdesign/pocketpoopy/ppt/5.png" },
+            { "caption": "6", "url": "/industrialdesign/industrialdesign/pocketpoopy/ppt/6.png" },
+            { "caption": "7", "url": "/industrialdesign/industrialdesign/pocketpoopy/ppt/7.png" },
+            { "caption": "8", "url": "/industrialdesign/industrialdesign/pocketpoopy/ppt/8.png" },
+            { "caption": "9", "url": "/industrialdesign/industrialdesign/pocketpoopy/ppt/9.png" },
+            { "caption": "10", "url": "/industrialdesign/industrialdesign/pocketpoopy/ppt/10.png" },
+            { "caption": "11", "url": "/industrialdesign/industrialdesign/pocketpoopy/ppt/11.png" },
+            { "caption": "12", "url": "/industrialdesign/industrialdesign/pocketpoopy/ppt/12.png" },
+            { "caption": "13", "url": "/industrialdesign/industrialdesign/pocketpoopy/ppt/13.png" },
+            { "caption": "14", "url": "/industrialdesign/industrialdesign/pocketpoopy/ppt/14.png" },
+            { "caption": "15", "url": "/industrialdesign/industrialdesign/pocketpoopy/ppt/15.png" },
+            { "caption": "16", "url": "/industrialdesign/industrialdesign/pocketpoopy/ppt/16.png" },
+            { "caption": "17", "url": "/industrialdesign/industrialdesign/pocketpoopy/ppt/17.png" },
+            { "caption": "18", "url": "/industrialdesign/industrialdesign/pocketpoopy/ppt/18.png" },
+            { "caption": "19", "url": "/industrialdesign/industrialdesign/pocketpoopy/ppt/19.png" },
+            { "caption": "20", "url": "/industrialdesign/industrialdesign/pocketpoopy/ppt/20.png" },
+            { "caption": "21", "url": "/industrialdesign/industrialdesign/pocketpoopy/ppt/21.png" },
+            { "caption": "22", "url": "/industrialdesign/industrialdesign/pocketpoopy/ppt/22.png" },
+            { "caption": "23", "url": "/industrialdesign/industrialdesign/pocketpoopy/ppt/23.png" }
+          ]
+        },
+        "video": {
+          "pageName": "영상",
+          "images": [
+            { "caption": "video", "url": "/industrialdesign/industrialdesign/pocketpoopy/video.mp4" }
+          ]
+        }
+      }
+    },
+    {
+      "id": "industrial05",
+      "category": "product",
+      "category2": "branding",
+      "category3": "video",
+      "teamProject": true,
+      "pages": {
+        "project": {
+          "pageName": "프로젝트",
+          "title": "KIT",
+          "summary": "중소형 숙소용 로컬 어메니티 DIY 키트",
+          "explain": {
+            "detail":"다양한 AI 도구를 활용하여 제품 디자인을 진행하였습니다. '포켓푸피'는 변을 상시 관찰해 반려견의 건강을 예측합니다. 변을 채취한 칩을 삽입하여 더욱 정밀한 검사가 가능합니다.",
+            "detail2":"NotebookLM, NanoBanana, Viscom, Grog 등 활용"
+          },
+          "thumbnail": "/industrialdesign/industrialdesign/kit/product.png",
+          "thumbnail2": "/industrialdesign/industrialdesign/kit/product2.png"
+        },
+        "presentation": {
+          "pageName": "발표 자료",
+          "images": [
+            { "caption": "51", "url": "/industrialdesign/industrialdesign/kit/ppt/51.png" },
+            { "caption": "52", "url": "/industrialdesign/industrialdesign/kit/ppt/52.png" },
+            { "caption": "53", "url": "/industrialdesign/industrialdesign/kit/ppt/53.png" },
+            { "caption": "54", "url": "/industrialdesign/industrialdesign/kit/ppt/54.png" },
+            { "caption": "55", "url": "/industrialdesign/industrialdesign/kit/ppt/55.png" },
+            { "caption": "56", "url": "/industrialdesign/industrialdesign/kit/ppt/56.png" },
+            { "caption": "57", "url": "/industrialdesign/industrialdesign/kit/ppt/57.png" },
+            { "caption": "58", "url": "/industrialdesign/industrialdesign/kit/ppt/58.png" },
+            { "caption": "59", "url": "/industrialdesign/industrialdesign/kit/ppt/59.png" },
+            { "caption": "60", "url": "/industrialdesign/industrialdesign/kit/ppt/60.png" },
+            { "caption": "61", "url": "/industrialdesign/industrialdesign/kit/ppt/61.png" },
+            { "caption": "62", "url": "/industrialdesign/industrialdesign/kit/ppt/62.png" },
+            { "caption": "63", "url": "/industrialdesign/industrialdesign/kit/ppt/63.png" },
+            { "caption": "64", "url": "/industrialdesign/industrialdesign/kit/ppt/64.png" },
+            { "caption": "65", "url": "/industrialdesign/industrialdesign/kit/ppt/65.png" },
+            { "caption": "66", "url": "/industrialdesign/industrialdesign/kit/ppt/66.png" },
+            { "caption": "67", "url": "/industrialdesign/industrialdesign/kit/ppt/67.png" },
+            { "caption": "68", "url": "/industrialdesign/industrialdesign/kit/ppt/68.png" },
+            { "caption": "69", "url": "/industrialdesign/industrialdesign/kit/ppt/69.png" },
+            { "caption": "70", "url": "/industrialdesign/industrialdesign/kit/ppt/70.png" },
+            { "caption": "71", "url": "/industrialdesign/industrialdesign/kit/ppt/71.png" },
+            { "caption": "72", "url": "/industrialdesign/industrialdesign/kit/ppt/72.png" },
+            { "caption": "73", "url": "/industrialdesign/industrialdesign/kit/ppt/73.png" },
+            { "caption": "74", "url": "/industrialdesign/industrialdesign/kit/ppt/74.png" },
+            { "caption": "75", "url": "/industrialdesign/industrialdesign/kit/ppt/75.png" },
+            { "caption": "76", "url": "/industrialdesign/industrialdesign/kit/ppt/76.png" },
+            { "caption": "77", "url": "/industrialdesign/industrialdesign/kit/ppt/77.png" },
+            { "caption": "78", "url": "/industrialdesign/industrialdesign/kit/ppt/78.png" },
+            { "caption": "79", "url": "/industrialdesign/industrialdesign/kit/ppt/79.png" },
+            { "caption": "80", "url": "/industrialdesign/industrialdesign/kit/ppt/80.png" },
+            { "caption": "81", "url": "/industrialdesign/industrialdesign/kit/ppt/81.png" },
+            { "caption": "82", "url": "/industrialdesign/industrialdesign/kit/ppt/82.png" },
+            { "caption": "83", "url": "/industrialdesign/industrialdesign/kit/ppt/83.png" },
+            { "caption": "84", "url": "/industrialdesign/industrialdesign/kit/ppt/84.png" },
+            { "caption": "85", "url": "/industrialdesign/industrialdesign/kit/ppt/85.png" },
+            { "caption": "86", "url": "/industrialdesign/industrialdesign/kit/ppt/86.png" },
+            { "caption": "87", "url": "/industrialdesign/industrialdesign/kit/ppt/87.png" },
+            { "caption": "88", "url": "/industrialdesign/industrialdesign/kit/ppt/88.png" },
+            { "caption": "89", "url": "/industrialdesign/industrialdesign/kit/ppt/89.png" },
+            { "caption": "90", "url": "/industrialdesign/industrialdesign/kit/ppt/90.png" },
+            { "caption": "91", "url": "/industrialdesign/industrialdesign/kit/ppt/91.png" },
+            { "caption": "92", "url": "/industrialdesign/industrialdesign/kit/ppt/92.png" },
+            { "caption": "93", "url": "/industrialdesign/industrialdesign/kit/ppt/93.png" },
+            { "caption": "94", "url": "/industrialdesign/industrialdesign/kit/ppt/94.png" },
+            { "caption": "95", "url": "/industrialdesign/industrialdesign/kit/ppt/95.png" },
+            { "caption": "96", "url": "/industrialdesign/industrialdesign/kit/ppt/96.png" },
+            { "caption": "97", "url": "/industrialdesign/industrialdesign/kit/ppt/97.png" },
+            { "caption": "98", "url": "/industrialdesign/industrialdesign/kit/ppt/98.png" },
+            { "caption": "99", "url": "/industrialdesign/industrialdesign/kit/ppt/99.png" },
+            { "caption": "100", "url": "/industrialdesign/industrialdesign/kit/ppt/100.png" },
+            { "caption": "101", "url": "/industrialdesign/industrialdesign/kit/ppt/101.png" },
+            { "caption": "103", "url": "/industrialdesign/industrialdesign/kit/ppt/103.png" }
+          ]
+        },
+        "leaflet": {
+          "pageName": "리플렛",
+          "images": [
+            { "caption": "1", "url": "/industrialdesign/industrialdesign/kit/brochure.pdf" },
+            { "caption": "2", "url": "/industrialdesign/industrialdesign/kit/brochure2.pdf" },
+            { "caption": "1", "url": "/industrialdesign/industrialdesign/kit/leaflet.jpg" },
+            { "caption": "2", "url": "/industrialdesign/industrialdesign/kit/leaflet2.jpg" },
+            { "caption": "3", "url": "/industrialdesign/industrialdesign/kit/leaflet3.jpg" },
+            { "caption": "4", "url": "/industrialdesign/industrialdesign/kit/leaflet4.jpg" }
+            
+          ]
+        },
+        "video": {
+          "pageName": "영상",
+          "images": [
+            { "caption": "video", "url": "/industrialdesign/industrialdesign/kit/video.mp4" }
+          ]
+        }
       }
     }
   ]

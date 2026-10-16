@@ -1,0 +1,429 @@
+@use './styles/variable.module' as *;
+
+:export { page: main-page; }
+
+:global {
+  .main-page {
+    position: relative;
+    isolation: isolate;
+    --hard-shadow-x: 6px;
+    --hard-shadow-y: 6px;
+    --radial-transparent: color-mix(in srgb, var(--main-color) 0%, transparent);
+    --radial-top: radial-gradient(
+      ellipse 60vw 60vw at 50% 0%,
+      var(--sub-color) 5%,
+      var(--main-color) 60%,
+      var(--radial-transparent) 100%
+    );
+    --radial-about-top: radial-gradient(
+      ellipse 60vw 50vw at 50% 0%,
+      var(--dark-color) 0%,
+      var(--main-color) 70%,
+      var(--radial-transparent) 99%
+    );
+    --radial-about-bottom: radial-gradient(
+      ellipse 60vw 50vw at 50% 100%,
+      var(--dark-color) 0%,
+      var(--main-color) 70%,
+      var(--radial-transparent) 99%
+    );
+
+    width: 100%;
+    min-height: 100svh;
+    overflow-x: clip;
+    background: var(--white-color);
+  }
+
+  .hero-section {
+    position: relative;
+    min-height: 2500px;
+    background: var(--radial-top), var(--radial-about-bottom), linear-gradient(
+      180deg,
+      var(--sub-color) 0,
+      var(--main-color) 20%,
+      var(--main-color) 100%
+    );
+    color: var(--white-color);
+  }
+
+  .wave-field {
+    position: fixed;
+    top: 50svh;
+    left: 0;
+    right: 0;
+    height: 808px;
+    overflow: hidden;
+    pointer-events: none;
+    transform: translateY(-50%);
+    z-index: 1;
+  }
+
+  .fish-shadows {
+    position: absolute;
+    top: -200px;
+    left: 0;
+    z-index: 0;
+    display: block;
+    width: 100%;
+    height: calc(100% + 400px);
+    pointer-events: none;
+  }
+
+  .wave-field.is-stopped {
+    position: absolute;
+    top: auto;
+    bottom: 130px;
+    transform: none;
+  }
+
+  .wave-row {
+    display: block;
+    width: 100%;
+    height: 56px;
+    color: var(--white-color);
+    overflow: visible;
+
+    &__shadow,
+    &__highlight {
+      fill: none;
+      vector-effect: non-scaling-stroke;
+    }
+
+    &__shadow {
+      stroke: var(--dark-color);
+      stroke-width: 4;
+      transform: translateY(5px);
+    }
+
+    &__highlight {
+      stroke: var(--white-color);
+      stroke-width: 4;
+    }
+  }
+
+  .wave-field .wave-row {
+    position: absolute;
+    left: 0;
+  }
+
+  @for $i from 1 through 5 {
+    .wave-field .wave-row:nth-child(#{$i}) {
+      top: #{($i - 1) * 188}px;
+    }
+  }
+
+  .hero-title {
+    position: absolute;
+    top: clamp(46px, 12.4vw, 160px);
+    left: 50%;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: max-content;
+    font-family: var(--title-font);
+    font-size: var(--font-size-hero-title);
+    font-weight: $font-weight-regular;
+    line-height: 0.82;
+    letter-spacing: 0;
+    text-align: center;
+    text-transform: uppercase;
+    transform: translateX(-50%);
+    text-shadow: 14px 14px 0 var(--dark-color);
+  }
+
+  .section-word {
+    position: relative;
+    z-index: 2;
+    font-family: var(--title-font);
+    font-size: var(--font-size-section-title);
+    font-weight: $font-weight-regular;
+    line-height: 1;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    text-shadow: var(--hard-shadow-x) var(--hard-shadow-y) 0 var(--dark-color);
+  }
+
+  .sparkle-mark {
+    position: absolute;
+    z-index: 3;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--point-color);
+    font-family: var(--body-font);
+    font-size: var(--font-size-body);
+    font-weight: $font-weight-regular;
+    line-height: 1;
+    text-transform: uppercase;
+
+    &__icon {
+      width: $sparkle-size;
+      height: $sparkle-size;
+      filter: drop-shadow(var(--hard-shadow-x) var(--hard-shadow-y) 0 var(--dark-color));
+    }
+  }
+
+  .sparkle-mark--about {
+    top: clamp(26px, 7.2vw, 126px);
+    left: 11.8%;
+  }
+
+  a.sparkle-mark {
+    text-decoration: none;
+    transform-origin: center;
+    transition: color 0.2s ease, transform 0.2s ease;
+
+    &:hover,
+    &:focus-visible {
+      color: var(--white-color);
+      transform: scale(1.08);
+    }
+
+    &:focus-visible {
+      outline: 2px solid currentColor;
+      outline-offset: 6px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    a.sparkle-mark { transition: none; }
+  }
+
+  .sparkle-mark--preview {
+    top: clamp(35px, 9.4vw, 166px);
+    right: 19.5%;
+  }
+
+  .sparkle-mark--plain-one {
+    top: clamp(76px, 18.9vw, 332px);
+    left: 25.4%;
+  }
+
+  .sparkle-mark--plain-two {
+    top: clamp(130px, 31.2vw, 550px);
+    right: 9.4%;
+  }
+
+  .sparkle-mark--frontend {
+    top: clamp(166px, 39.7vw, 720px);
+    left: 43.4%;
+  }
+
+  .sparkle-mark--industrial {
+    top: clamp(181px, 43vw, 770px);
+    left: 37%;
+  }
+
+  .sparkle-mark--plain-three {
+    top: clamp(276px, 64.5vw, 1138px);
+    right: 31.5%;
+  }
+
+  .sparkle-mark--plain-four {
+    top: clamp(288px, 67.8vw, 1194px);
+    right: 24.5%;
+  }
+
+  .sparkle-mark--plain-five {
+    top: clamp(316px, 73.8vw, 1300px);
+    left: 13%;
+  }
+
+  .sparkle-mark--plain-six {
+    top: clamp(382px, 88.6vw, 1560px);
+    left: 31.2%;
+  }
+
+  .sparkle-mark--plain-one,
+  .sparkle-mark--plain-two,
+  .sparkle-mark--plain-three,
+  .sparkle-mark--plain-four,
+  .sparkle-mark--plain-five,
+  .sparkle-mark--plain-six {
+    color: var(--white-color);
+  }
+
+  .about-section {
+    --about-space-closed-height: 56px;
+    --about-space-open-height: 1290px;
+    --about-space-transition-duration: 0.5s;
+
+    position: relative;
+    height: 1290px;
+    overflow: visible;
+
+    &::before {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      background: var(--radial-about-top), var(--radial-about-bottom), var(--main-color);
+      pointer-events: none;
+      content: '';
+    }
+  }
+
+  .about-space {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    height: var(--about-space-closed-height);
+    overflow: hidden;
+    transition: height var(--about-space-transition-duration) ease;
+  }
+
+  .about-section.is-open .about-space {
+    height: var(--about-space-open-height);
+  }
+
+  .about-space__fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    color: var(--white-color);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .about-section.is-open .about-space__fill {
+    opacity: 1;
+  }
+
+  .about-space__top-wave,
+  .about-space__bottom-wave {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 56px;
+    pointer-events: none;
+  }
+
+  .about-space__top-wave {
+    top: 0;
+    z-index: 6;
+  }
+
+  .about-space__bottom-wave {
+    bottom: 0;
+    z-index: 3;
+  }
+
+  .section-word--about {
+    position: absolute;
+    top: 120px;
+    left: 50%;
+    z-index: 2;
+    width: 79%;
+    max-width: 1280px;
+    color: var(--main-color);
+    transform: translateX(-50%);
+  }
+
+  .preview-section {
+    position: relative;
+    padding: 160px 0 200px;
+    background: var(--radial-about-top), linear-gradient(
+      180deg,
+      var(--main-color) 0%,
+      var(--dark-color) 70%
+    );
+    overflow: visible;
+  }
+
+  .preview-heading {
+    position: relative;
+    z-index: 2;
+    display: grid;
+    justify-items: center;
+    gap: 34px;
+    margin-bottom: 135px;
+
+    p {
+      color: var(--white-color);
+      font-family: var(--body-font);
+      font-size: var(--font-size-body);
+      font-weight: var(--font-weight-bold);
+    }
+  }
+
+  .preview-group + .preview-group { margin-top: 100px; }
+
+  .preview-group {
+    position: relative;
+    min-width: 0;
+  }
+  .preview-label {
+    position: relative;
+    margin: 0 6.25% 32px;
+  }
+
+  @media (max-width: 900px) {
+    .main-page {
+      --hard-shadow-x: 4px;
+      --hard-shadow-y: 4px;
+    }
+
+    .hero-section {
+      min-height: 1320px;
+    }
+
+    .wave-field {
+      height: 570px;
+    }
+
+    .wave-field.is-stopped {
+      bottom: 124px;
+    }
+
+    .wave-row {
+      height: 42px;
+    }
+
+    @for $i from 1 through 5 {
+      .wave-field .wave-row:nth-child(#{$i}) {
+        top: #{($i - 1) * 132}px;
+      }
+    }
+
+    .hero-title {
+      top: clamp(46px, 12.4vw, 134px);
+      text-shadow: 8px 8px 0 var(--dark-color);
+    }
+
+    .section-word {
+      text-shadow: var(--hard-shadow-x) var(--hard-shadow-y) 0 var(--dark-color);
+    }
+
+    .about-section {
+      --about-space-closed-height: 42px;
+      --about-space-open-height: 980px;
+
+      height: 980px;
+    }
+
+    .about-space__top-wave,
+    .about-space__bottom-wave {
+      height: 42px;
+    }
+
+    .section-word--about {
+      top: 90px;
+    }
+
+    .preview-section {
+      padding: 128px 0 160px;
+    }
+    .preview-group + .preview-group { margin-top: 72px; }
+    .preview-heading { margin-bottom: 80px; gap: 18px; }
+  }
+  @media (max-width: 700px) {
+    .preview-section { padding: 88px 0 120px; }
+    .preview-group + .preview-group { margin-top: 48px; }
+    .preview-label { margin-bottom: 24px; }
+  }
+}

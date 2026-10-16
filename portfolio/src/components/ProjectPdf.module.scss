@@ -1,0 +1,9 @@
+.document { display: grid; gap: inherit; min-width: 0; }
+.image { display: block; width: 100%; height: auto; }
+.open {
+  display: inline-block;
+  color: var(--white-color);
+  font: var(--font-weight-normal) var(--font-size-body-small)/1.4 var(--body-font);
+  text-underline-offset: 3px;
+  &:hover, &:focus-visible { color: var(--point-color); }
+}

@@ -1,13 +1,18 @@
-import { useEffect, useId, useLayoutEffect, useRef } from 'react'
-import SparkleShape from './components/SparkleShape'
+import { useEffect, useId, useLayoutEffect, useRef, useState } from 'react'
+import SparkleMark from './components/SparkleMark'
+import Footer from './components/Footer'
+import PortfolioSlide from './components/PortfolioSlide'
+import PortfolioBanner from './components/PortfolioBanner'
+import HeroTitle from './components/HeroTitle'
+import frontendData from './data/frontend.json'
+import industrialData from './data/industrialDesign.json'
 import About from './components/About'
 import FishShadows from './components/FishShadows'
-import './App.scss'
+import { createWavePath } from './components/waveGeometry'
+import styles from './App.module.scss'
 
 const waveRows = Array.from({ length: 5 }, (_, index) => index)
-const previewTiles = Array.from({ length: 12 }, (_, index) => index)
-const wavePath =
-  'M-96 18 C-48 44 -16 44 32 18 S112 -8 160 18 240 44 288 18 368 -8 416 18 496 44 544 18 624 -8 672 18 752 44 800 18 880 -8 928 18 1008 44 1056 18 1136 -8 1184 18 1264 44 1312 18 1392 -8 1440 18 1520 44 1568 18 1648 -8 1696 18 1776 44 1824 18 1904 -8 1952 18 2032 44 2080 18'
+const wavePath = createWavePath()
 
 function WaveRow({ className = '', showShadow = true }) {
   return (
@@ -41,66 +46,57 @@ function WaveSpaceFill() {
   useLayoutEffect(() => {
     const fill = fillRef.current
     const space = fill.parentElement
+    const topWave = space.querySelector('.about-space__top-wave')
+    const content = space.querySelector('.about-content')
+    const donuts = [...space.querySelectorAll('.about-content__donut')]
+    const holes = donuts.map(() => document.createElementNS('http://www.w3.org/2000/svg', 'ellipse'))
+    holesRef.current.replaceChildren(...holes)
+    let scaleY = topWave.clientHeight / 64
+    let previousHeight = -1
+
     const updateClips = () => {
-      const height = space.getBoundingClientRect().height
-      const waveHeight = space.querySelector('.about-space__top-wave').getBoundingClientRect().height
-      const scaleY = waveHeight / 64
+      const height = space.clientHeight
+      if (height === previousHeight) return
+      previousHeight = height
 
       // Keep the wave amplitude fixed while the distance between boundaries grows.
       fill.setAttribute('viewBox', `0 0 1920 ${height}`)
-      topClipRef.current.setAttribute('d', `${wavePath} L2080 ${height / scaleY} L-96 ${height / scaleY} Z`)
-      topClipRef.current.setAttribute('transform', `translate(0 ${12 * scaleY}) scale(1 ${scaleY})`)
-      bottomClipRef.current.setAttribute('d', `${wavePath} L2080 ${-height / scaleY} L-96 ${-height / scaleY} Z`)
-      bottomClipRef.current.setAttribute('transform', `translate(0 ${height - waveHeight + 12 * scaleY}) scale(1 ${scaleY})`)
-
-      const fillMatrix = fill.getScreenCTM()?.inverse()
-      if (!fillMatrix) {
-        return
-      }
-
-      const toFillPoint = (x, y) => {
-        const point = fill.createSVGPoint()
-        point.x = x
-        point.y = y
-        return point.matrixTransform(fillMatrix)
-      }
-
-      const holes = [...space.querySelectorAll('.about-content__donut')].map((donut) => {
-        const bounds = donut.getBoundingClientRect()
-        const center = toFillPoint(
-          bounds.left + bounds.width / 2,
-          bounds.top + bounds.height / 2,
-        )
-        const horizontalEdge = toFillPoint(
-          bounds.left + bounds.width * 0.94,
-          bounds.top + bounds.height / 2,
-        )
-        const verticalEdge = toFillPoint(
-          bounds.left + bounds.width / 2,
-          bounds.top + bounds.height * 0.94,
-        )
-        const hole = document.createElementNS('http://www.w3.org/2000/svg', 'ellipse')
-        hole.setAttribute('cx', String(center.x))
-        hole.setAttribute('cy', String(center.y))
-        hole.setAttribute('rx', String(Math.abs(horizontalEdge.x - center.x)))
-        hole.setAttribute('ry', String(Math.abs(verticalEdge.y - center.y)))
-        return hole
-      })
-      holesRef.current.replaceChildren(...holes)
+      bottomClipRef.current.setAttribute('transform', `translate(0 ${height - 52 * scaleY}) scale(1 ${scaleY})`)
     }
 
+    const updateLayout = () => {
+      const spaceBounds = space.getBoundingClientRect()
+      const bounds = donuts.map((donut) => donut.getBoundingClientRect())
+      scaleY = topWave.clientHeight / 64
+      const scaleX = 1920 / spaceBounds.width
+      // Read layout together, then reuse the mask nodes rather than replacing them.
+      bounds.forEach((bounds, index) => {
+        holes[index].setAttribute('cx', String((bounds.left + bounds.width / 2 - spaceBounds.left) * scaleX))
+        holes[index].setAttribute('cy', String(bounds.top + bounds.height / 2 - spaceBounds.top))
+        holes[index].setAttribute('rx', String(bounds.width * 0.44 * scaleX))
+        holes[index].setAttribute('ry', String(bounds.height * 0.44))
+      })
+      topClipRef.current.setAttribute('d', `${wavePath} L2080 100000 L-96 100000 Z`)
+      bottomClipRef.current.setAttribute('d', `${wavePath} L2080 -100000 L-96 -100000 Z`)
+      topClipRef.current.setAttribute('transform', `translate(0 ${12 * scaleY}) scale(1 ${scaleY})`)
+      previousHeight = -1
+      updateClips()
+    }
+
+    updateLayout()
     updateClips()
     const observer = new ResizeObserver(updateClips)
     observer.observe(space)
-    observer.observe(space.querySelector('.about-space__top-wave'))
-    space.querySelectorAll('.about-content__donut, .about-content').forEach((element) => observer.observe(element))
-    window.addEventListener('resize', updateClips)
-    space.addEventListener('transitionend', updateClips)
+    const layoutObserver = new ResizeObserver(updateLayout)
+    layoutObserver.observe(content)
+    layoutObserver.observe(topWave)
+    donuts.forEach((donut) => layoutObserver.observe(donut))
+    window.addEventListener('resize', updateLayout)
 
     return () => {
       observer.disconnect()
-      window.removeEventListener('resize', updateClips)
-      space.removeEventListener('transitionend', updateClips)
+      layoutObserver.disconnect()
+      window.removeEventListener('resize', updateLayout)
     }
   }, [])
 
@@ -137,12 +133,15 @@ function WaveSpaceFill() {
   )
 }
 
-function SparkleMark({ className, label }) {
+function PortfolioPreview({ projects, label, href, mirrored = false }) {
+  const [selectedId, setSelectedId] = useState(projects[0]?.id)
+  const selected = projects.find(project => project.id === selectedId) || projects[0]
   return (
-    <span className={`sparkle-mark ${className}`}>
-      <SparkleShape className="sparkle-mark__icon" size={32} />
-      {label && <span>{label}</span>}
-    </span>
+    <section className="preview-group" aria-label={label}>
+      <SparkleMark className="preview-label" label={label} href={href} />
+      <PortfolioSlide projects={projects} selectedId={selected?.id} onSelect={setSelectedId} reverse={mirrored} />
+      <PortfolioBanner project={selected} mirrored={mirrored} />
+    </section>
   )
 }
 
@@ -150,11 +149,94 @@ function App() {
   const heroRef = useRef(null)
   const waveFieldRef = useRef(null)
   const aboutRef = useRef(null)
+  const autoScrollingRef = useRef(false)
+
+  useEffect(() => {
+    let moving = false
+    let scrollFrame = 0
+    let touchY = null
+    const release = () => {
+      moving = false
+      autoScrollingRef.current = false
+      window.cancelAnimationFrame(scrollFrame)
+    }
+    const advance = (event, direction) => {
+      if (direction <= 0) {
+        if (moving) {
+          window.scrollTo({ top: window.scrollY, behavior: 'instant' })
+          release()
+        }
+        return
+      }
+      if (!moving && window.scrollY > 2) return
+      event.preventDefault()
+      if (moving) return
+      const target = aboutRef.current
+      if (!target) return
+      const startY = window.scrollY
+      const targetY = target.getBoundingClientRect().top + startY
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        window.scrollTo({ top: targetY, behavior: 'instant' })
+        return
+      }
+      moving = true
+      autoScrollingRef.current = true
+      const startTime = performance.now()
+      const scroll = (now) => {
+        const progress = Math.min((now - startTime) / 1800, 1)
+        const eased = progress < 0.5
+          ? 4 * progress ** 3
+          : 1 - (-2 * progress + 2) ** 3 / 2
+        window.scrollTo({ top: startY + (targetY - startY) * eased, behavior: 'instant' })
+        if (progress < 1) scrollFrame = window.requestAnimationFrame(scroll)
+        else release()
+      }
+      scrollFrame = window.requestAnimationFrame(scroll)
+    }
+    const onWheel = (event) => {
+      if (!event.ctrlKey && Math.abs(event.deltaY) > Math.abs(event.deltaX)) advance(event, event.deltaY)
+    }
+    const onTouchStart = (event) => {
+      touchY = event.touches.length === 1 && !event.target.closest('[data-custom-scrollbar]') ? event.touches[0].clientY : null
+    }
+    const onTouchMove = (event) => {
+      if (touchY !== null && event.touches.length === 1) {
+        const nextY = event.touches[0].clientY
+        const direction = touchY - nextY
+        if (Math.abs(direction) < 8) return
+        touchY = nextY
+        advance(event, direction)
+      }
+    }
+    window.addEventListener('wheel', onWheel, { passive: false })
+    window.addEventListener('touchstart', onTouchStart, { passive: true })
+    window.addEventListener('touchmove', onTouchMove, { passive: false })
+    window.addEventListener('pointerdown', release)
+    window.addEventListener('keydown', release)
+    return () => {
+      release()
+      window.removeEventListener('wheel', onWheel)
+      window.removeEventListener('touchstart', onTouchStart)
+      window.removeEventListener('touchmove', onTouchMove)
+      window.removeEventListener('pointerdown', release)
+      window.removeEventListener('keydown', release)
+    }
+  }, [])
 
   useEffect(() => {
     const aboutSection = aboutRef.current
-    const aboutSpace = aboutSection?.querySelector('.about-space')
-    let revealTimer = 0
+    let frame = 0
+    let stopScrollY = 0
+    let splitStartScrollY = 0
+    let revealTimeout = 0
+
+    const revealWhenStopped = () => {
+      if (autoScrollingRef.current) {
+        revealTimeout = window.setTimeout(revealWhenStopped, 180)
+        return
+      }
+      if (window.scrollY >= splitStartScrollY) aboutSection.classList.add('is-open')
+    }
 
     const syncAboutSpaceHeight = () => {
       if (!aboutSection) {
@@ -167,17 +249,20 @@ function App() {
       )
     }
 
-    const revealAboutContent = (event) => {
-      if (
-        event.target === aboutSpace &&
-        event.propertyName === 'height' &&
-        aboutSection.classList.contains('is-open')
-      ) {
-        aboutSection.classList.add('is-content-visible')
+    const updateWaveState = () => {
+      frame = 0
+      waveFieldRef.current?.classList.toggle('is-stopped', window.scrollY >= stopScrollY)
+      window.clearTimeout(revealTimeout)
+      if (window.scrollY >= splitStartScrollY && !aboutSection.classList.contains('is-open')) {
+        revealTimeout = window.setTimeout(revealWhenStopped, 180)
       }
     }
 
-    const updateWaveState = () => {
+    const scheduleWaveState = () => {
+      if (!frame) frame = window.requestAnimationFrame(updateWaveState)
+    }
+
+    const syncLayout = () => {
       if (!heroRef.current || !waveFieldRef.current || !aboutRef.current) {
         return
       }
@@ -188,41 +273,34 @@ function App() {
       const stoppedBottom = isMobile ? 124 : 140
       const heroBottom =
         heroRef.current.offsetTop + heroRef.current.offsetHeight
-      const stopScrollY = heroBottom - stoppedBottom - waveHeight - fixedTop
+      stopScrollY = heroBottom - stoppedBottom - waveHeight - fixedTop
       const triggerWaveHeight = isMobile ? 42 : 56
-      const splitStartScrollY =
+      splitStartScrollY =
         aboutRef.current.offsetTop + triggerWaveHeight / 2 - window.innerHeight / 2
 
-      waveFieldRef.current.classList.toggle(
-        'is-stopped',
-        window.scrollY >= stopScrollY,
-      )
-      if (window.scrollY >= splitStartScrollY) {
-        syncAboutSpaceHeight()
-        aboutRef.current.classList.add('is-open')
-        window.clearTimeout(revealTimer)
-        revealTimer = window.setTimeout(() => {
-          aboutRef.current?.classList.add('is-content-visible')
-        }, 550)
-      }
+      syncAboutSpaceHeight()
+      scheduleWaveState()
     }
 
-    syncAboutSpaceHeight()
-    aboutSpace?.addEventListener('transitionend', revealAboutContent)
-    updateWaveState()
-    window.addEventListener('scroll', updateWaveState, { passive: true })
-    window.addEventListener('resize', updateWaveState)
+    syncLayout()
+    window.addEventListener('scroll', scheduleWaveState, { passive: true })
+    window.addEventListener('resize', syncLayout)
+    const layoutObserver = new ResizeObserver(syncLayout)
+    layoutObserver.observe(aboutSection)
+    layoutObserver.observe(heroRef.current)
 
     return () => {
-      window.clearTimeout(revealTimer)
-      aboutSpace?.removeEventListener('transitionend', revealAboutContent)
-      window.removeEventListener('scroll', updateWaveState)
-      window.removeEventListener('resize', updateWaveState)
+      window.cancelAnimationFrame(frame)
+      window.clearTimeout(revealTimeout)
+      layoutObserver.disconnect()
+      window.removeEventListener('scroll', scheduleWaveState)
+      window.removeEventListener('resize', syncLayout)
     }
   }, [])
 
   return (
-    <main className="main-page">
+    <>
+    <main className={styles.page}>
       <section
         className="hero-section"
         aria-labelledby="main-title"
@@ -239,27 +317,26 @@ function App() {
           ))}
         </div>
 
-        <SparkleMark className="sparkle-mark--about" label="ABOUT" />
-        <SparkleMark className="sparkle-mark--preview" label="PREVIEW" />
+        <SparkleMark className="sparkle-mark--about" label="ABOUT" href="#about" />
+        <SparkleMark className="sparkle-mark--preview" label="PREVIEW" href="#preview" />
         <SparkleMark className="sparkle-mark--plain-one" />
         <SparkleMark className="sparkle-mark--plain-two" />
-        <SparkleMark className="sparkle-mark--frontend" label="FRONTEND" />
+        <SparkleMark className="sparkle-mark--frontend" label="FRONTEND" href="/frontend" />
         <SparkleMark
           className="sparkle-mark--industrial"
           label="INDUSTRIAL DESIGN"
+          href="/industrial-design"
         />
         <SparkleMark className="sparkle-mark--plain-three" />
         <SparkleMark className="sparkle-mark--plain-four" />
         <SparkleMark className="sparkle-mark--plain-five" />
         <SparkleMark className="sparkle-mark--plain-six" />
 
-        <h1 id="main-title" className="hero-title">
-          <span>KIM</span>
-          <span>TAE EUN</span>
-        </h1>
+        <HeroTitle />
       </section>
 
       <section
+        id="about"
         className="about-section"
         aria-labelledby="about-title"
         ref={aboutRef}
@@ -276,32 +353,18 @@ function App() {
         </div>
       </section>
 
-      <section className="preview-section" aria-labelledby="preview-title">
+      <section id="preview" className="preview-section" aria-labelledby="preview-title">
         <FishShadows seed={53} />
         <div className="preview-heading">
-          <h2 id="preview-title" className="section-word">
-            PREVIEW
-          </h2>
+          <h2 id="preview-title" className="section-word">PREVIEW</h2>
           <p>분야별 대표 작업물을 확인해보세요</p>
         </div>
-
-        <div className="tile-strip" aria-hidden="true">
-          {previewTiles.slice(0, 6).map((tile) => (
-            <span key={tile} />
-          ))}
-        </div>
-
-        <div className="preview-card preview-card--first" aria-hidden="true" />
-
-        <div className="tile-strip tile-strip--middle" aria-hidden="true">
-          {previewTiles.slice(6).map((tile) => (
-            <span key={tile} />
-          ))}
-        </div>
-
-        <div className="preview-card preview-card--second" aria-hidden="true" />
+        <PortfolioPreview projects={frontendData.projects} label="FRONTEND PROJECT" href="/frontend" />
+        <PortfolioPreview projects={industrialData.projects} label="INDUSTRIAL DESIGN PROJECT" href="/industrial-design" mirrored />
       </section>
     </main>
+    <Footer />
+    </>
   )
 }
 

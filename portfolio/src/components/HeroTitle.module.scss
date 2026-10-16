@@ -1,0 +1,43 @@
+.stage {
+  --hero-render-size: calc(var(--font-size-hero-title) * var(--hero-title-fit, 1));
+  position: absolute;
+  top: clamp(46px, 12.4vw, 160px);
+  left: 50%;
+  z-index: 2;
+  width: max-content;
+  transform: translateX(-50%);
+}
+.scene {
+  position: relative;
+  transform-style: preserve-3d;
+  transform: perspective(2600px) rotateX(var(--tilt-x, 0deg)) rotateY(var(--tilt-y, 0deg));
+}
+.stage :global(.hero-title) {
+  position: relative;
+  top: auto;
+  left: auto;
+  font-size: var(--hero-render-size);
+  transform: translateZ(24px);
+  span { text-shadow: none; }
+}
+.shadow {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--dark-color);
+  font: var(--font-weight-regular) var(--hero-render-size)/0.82 var(--title-font);
+  text-align: center;
+  pointer-events: none;
+  transform: translate(14px, 22px);
+}
+@media (max-width: 900px) {
+  .stage { top: clamp(46px, 12.4vw, 134px); }
+  .shadow { transform: translate(8px, 12px); }
+}
+@media (hover: none), (pointer: coarse), (prefers-reduced-motion: reduce) {
+  .scene { transform: none; transform-style: flat; }
+  .stage :global(.hero-title) { transform: none; }
+}

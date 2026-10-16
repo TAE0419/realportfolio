@@ -1,0 +1,23 @@
+.rail {
+  position: fixed;
+  right: 2px;
+  z-index: 1100;
+  width: 12px;
+  touch-action: none;
+  user-select: none;
+  cursor: pointer;
+  &:focus-visible { outline: 1px solid var(--point-color); outline-offset: 1px; }
+}
+.thumb {
+  position: absolute;
+  top: 0;
+  left: 4px;
+  display: block;
+  width: 4px;
+  min-height: 36px;
+  border-radius: 4px;
+  background: var(--point-color);
+  cursor: grab;
+}
+.rail:hover .thumb, .rail:focus-visible .thumb, .rail[data-dragging] .thumb { left: 3px; width: 6px; }
+.rail[data-dragging] { cursor: grabbing; .thumb { cursor: grabbing; } }

@@ -1,0 +1,14 @@
+{
+  "name": "realportfolio",
+  "private": true,
+  "engines": {
+    "node": "22.x"
+  },
+  "scripts": {
+    "dev": "npm --prefix portfolio run dev",
+    "build": "npm --prefix portfolio run build",
+    "lint": "npm --prefix portfolio run lint",
+    "test": "npm --prefix portfolio test",
+    "preview": "npm --prefix portfolio run preview"
+  }
+}

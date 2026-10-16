@@ -1,0 +1,30 @@
+$sub-color: #46DDFF;
+$main-color: #2D3CDE;
+$point-color: #74ff58;
+$skill-color: #74ff58;
+$dark-color: #000000;
+$white-color: #ffffff;
+
+$font-size-hero-title: clamp(5.2rem, 20vw, 20rem);
+$font-size-section-title: 76px;
+$font-size-heading: 24px;
+$font-size-body: 16px;
+$font-size-section-title-small: 32px;
+$font-size-heading-small: 18px;
+$font-size-body-small: 14px;
+$sparkle-size: clamp(17px, 2.45vw, 31px);
+
+$font-weight-regular: 300;
+$font-weight-bold: 700;
+$font-weight-normal: 400;
+$navigation-button-size: 84px;
+$navigation-button-size-small: 64px;
+$navigation-bottom-offset: 50px;
+$navigation-bottom-offset-small: 16px;
+
+$font-size-scale: (
+  16: 16px, 20: 20px, 28: 28px, 40: 40px, 42: 42px,
+  44: 44px, 64: 64px, 72: 72px, 80: 80px, 96: 96px,
+  112: 112px, 128: 128px, 136: 136px, 160: 160px,
+  176: 176px, 212: 212px, 232: 232px,
+);

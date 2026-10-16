@@ -1,0 +1,9 @@
+:export { shape: sparkle-shape; }
+
+:global {
+  .sparkle-shape {
+    display: inline-block;
+    flex: 0 0 auto;
+    vertical-align: middle;
+  }
+}

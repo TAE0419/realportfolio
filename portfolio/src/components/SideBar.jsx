@@ -1,1 +1,0 @@
-import './SideBar.scss'
