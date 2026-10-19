@@ -1,5 +1,33 @@
 :export { page: project-list; }
 
+.homeLink {
+  position: absolute;
+  top: max(32px, env(safe-area-inset-top));
+  right: max(50px, env(safe-area-inset-right));
+  z-index: 4;
+  max-width: 148px;
+  color: var(--white-color);
+  font: var(--font-weight-bold) var(--font-size-body)/1.4 var(--body-font);
+  text-decoration: none;
+  overflow-wrap: anywhere;
+  transition: color 200ms ease;
+  &:hover, &:focus-visible { color: var(--main-color); }
+  &:focus-visible { outline: 2px solid var(--white-color); outline-offset: 6px; }
+}
+
+@media (max-width: 700px) {
+  .homeLink {
+    top: max(20px, env(safe-area-inset-top));
+    right: max(8px, env(safe-area-inset-right));
+    max-width: 80px;
+    font-size: var(--font-size-body-small);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .homeLink { transition: none; }
+}
+
 :global {
   .project-list {
     --hard-shadow-x: 6px;
@@ -178,7 +206,7 @@
       position: absolute;
       inset: 0;
       z-index: 1;
-      color: var(--main-color);
+      color: var(--dark-color);
       pointer-events: none;
       transform: translate(var(--title-shadow-x, 0px), var(--title-shadow-y, 0px));
     }
@@ -196,7 +224,27 @@
       &:hover, &:focus-visible { color: var(--white-color); transform: scale(1.08); }
       &:focus-visible { outline: 2px solid currentColor; outline-offset: 6px; }
 
-      &--all { top: 18.15%; left: 22.71%; }
+      &--all {
+        --all-sparkle-size: 112px;
+        top: 18.15%;
+        left: 22.71%;
+        display: grid;
+        place-items: center;
+        width: var(--all-sparkle-size);
+        height: var(--all-sparkle-size);
+        margin-top: -10px;
+        gap: 0;
+        color: var(--white-color);
+
+        .sparkle-mark__icon {
+          grid-area: 1 / 1;
+          width: 100%;
+          height: 100%;
+          filter: drop-shadow(calc(var(--hard-shadow-x) * 1.5) calc(var(--hard-shadow-y) * 1.5) 0 var(--dark-color));
+        }
+        span { position: relative; grid-area: 1 / 1; color: var(--dark-color); font-weight: var(--font-weight-black); }
+        &:hover, &:focus-visible { color: var(--point-color); }
+      }
       &--team { top: 13.33%; left: 71.25%; }
       &--personal { top: 19.91%; left: 73.91%; }
       &--javascript { top: 69.07%; left: 13.96%; }
@@ -260,7 +308,7 @@
       &__title-motion { top: 37.14%; left: 53%; }
       &__title { font-size: var(--font-size-80); line-height: 1.05; }
       &__filter {
-        &--all { top: 20%; left: 16%; }
+        &--all { --all-sparkle-size: 88px; top: 20%; left: 16%; }
         &--team { top: 12.86%; left: 63%; }
         &--personal { top: 20.71%; left: 65%; }
         &--javascript, &--product { top: 68.57%; left: 16%; }

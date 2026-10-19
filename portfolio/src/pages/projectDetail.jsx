@@ -64,7 +64,7 @@ export default function ProjectDetail() {
     let disposed = false
     const syncShadow = () => {
       if (disposed) return
-      const navigation = document.querySelector('[aria-controls="floating-navigation-links"]')
+      const navigation = document.querySelector('[data-floating-navigation-anchor]')
       if (navigation && contentRef.current) {
         const available = navigation.getBoundingClientRect().left - contentRef.current.getBoundingClientRect().left - 24
         contentRef.current.style.setProperty('--thumbnail-available-width', `${Math.max(0, available)}px`)

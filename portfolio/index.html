@@ -1,9 +1,19 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-page-boot>
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      html { background: var(--dark-color, #000); }
+      html[data-page-boot]::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        z-index: 10000;
+        background: var(--dark-color, #000);
+      }
+    </style>
     <title>portfolio</title>
   </head>
   <body>

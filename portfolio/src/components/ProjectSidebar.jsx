@@ -160,7 +160,7 @@ export default function ProjectSidebar({ projectId, pages, activePage, onNavigat
             onClick={page.url ? undefined : event => onNavigate(event, key)}>{page.pageName}</a>
         ))}
       </nav>
-      <a href={returnPath} data-back="true">돌아가기</a>
+      <a href={returnPath} data-back="true">목록으로</a>
     </aside>
   )
 }

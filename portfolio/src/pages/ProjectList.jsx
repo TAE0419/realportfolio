@@ -104,6 +104,7 @@ export default function ProjectList({ title }) {
   return (
     <main className={`${styles.page} project-list--${variant}`}>
       <header className="project-list__hero">
+        <a className={styles.homeLink} href="/">메인으로</a>
         <FishShadows seed={variant === 'frontend' ? 71 : 89} schoolCount={1} />
         <div className="project-list__stage">
           <div ref={titleMotionRef} className="project-list__title-motion" data-list-parallax="true">

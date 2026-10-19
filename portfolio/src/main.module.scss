@@ -37,6 +37,7 @@
     --font-weight-regular: #{$font-weight-regular};
     --font-weight-normal: #{$font-weight-normal};
     --font-weight-bold: #{$font-weight-bold};
+    --font-weight-black: #{$font-weight-black};
     --navigation-button-size: #{$navigation-button-size};
     --navigation-bottom-offset: max(#{$navigation-bottom-offset}, env(safe-area-inset-bottom));
     @each $size, $value in $font-size-scale {
@@ -56,7 +57,7 @@
 
     font: var(--font-weight-normal) var(--font-size-body)/1.45 var(--body-font);
     color: var(--white-color);
-    background: var(--white-color);
+    background: var(--dark-color);
     font-synthesis: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;

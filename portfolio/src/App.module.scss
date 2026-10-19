@@ -246,11 +246,17 @@
 
   .about-section {
     --about-space-closed-height: 56px;
-    --about-space-open-height: 1290px;
+    --about-space-open-height: 100svh;
+    --about-title-top: clamp(64px, 8svh, 88px);
+    --about-content-top: calc(var(--about-title-top) + var(--font-size-section-title) + 36px);
+    --about-layout-width: 79%;
+    --about-layout-max-width: 1200px;
+    --about-layout-left: max(calc((100% - var(--about-layout-width)) / 2), calc((100% - var(--about-layout-max-width)) / 2));
+    --about-content-bottom: 72px;
     --about-space-transition-duration: 0.5s;
 
     position: relative;
-    height: 1290px;
+    height: 100svh;
     overflow: visible;
 
     &::before {
@@ -276,6 +282,19 @@
 
   .about-section.is-open .about-space {
     height: var(--about-space-open-height);
+  }
+
+  .about-space__content,
+  .about-space__content-inner {
+    position: absolute;
+    inset: 0;
+  }
+  .about-space__content {
+    z-index: 2;
+    clip-path: var(--about-content-top-clip, inset(0));
+  }
+  .about-space__content-inner {
+    clip-path: var(--about-content-bottom-clip, inset(0));
   }
 
   .about-space__fill {
@@ -315,13 +334,13 @@
 
   .section-word--about {
     position: absolute;
-    top: 120px;
-    left: 50%;
+    top: var(--about-title-top);
+    left: var(--about-layout-left);
     z-index: 2;
-    width: 79%;
-    max-width: 1280px;
+    width: var(--about-layout-width);
+    max-width: var(--about-layout-max-width);
     color: var(--main-color);
-    transform: translateX(-50%);
+    transform: none;
   }
 
   .preview-section {
@@ -401,18 +420,13 @@
 
     .about-section {
       --about-space-closed-height: 42px;
-      --about-space-open-height: 980px;
-
-      height: 980px;
+      --about-title-top: 64px;
+      --about-content-bottom: 60px;
     }
 
     .about-space__top-wave,
     .about-space__bottom-wave {
       height: 42px;
-    }
-
-    .section-word--about {
-      top: 90px;
     }
 
     .preview-section {
@@ -422,8 +436,12 @@
     .preview-heading { margin-bottom: 80px; gap: 18px; }
   }
   @media (max-width: 700px) {
+    .about-section { --about-content-bottom: 92px; }
     .preview-section { padding: 88px 0 120px; }
     .preview-group + .preview-group { margin-top: 48px; }
     .preview-label { margin-bottom: 24px; }
+  }
+  @media (max-width: 620px) {
+    .about-section { --about-layout-width: 88%; }
   }
 }

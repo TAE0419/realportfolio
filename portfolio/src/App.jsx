@@ -41,6 +41,8 @@ function WaveSpaceFill() {
   const fillRef = useRef(null)
   const topClipRef = useRef(null)
   const bottomClipRef = useRef(null)
+  const contentTopClipRef = useRef(null)
+  const contentBottomClipRef = useRef(null)
   const holesRef = useRef(null)
 
   useLayoutEffect(() => {
@@ -53,15 +55,17 @@ function WaveSpaceFill() {
     holesRef.current.replaceChildren(...holes)
     let scaleY = topWave.clientHeight / 64
     let previousHeight = -1
+    let contentScaleX = 1
+    space.style.setProperty('--about-content-top-clip', `url(#${id}-content-top)`)
+    space.style.setProperty('--about-content-bottom-clip', `url(#${id}-content-bottom)`)
 
-    const updateClips = () => {
-      const height = space.clientHeight
+    const updateClips = (height) => {
       if (height === previousHeight) return
       previousHeight = height
 
       // Keep the wave amplitude fixed while the distance between boundaries grows.
-      fill.setAttribute('viewBox', `0 0 1920 ${height}`)
       bottomClipRef.current.setAttribute('transform', `translate(0 ${height - 52 * scaleY}) scale(1 ${scaleY})`)
+      contentBottomClipRef.current.setAttribute('transform', `translate(0 ${height - 52 * scaleY}) scale(${contentScaleX} ${scaleY})`)
     }
 
     const updateLayout = () => {
@@ -69,6 +73,10 @@ function WaveSpaceFill() {
       const bounds = donuts.map((donut) => donut.getBoundingClientRect())
       scaleY = topWave.clientHeight / 64
       const scaleX = 1920 / spaceBounds.width
+      contentScaleX = spaceBounds.width / 1920
+      const fullHeight = space.parentElement.clientHeight
+      fill.setAttribute('viewBox', `0 0 1920 ${fullHeight}`)
+      fill.style.height = `${fullHeight}px`
       // Read layout together, then reuse the mask nodes rather than replacing them.
       bounds.forEach((bounds, index) => {
         holes[index].setAttribute('cx', String((bounds.left + bounds.width / 2 - spaceBounds.left) * scaleX))
@@ -79,26 +87,33 @@ function WaveSpaceFill() {
       topClipRef.current.setAttribute('d', `${wavePath} L2080 100000 L-96 100000 Z`)
       bottomClipRef.current.setAttribute('d', `${wavePath} L2080 -100000 L-96 -100000 Z`)
       topClipRef.current.setAttribute('transform', `translate(0 ${12 * scaleY}) scale(1 ${scaleY})`)
+      contentTopClipRef.current.setAttribute('d', `${wavePath} L2080 100000 L-96 100000 Z`)
+      contentBottomClipRef.current.setAttribute('d', `${wavePath} L2080 -100000 L-96 -100000 Z`)
+      contentTopClipRef.current.setAttribute('transform', `translate(0 ${12 * scaleY}) scale(${spaceBounds.width / 1920} ${scaleY})`)
       previousHeight = -1
-      updateClips()
+      updateClips(spaceBounds.height)
     }
 
     updateLayout()
-    updateClips()
-    const observer = new ResizeObserver(updateClips)
+    const observer = new ResizeObserver(([entry]) => updateClips(entry.contentRect.height))
     observer.observe(space)
     const layoutObserver = new ResizeObserver(updateLayout)
     layoutObserver.observe(content)
     layoutObserver.observe(topWave)
+    layoutObserver.observe(space.parentElement)
     donuts.forEach((donut) => layoutObserver.observe(donut))
     window.addEventListener('resize', updateLayout)
+    content.addEventListener('portfolio-about-layout', updateLayout)
 
     return () => {
       observer.disconnect()
       layoutObserver.disconnect()
       window.removeEventListener('resize', updateLayout)
+      content.removeEventListener('portfolio-about-layout', updateLayout)
+      space.style.removeProperty('--about-content-top-clip')
+      space.style.removeProperty('--about-content-bottom-clip')
     }
-  }, [])
+  }, [id])
 
   return (
     <svg
@@ -122,6 +137,12 @@ function WaveSpaceFill() {
         </clipPath>
         <clipPath id={`${id}-bottom`} clipPathUnits="userSpaceOnUse">
           <path ref={bottomClipRef} />
+        </clipPath>
+        <clipPath id={`${id}-content-top`} clipPathUnits="userSpaceOnUse">
+          <path ref={contentTopClipRef} />
+        </clipPath>
+        <clipPath id={`${id}-content-bottom`} clipPathUnits="userSpaceOnUse">
+          <path ref={contentBottomClipRef} />
         </clipPath>
       </defs>
       <g clipPath={`url(#${id}-top)`}>
@@ -177,6 +198,7 @@ function App() {
       const targetY = target.getBoundingClientRect().top + startY
       if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
         window.scrollTo({ top: targetY, behavior: 'instant' })
+        window.dispatchEvent(new Event('portfolio-scroll-settled'))
         return
       }
       moving = true
@@ -189,7 +211,10 @@ function App() {
           : 1 - (-2 * progress + 2) ** 3 / 2
         window.scrollTo({ top: startY + (targetY - startY) * eased, behavior: 'instant' })
         if (progress < 1) scrollFrame = window.requestAnimationFrame(scroll)
-        else release()
+        else {
+          release()
+          window.dispatchEvent(new Event('portfolio-scroll-settled'))
+        }
       }
       scrollFrame = window.requestAnimationFrame(scroll)
     }
@@ -231,10 +256,8 @@ function App() {
     let revealTimeout = 0
 
     const revealWhenStopped = () => {
-      if (autoScrollingRef.current) {
-        revealTimeout = window.setTimeout(revealWhenStopped, 180)
-        return
-      }
+      window.clearTimeout(revealTimeout)
+      if (autoScrollingRef.current) return
       if (window.scrollY >= splitStartScrollY) aboutSection.classList.add('is-open')
     }
 
@@ -254,7 +277,10 @@ function App() {
       waveFieldRef.current?.classList.toggle('is-stopped', window.scrollY >= stopScrollY)
       window.clearTimeout(revealTimeout)
       if (window.scrollY >= splitStartScrollY && !aboutSection.classList.contains('is-open')) {
-        revealTimeout = window.setTimeout(revealWhenStopped, 180)
+        // scrollend handles native scrolling; the timer supports older browsers.
+        if (!('onscrollend' in window) && !autoScrollingRef.current) {
+          revealTimeout = window.setTimeout(revealWhenStopped, 80)
+        }
       }
     }
 
@@ -284,6 +310,8 @@ function App() {
 
     syncLayout()
     window.addEventListener('scroll', scheduleWaveState, { passive: true })
+    window.addEventListener('scrollend', revealWhenStopped)
+    window.addEventListener('portfolio-scroll-settled', revealWhenStopped)
     window.addEventListener('resize', syncLayout)
     const layoutObserver = new ResizeObserver(syncLayout)
     layoutObserver.observe(aboutSection)
@@ -294,6 +322,8 @@ function App() {
       window.clearTimeout(revealTimeout)
       layoutObserver.disconnect()
       window.removeEventListener('scroll', scheduleWaveState)
+      window.removeEventListener('scrollend', revealWhenStopped)
+      window.removeEventListener('portfolio-scroll-settled', revealWhenStopped)
       window.removeEventListener('resize', syncLayout)
     }
   }, [])
@@ -337,6 +367,7 @@ function App() {
 
       <section
         id="about"
+        data-navigation-surface="light"
         className="about-section"
         aria-labelledby="about-title"
         ref={aboutRef}
@@ -345,10 +376,14 @@ function App() {
         <div className="about-space">
           <WaveSpaceFill />
           <WaveRow className="about-space__top-wave" showShadow={false} />
-          <h2 id="about-title" className="section-word section-word--about">
-            ABOUT
-          </h2>
-          <About />
+          <div className="about-space__content">
+            <div className="about-space__content-inner">
+              <h2 id="about-title" className="section-word section-word--about">
+                ABOUT
+              </h2>
+              <About />
+            </div>
+          </div>
           <WaveRow className="about-space__bottom-wave" />
         </div>
       </section>

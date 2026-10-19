@@ -2,6 +2,13 @@
 
 React/Vite portfolio. Application source and assets live in `portfolio/`.
 
+## Portfolio Chatbot
+
+The floating navigation sparkle opens the chatbot. Only `OPENAI_API_KEY` is
+required; no Redis service is needed. See [CHATBOT_SETUP.md](CHATBOT_SETUP.md)
+for setup, editable information and prompts, and the limitations of per-instance
+request limits. Never commit real credentials.
+
 ## Local Development
 
 Use Node.js 22.13 or newer within the 22.x release line and Git LFS.

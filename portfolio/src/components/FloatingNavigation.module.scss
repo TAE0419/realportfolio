@@ -1,13 +1,115 @@
+@property --chat-slide-progress {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0;
+}
+
+@property --chat-lift-progress {
+  syntax: '<number>';
+  inherits: true;
+  initial-value: 0;
+}
+
+.rig {
+  --chat-slide-progress: 0;
+  --chat-lift-progress: 0;
+  --chat-right: max(50px, env(safe-area-inset-right));
+  --chat-bottom: var(--navigation-bottom-offset);
+  --chat-width: min(560px, calc(100vw - 180px));
+  --chat-height: min(680px, calc(100dvh - 190px));
+  --chat-headroom: 28px;
+  --chat-line-width: 4px;
+  --chat-line-inset: 4px;
+  --chat-eye-x: 90px;
+  --chat-bend-radius: 28px;
+  --chat-shift-x: calc(-1 * (var(--chat-width) + 20px));
+  --chat-shift-y: calc(-1 * (var(--chat-height) + var(--chat-headroom)));
+  --chat-slide-out: calc(var(--chat-width) + var(--chat-right) + 16px);
+  transition: --chat-lift-progress 420ms cubic-bezier(0.45, 0, 0.2, 1), --chat-slide-progress 480ms cubic-bezier(0.45, 0, 0.2, 1);
+}
+
+.anchor {
+  position: fixed;
+  right: var(--chat-right);
+  bottom: var(--chat-bottom);
+  width: var(--navigation-button-size);
+  height: var(--navigation-button-size);
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.motionViewport {
+  position: fixed;
+  inset: 0;
+  z-index: 1003;
+  overflow: clip;
+  contain: layout paint;
+  pointer-events: none;
+}
+
 .navigation {
   position: fixed;
-  right: max(50px, env(safe-area-inset-right));
+  right: var(--chat-right);
   bottom: var(--navigation-bottom-offset);
-  z-index: 1000;
+  z-index: 1003;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
   width: 190px;
   pointer-events: none;
+  transform: translate(calc(var(--chat-shift-x) * var(--chat-slide-progress)), calc(var(--chat-shift-y) * var(--chat-lift-progress)));
+}
+
+.connector {
+  position: absolute;
+  left: calc(100% - var(--chat-line-inset));
+  bottom: calc(var(--navigation-button-size) / 2 - var(--chat-line-width) / 2);
+  z-index: -1;
+  // This endpoint follows the same progress as the dialog's rounded connection.
+  width: calc(var(--chat-right) + var(--chat-line-inset) + 16px + var(--chat-eye-x) - var(--chat-bend-radius) + var(--chat-line-width) / 2 + 0.5px - (var(--chat-slide-out) + var(--chat-shift-x)) * var(--chat-slide-progress));
+  height: var(--chat-line-width);
+  pointer-events: none;
+  span {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: var(--dark-color);
+    border-radius: 999px 0 0 999px;
+    transform: translateX(calc(var(--chat-right) + var(--chat-line-inset)));
+    transition: transform 240ms ease;
+  }
+}
+
+.rig:not([data-chat-stage='closed'], [data-chat-stage='disconnecting']) .connector span { transform: translateX(0); }
+.rig:is([data-chat-stage='lifting'], [data-chat-stage='revealing'], [data-chat-stage='open'], [data-chat-stage='concealing']) {
+  --chat-lift-progress: 1;
+}
+.rig:is([data-chat-stage='revealing'], [data-chat-stage='open']) {
+  --chat-slide-progress: 1;
+  transition-duration: 420ms, 600ms;
+}
+.rig[data-chat-menu-docked='true'] .links {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 0;
+  align-items: flex-end;
+  text-align: right;
+  transform: translateX(-12px);
+  width: max-content;
+  padding: 0;
+  gap: 12px;
+  &::before { content: ''; position: absolute; top: -12px; left: 0; width: 100%; height: 12px; }
+}
+.rig[data-chat-menu-docked='true'][data-chat-surface='light'] .links a {
+  color: var(--dark-color);
+  &:hover, &:focus-visible { color: var(--main-color); }
+  &:focus-visible { outline-color: var(--main-color); }
+}
+.rig:is([data-chat-stage='connecting'], [data-chat-stage='lifting'], [data-chat-stage='revealing']) .links {
+  visibility: hidden;
+  pointer-events: none;
+  transition: none;
+  a span { transform: translateY(100%); transition: none; }
 }
 
 .trigger {
@@ -24,14 +126,41 @@
   pointer-events: auto;
   transition: color 200ms ease;
 
-  svg > path {
+  .sparkle {
+    grid-area: 1 / 1;
+    filter: var(--navigation-shadow, none);
+    transition: filter 200ms ease;
+  }
+  .sparkle > path {
     stroke: currentColor;
-    stroke-width: 6;
+    stroke-width: 4.5;
     stroke-linejoin: round;
-    transition: fill 200ms ease, stroke 200ms ease;
+    transition: fill 200ms ease, stroke 200ms ease, stroke-width 200ms ease;
   }
 
   &:focus-visible { outline: 2px solid var(--white-color); outline-offset: 4px; }
+}
+
+.pictogram {
+  position: relative;
+  z-index: 1;
+  grid-area: 1 / 1;
+  width: 28px;
+  height: 28px;
+  color: var(--dark-color);
+  background: currentColor;
+  mask-size: contain;
+  mask-position: center;
+  mask-repeat: no-repeat;
+  opacity: 1;
+  pointer-events: none;
+  transition: color 200ms ease;
+}
+.closePictogram {
+  background: transparent;
+  color: var(--point-color);
+  opacity: 0;
+  transition: opacity 200ms ease;
 }
 
 .links {
@@ -42,6 +171,7 @@
   gap: 18px;
   width: 100%;
   padding: 0 0 20px;
+  transform: translateX(-8px);
   visibility: hidden;
   transition: visibility 0s calc(300ms + (var(--link-count) - 1) * 90ms);
 
@@ -60,13 +190,21 @@
     }
 
     &:hover { color: var(--white-color); }
+    &[data-surface='light'] {
+      color: var(--dark-color);
+      &:hover, &:focus-visible { color: var(--main-color); }
+      &:focus-visible { outline-color: var(--main-color); }
+    }
     &:focus-visible { outline: 2px solid var(--white-color); outline-offset: 4px; }
   }
 }
 
 .open {
   pointer-events: auto;
-  .trigger svg > path { fill: transparent; stroke: currentColor; }
+  .trigger .sparkle { filter: none; }
+  .trigger .sparkle > path { fill: transparent; stroke: currentColor; stroke-width: 3; }
+  .pictogram { color: var(--point-color); }
+  .closePictogram { opacity: 1; }
   .links { visibility: visible; transition-delay: 0s; }
   .links a span {
     transform: translateY(0);
@@ -74,12 +212,45 @@
   }
 }
 
+.rig[data-chat-surface='light'] .open {
+  .trigger, .pictogram { color: var(--dark-color); }
+  .trigger:focus-visible { outline-color: var(--dark-color); }
+}
+
 @media (max-width: 700px) {
-  .navigation { right: max(16px, env(safe-area-inset-right)); }
-  .trigger svg { width: 60px; height: 60px; }
+  .rig {
+    --chat-right: max(16px, env(safe-area-inset-right));
+    --chat-width: calc(100vw - 100px);
+    --chat-menu-reserve: 86px;
+    --chat-height: min(680px, calc(100dvh - 190px - var(--chat-menu-reserve)));
+    --chat-headroom: calc(94px + var(--chat-menu-reserve));
+    --chat-line-inset: 2px;
+    --chat-eye-x: 55.5px;
+    --chat-shift-x: calc(-1 * (var(--chat-width) + 6px));
+  }
+  .trigger .sparkle { width: 60px; height: 60px; }
+  .pictogram { width: 24px; height: 24px; }
   .links { gap: 14px; padding-bottom: 18px; }
+  .rig[data-chat-menu-docked='true'] .links {
+    left: calc(100% - var(--navigation-button-size));
+    right: auto;
+    gap: 8px;
+    align-items: flex-end;
+  }
+}
+
+@media (max-width: 700px) and (max-height: 480px) {
+  .rig { --chat-menu-reserve: 0px; }
+  .rig[data-chat-menu-docked='true'] .links {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    width: calc(100vw - 28px);
+    gap: 4px 12px;
+    a { justify-self: end; font-size: var(--font-size-body-small); line-height: 1.4; }
+    a:last-child { grid-column: 1 / -1; }
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .trigger, .trigger svg > path, .links, .links a span { transition: none; }
+  .rig, .navigation, .connector, .connector span, .trigger, .trigger .sparkle, .trigger .sparkle > path, .pictogram, .links, .links a span { transition: none !important; }
 }

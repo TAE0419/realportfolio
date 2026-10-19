@@ -1,17 +1,13 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useLayoutEffect, useState } from 'react'
 import styles from './PageTransition.module.scss'
 
-const transitionKey = 'portfolio-page-transition'
-let arriving = false
-try {
-  arriving = sessionStorage.getItem(transitionKey) === window.location.href
-  sessionStorage.removeItem(transitionKey)
-} catch {
-  // Navigation still works when browser storage is disabled.
-}
-
 export default function PageTransition() {
-  const [covered, setCovered] = useState(() => arriving || window.location.pathname !== '/')
+  const [covered, setCovered] = useState(true)
+
+  useLayoutEffect(() => {
+    // Hand the HTML boot cover to the mounted overlay before the next paint.
+    document.documentElement.removeAttribute('data-page-boot')
+  }, [])
 
   useEffect(() => {
     let disposed = false
@@ -43,7 +39,6 @@ export default function PageTransition() {
       leaving = true
       setCovered(true)
       timer = window.setTimeout(() => {
-        try { sessionStorage.setItem(transitionKey, destination.href) } catch { /* Storage is optional. */ }
         window.location.assign(destination.href)
       }, reducedMotion.matches ? 0 : 300)
     }

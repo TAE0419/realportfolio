@@ -1,0 +1,16 @@
+{
+  "name": "김태은",
+  "englishName": "KIM TAE EUN",
+  "role": "프론트엔드 개발자이자 산업디자이너",
+  "email": "ktcat0419@gmail.com",
+  "introduction": "표면보다 본질을 깊이 탐구하고, 프로젝트의 핵심 가치를 시각 언어와 인터랙션으로 전달하는 것을 지향합니다.",
+  "skills": ["Illustrator", "After Effects", "Figma", "Clip Studio", "Rhino", "KeyShot", "JavaScript", "React"],
+  "experiences": [
+    "2023.03 숙명여자대학교 산업디자인과 입학",
+    "2024 - 2025 숙명여자대학교 산업디자인과 학생회 활동",
+    "2024 - 2027 숙명여자대학교 숙묘지교 동아리 활동",
+    "2026.04 - 2026.10 이젠아카데미 프론트엔드 수강",
+    "2026.06 - 2026.10 아리수 서포터즈 활동"
+  ],
+  "number":"010-3339-6882"
+}

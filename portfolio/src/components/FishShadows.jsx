@@ -214,6 +214,26 @@ export default function FishShadows({ seed = 1, areaSelector, bottomBoundarySele
       paint()
       if (visible && !reducedMotion.matches && !document.hidden && !document.documentElement.hasAttribute('data-initial-loading')) frame = window.requestAnimationFrame(tick)
     }
+    const syncBoundary = () => {
+      if (boundaryPath) {
+        const matrix = boundaryPath.getScreenCTM()
+        if (matrix) {
+          const canvasBounds = canvas.getBoundingClientRect()
+          clipOffset = matrix.f - canvasBounds.top
+          const geometry = [width, height, matrix.a, matrix.b, matrix.c, matrix.d, matrix.e - canvasBounds.left].join(',')
+          if (geometry !== clipGeometry) {
+            clipGeometry = geometry
+            bottomClip = new Path2D()
+            bottomClip.moveTo(0, -height * 2)
+            boundaryPoints.forEach((point) => {
+              bottomClip.lineTo(matrix.a * point.x + matrix.c * point.y + matrix.e - canvasBounds.left, matrix.b * point.x + matrix.d * point.y)
+            })
+            bottomClip.lineTo(width, -height * 2)
+            bottomClip.closePath()
+          }
+        }
+      }
+    }
     const resize = () => {
       width = section.clientWidth
       canvasTop = canvas.getBoundingClientRect().top + window.scrollY
@@ -239,24 +259,7 @@ export default function FishShadows({ seed = 1, areaSelector, bottomBoundarySele
       if (canvas.width !== pixelWidth) canvas.width = pixelWidth
       if (canvas.height !== pixelHeight) canvas.height = pixelHeight
       context.setTransform(ratio, 0, 0, ratio, 0, 0)
-      if (boundaryPath) {
-        const matrix = boundaryPath.getScreenCTM()
-        if (matrix) {
-          const canvasBounds = canvas.getBoundingClientRect()
-          clipOffset = matrix.f - canvasBounds.top
-          const geometry = [width, height, matrix.a, matrix.b, matrix.c, matrix.d, matrix.e - canvasBounds.left].join(',')
-          if (geometry !== clipGeometry) {
-            clipGeometry = geometry
-            bottomClip = new Path2D()
-            bottomClip.moveTo(0, -height * 2)
-            boundaryPoints.forEach((point) => {
-              bottomClip.lineTo(matrix.a * point.x + matrix.c * point.y + matrix.e - canvasBounds.left, matrix.b * point.x + matrix.d * point.y)
-            })
-            bottomClip.lineTo(width, -height * 2)
-            bottomClip.closePath()
-          }
-        }
-      }
+      syncBoundary()
       paint()
     }
     const resizeObserver = new ResizeObserver(resize)
@@ -265,10 +268,12 @@ export default function FishShadows({ seed = 1, areaSelector, bottomBoundarySele
       resizeObserver.observe(area)
       resizeObserver.observe(area.parentElement)
     }
-    if (bottomBoundary) {
-      resizeObserver.observe(bottomBoundary)
-      resizeObserver.observe(bottomBoundary.parentElement)
-    }
+    // Opening the wave only changes its clipping boundary, not the canvas layout.
+    const boundaryObserver = new ResizeObserver(() => {
+      syncBoundary()
+      if (!frame) paint()
+    })
+    if (bottomBoundary) boundaryObserver.observe(bottomBoundary.parentElement)
     const intersectionObserver = new IntersectionObserver(([entry]) => {
       visible = entry.isIntersecting
       syncAnimation()
@@ -277,15 +282,18 @@ export default function FishShadows({ seed = 1, areaSelector, bottomBoundarySele
     reducedMotion.addEventListener('change', syncAnimation)
     document.addEventListener('visibilitychange', syncAnimation)
     window.addEventListener('portfolio-ready', syncAnimation)
+    section.addEventListener('portfolio-about-layout', resize)
     resize()
 
     return () => {
       window.cancelAnimationFrame(frame)
       resizeObserver.disconnect()
+      boundaryObserver.disconnect()
       intersectionObserver.disconnect()
       reducedMotion.removeEventListener('change', syncAnimation)
       document.removeEventListener('visibilitychange', syncAnimation)
       window.removeEventListener('portfolio-ready', syncAnimation)
+      section.removeEventListener('portfolio-about-layout', resize)
     }
   }, [seed, areaSelector, bottomBoundarySelector, schoolCount])
 
