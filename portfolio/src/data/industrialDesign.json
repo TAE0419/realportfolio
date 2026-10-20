@@ -154,7 +154,7 @@
           ]
         },
         "leaflet": {
-          "pageName": "리플릿",
+          "pageName": "리플렛",
           "images": [
             { "caption": "1", "url": "/industrialdesign/industrialdesign/smim/leaflet/1.png" },
             { "caption": "2", "url": "/industrialdesign/industrialdesign/smim/leaflet/2.png" }
@@ -339,7 +339,7 @@
           ]
         },
         "leaflet": {
-          "pageName": "리플릿",
+          "pageName": "리플렛",
           "images": [
             { "caption": "1", "url": "/industrialdesign/industrialdesign/ne/leaflet/1.png" },
             { "caption": "2", "url": "/industrialdesign/industrialdesign/ne/leaflet/2.png" }
@@ -432,7 +432,7 @@
           ]
         },
         "leaflet": {
-          "pageName": "리플릿",
+          "pageName": "리플렛",
           "images": [
             { "caption": "1", "url": "/industrialdesign/industrialdesign/mute/leaflet/1.png" },
             { "caption": "2", "url": "/industrialdesign/industrialdesign/mute/leaflet/2.png" },
@@ -694,7 +694,7 @@
           ]
         },
         "leaflet": {
-          "pageName": "리플릿",
+          "pageName": "리플렛",
           "images": [
             { "caption": "1", "url": "/industrialdesign/industrialdesign/kit/brochure.pdf" },
             { "caption": "2", "url": "/industrialdesign/industrialdesign/kit/brochure2.pdf" },
