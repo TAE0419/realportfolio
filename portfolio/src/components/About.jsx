@@ -1,6 +1,6 @@
 import { useEffect, useLayoutEffect, useRef } from 'react'
 import styles from './About.module.scss'
-import face from '../assets/face.jpg'
+import portrait from 'virtual:portrait-image'
 import SparkleShape from './SparkleShape'
 
 const experiences = [
@@ -14,12 +14,12 @@ const experiences = [
 const skills = [
   { name: 'Illustrator', label: ['Ai'], value: 85 },
   { name: 'After Effects', label: ['Ae'], value: 80 },
-  { name: 'Clip Studio Paint', label: ['Figma'], value: 90 },
-  { name: 'Clip Studio Modeler', label: ['Clip', 'Studio'], value: 90 },
+  { name: 'Figma', label: ['Figma'], value: 90 },
+  { name: 'Clip Studio', label: ['Clip', 'Studio'], value: 90 },
   { name: 'Rhino', label: ['Rhino'], value: 85 },
   { name: 'KeyShot', label: ['Key', 'Shot'], value: 90 },
-  { name: 'Figma', label: ['Java', 'script'], value: 75 },
-  { name: '', label: ['React'], value: 70 },
+  { name: 'JavaScript', label: ['Java', 'script'], value: 75 },
+  { name: 'React', label: ['React'], value: 70 },
 ]
 
 export default function About() {
@@ -105,13 +105,14 @@ export default function About() {
   return (
     <div className={styles.content} ref={contentRef}>
       <div className="about-content__overview">
-      <img className="about-content__portrait" src={face} alt="김태은 프로필 사진" />
+      <img className="about-content__portrait" src={portrait.src} srcSet={portrait.srcSet} sizes="(max-width: 700px) 120px, (max-width: 900px) 160px, 300px"
+        width={portrait.width} height={portrait.height} decoding="async" alt="김태은 프로필 사진" />
       <div className="about-content__profile">
         <h3 className="about-content__name">KIM TAE EUN <span>김태은</span></h3>
         <dl className="about-content__details">
           <div><dt>birth</dt><dd>2004.04.19</dd></div>
-          <div><dt>instar</dt><dd>@tae</dd></div>
-          <div><dt>email</dt><dd><a href="mailto:ktcat0419@gmail.com">ktcat0419@gmail.com</a></dd></div>
+          <div><dt>Instagram</dt><dd>@tae_eun419</dd></div>
+          <div><dt>e-mail</dt><dd><a href="mailto:ktcat0419@gmail.com">ktcat0419@gmail.com</a></dd></div>
         </dl>
         <div className="about-content__intro">
           <p>끝을 가늠하기 어려운 심해를 들여다보듯, 어떤 분야를 마주하든 표면에 머무르기보다 본질까지 깊이 파고들어 사유하는 프론트엔드 개발자이자 디자이너 김태은입니다.</p>
@@ -134,7 +135,7 @@ export default function About() {
         <h3>SKILLS</h3>
         <ul className="about-content__skill-grid">
           {skills.map((skill, index) => (
-            <li className="about-content__skill" key={index} aria-label={skill.name || '스킬'}>
+            <li className="about-content__skill" key={index} aria-label={`${skill.name} 숙련도 ${skill.value}%`}>
               <svg viewBox="0 0 100 100" className="about-content__donut" aria-hidden="true">
                 <circle className="about-content__donut-track" cx="50" cy="50" r="46" />
                 <circle className="about-content__donut-progress" cx="50" cy="50" r="46" pathLength="100" strokeDasharray="100 100" style={{ '--skill-offset': 100 - skill.value }} />

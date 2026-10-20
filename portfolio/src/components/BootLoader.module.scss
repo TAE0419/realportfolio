@@ -1,0 +1,54 @@
+@use '../styles/variable.module' as *;
+@use 'sass:map';
+
+html[data-boot-loading] { overflow: hidden; }
+#boot-loader { display: none; }
+html[data-boot-loading] #boot-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 20001;
+  display: block;
+  overflow: hidden;
+  background: $white-color;
+  color: $main-color;
+  touch-action: none;
+}
+#boot-loader [data-boot-label], #boot-loader output {
+  position: absolute;
+  left: 50%;
+  width: max-content;
+  margin: 0;
+  transform: translateX(-50%);
+}
+#boot-loader [data-boot-label] {
+  bottom: calc(50% + 72px);
+  font-family: 'Nasalization', system-ui, sans-serif;
+  font-size: map.get($font-size-scale, 44);
+  font-weight: $font-weight-regular;
+  line-height: 1;
+}
+#boot-loader output {
+  top: calc(50% + 30px);
+  font-family: 'NanumSquare', system-ui, sans-serif;
+  font-size: map.get($font-size-scale, 20);
+  font-weight: $font-weight-bold;
+  line-height: 1.4;
+  font-variant-numeric: tabular-nums;
+}
+#boot-loader > svg {
+  position: absolute;
+  top: calc(50% - 28px);
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 56px;
+  fill: none;
+  path { stroke-width: 4; vector-effect: non-scaling-stroke; }
+}
+@media (max-width: 900px) {
+  #boot-loader > svg { top: calc(50% - 21px); height: 42px; }
+}
+@media (max-width: 700px) {
+  #boot-loader [data-boot-label] { bottom: calc(50% + 56px); font-size: map.get($font-size-scale, 28); }
+  #boot-loader output { top: calc(50% + 24px); font-size: map.get($font-size-scale, 16); }
+}

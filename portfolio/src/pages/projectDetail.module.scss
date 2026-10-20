@@ -81,7 +81,9 @@
 }
 @media (max-width: 700px) {
   .content, .galleryPage .content { --detail-top-spacing: 64px; margin-left: 132px; margin-right: 16px; }
-  .heading h1 { font-size: var(--font-size-40); }
+  .heading { align-items: flex-end; }
+  .heading h1 { font-size: var(--font-size-40); transform: scale(var(--mobile-title-fit, 1)); transform-origin: right bottom; }
+  .heading p { transform: scale(var(--mobile-summary-fit, 1)); transform-origin: right bottom; }
   .explain li { grid-template-columns: 24px minmax(0, 1fr); gap: 8px; }
   .explain p { font-size: var(--font-size-body-small); }
   .thumbnails { gap: 12px; }

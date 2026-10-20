@@ -4,9 +4,12 @@ import { normalizeProjectImagePath } from '../src/data/imagePaths.js'
 import { cardThumbnails } from './cardThumbnails.js'
 import { pdfPages } from './pdfPages.js'
 import { isProjectPdf } from '../src/data/projectMedia.js'
+import { responsiveImages } from './responsiveImages.js'
 
 const moduleId = 'virtual:project-images'
 const resolvedId = `\0${moduleId}`
+const portraitModuleId = 'virtual:portrait-image'
+const resolvedPortraitId = `\0${portraitModuleId}`
 
 function collectImages(value, images, cards) {
   if (!value || typeof value !== 'object') return
@@ -38,8 +41,18 @@ export default function projectAssetsPlugin() {
   return {
     name: 'project-images',
     configResolved(config) { root = config.root },
-    resolveId(id) { if (id === moduleId) return resolvedId },
+    resolveId(id) {
+      if (id === moduleId) return resolvedId
+      if (id === portraitModuleId) return resolvedPortraitId
+    },
     async load(id) {
+      if (id === resolvedPortraitId) {
+        const filename = path.join(root, 'src/assets/face.jpg')
+        this.addWatchFile(filename)
+        const variants = await responsiveImages(filename, path.join(root, 'node_modules/.cache/project-details'))
+        const imports = variants.map((item, index) => `import image${index} from ${JSON.stringify(`${item.filename.replace(/\\/g, '/')}?url`)};`)
+        return `${imports.join('\n')}\nexport default {src: image0, srcSet: ${variants.map((item, index) => `image${index} + ' ${item.width}w'`).join(" + ', ' + ")}, width: ${variants[0].width}, height: ${variants[0].height}};`
+      }
       if (id !== resolvedId) return
       const images = new Set()
       const cards = new Set()
@@ -53,6 +66,7 @@ export default function projectAssetsPlugin() {
       const entries = []
       const cardEntries = []
       const pdfEntries = []
+      const detailEntries = []
       const dependencies = new Set()
       for (const image of images) {
         const filename = path.join(root, 'src/assets', image.slice(1))
@@ -76,8 +90,20 @@ export default function projectAssetsPlugin() {
           // PDFs are displayed as images; do not deploy the oversized source documents.
           continue
         }
-        imports.push(`import ${name} from ${JSON.stringify(`${filename.replace(/\\/g, '/')}?url`)};`)
-        entries.push(`${JSON.stringify(image)}: ${name}`)
+        const responsive = await responsiveImages(filename, path.join(root, 'node_modules/.cache/project-details'))
+        if (responsive) {
+          const sizes = responsive.map((variant, index) => {
+            const variable = `${name}Detail${index}`
+            imports.push(`import ${variable} from ${JSON.stringify(`${variant.filename.replace(/\\/g, '/')}?url`)};`)
+            return { ...variant, variable }
+          })
+          const fallback = sizes.find(size => size.width >= 1280) || sizes.at(-1)
+          entries.push(`${JSON.stringify(image)}: ${fallback.variable}`)
+          detailEntries.push(`${JSON.stringify(image)}: {src: ${fallback.variable}, srcSet: ${sizes.map(size => `${size.variable} + ' ${size.width}w'`).join(" + ', ' + ")}, width: ${fallback.width}, height: ${fallback.height}}`)
+        } else {
+          imports.push(`import ${name} from ${JSON.stringify(`${filename.replace(/\\/g, '/')}?url`)};`)
+          entries.push(`${JSON.stringify(image)}: ${name}`)
+        }
         if (cards.has(image)) {
           const variants = await cardThumbnails(filename, path.join(root, 'node_modules/.cache/project-cards'))
           const sizes = variants.map((variant, index) => {
@@ -90,7 +116,7 @@ export default function projectAssetsPlugin() {
       }
       referencedFiles = dependencies
       // Only referenced files become imports; unrelated presentation assets stay out of the build.
-      return `${imports.join('\n')}\nexport const cardImages = {${cardEntries.join(',')}};\nexport const pdfImages = {${pdfEntries.join(',')}};\nexport default {${entries.join(',')}};`
+      return `${imports.join('\n')}\nexport const cardImages = {${cardEntries.join(',')}};\nexport const detailImages = {${detailEntries.join(',')}};\nexport const pdfImages = {${pdfEntries.join(',')}};\nexport default {${entries.join(',')}};`
     },
     configureServer(server) {
       server.watcher.add([dataDirectory(), path.join(root, 'src/assets')])

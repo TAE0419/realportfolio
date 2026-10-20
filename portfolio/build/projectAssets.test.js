@@ -39,19 +39,22 @@ test('imports only JSON-referenced thumbnails and gallery images and updates wit
     const id = plugin.resolveId('virtual:project-images')
     const context = { addWatchFile: file => watched.push(file) }
     const source = await plugin.load.call(context, id)
-    assert.equal(source.match(/^import /gm).length, 6)
+    assert.equal(source.match(/^import /gm).length, 12)
     assert.ok(source.includes('export const cardImages'))
     assert.ok(source.includes('480w'))
     assert.ok(source.includes('960w'))
-    assert.ok(source.includes('second.webp?url'))
-    assert.ok(source.includes('slide 1.png?url'))
+    assert.ok(source.includes('export const detailImages'))
+    assert.ok(source.includes('1280w'))
+    assert.ok(source.includes('/frontend/new-project/second.webp'))
+    assert.ok(source.includes('/frontend/new-project/slide 1.png'))
+    assert.ok(!source.includes('product.png?url'))
     for (const unexpected of ['unused.png', 'new.png', 'remote.jpg', 'missing.png', 'not-an-image']) assert.ok(!source.includes(unexpected))
     assert.ok(watched.includes(dataFile))
 
     await writeFile(dataFile, JSON.stringify({ projects: [{ pages: { project: { thumbnail: '/frontend/new-project/new.png' } } }] }))
     const updated = await plugin.load.call(context, id)
-    assert.equal(updated.match(/^import /gm).length, 4)
-    assert.ok(updated.includes('new.png?url'))
+    assert.equal(updated.match(/^import /gm).length, 6)
+    assert.ok(updated.includes('/frontend/new-project/new.png'))
     assert.ok(!updated.includes('product.png'))
 
     const virtualModule = { id }

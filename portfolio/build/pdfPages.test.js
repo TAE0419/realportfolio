@@ -55,6 +55,9 @@ test('renders every PDF page in order, preserves ratios and originals, and reuse
     assert.deepEqual(await pdfPages(filename, cache), pages)
     assert.deepEqual(await Promise.all(pages.map(page => stat(page.filename).then(file => file.mtimeMs))), modified)
     assert.deepEqual(await readFile(filename), original)
+    const relocated = path.join(root, 'copied-brochure.pdf')
+    await writeFile(relocated, original)
+    assert.deepEqual(await pdfPages(relocated, cache), pages)
   } finally {
     await rm(root, { recursive: true, force: true, maxRetries: 5, retryDelay: 100 })
   }
@@ -75,7 +78,8 @@ test('bundles PDF preview images without deploying the original PDF', async () =
     plugin.configResolved({ root })
     const source = await plugin.load.call({ addWatchFile() {} }, plugin.resolveId('virtual:project-images'))
     assert.ok(source.includes('"/brochure.pdf": [{src:'))
-    assert.ok(source.includes('after.png?url'))
+    assert.ok(source.includes('"/after.png"'))
+    assert.ok(!source.includes('after.png?url'))
     assert.ok(!source.includes('brochure.pdf?url'))
     const variables = [...source.matchAll(/^import (\w+) from /gm)].map(match => match[1])
     assert.equal(variables.length, 3)

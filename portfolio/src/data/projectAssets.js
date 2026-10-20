@@ -1,4 +1,4 @@
-import images, { cardImages, pdfImages } from 'virtual:project-images'
+import images, { cardImages, detailImages, pdfImages } from 'virtual:project-images'
 import { normalizeProjectImagePath } from './imagePaths'
 
 export function projectImage(path) {
@@ -13,4 +13,8 @@ export function projectCardImage(path) {
 
 export function projectPdfPages(path) {
   return pdfImages[normalizeProjectImagePath(path)] || []
+}
+
+export function projectDetailImage(path) {
+  return detailImages[normalizeProjectImagePath(path)] || { src: projectImage(path) }
 }

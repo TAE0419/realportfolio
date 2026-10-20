@@ -1,5 +1,6 @@
 import { useEffect, useLayoutEffect, useState } from 'react'
 import styles from './PageTransition.module.scss'
+import { settleWithin } from '../data/preparation'
 
 export default function PageTransition() {
   const [covered, setCovered] = useState(true)
@@ -17,7 +18,7 @@ export default function PageTransition() {
     let localPage = null
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
 
-    document.fonts.ready.then(() => {
+    settleWithin(document.fonts.ready).then(() => {
       if (disposed) return
       frame = requestAnimationFrame(() => {
         frame = requestAnimationFrame(() => { if (!leaving) setCovered(false) })
@@ -63,12 +64,20 @@ export default function PageTransition() {
     }
     const restore = (event) => {
       if (!event.persisted) return
+      cancelPending()
+    }
+    const cancelPending = () => {
+      clearTimeout(timer)
+      cancelAnimationFrame(frame)
+      localPage?.removeAttribute('data-content-transition')
+      localPage = null
       leaving = false
       setCovered(false)
     }
     document.addEventListener('click', navigate, true)
     window.addEventListener('portfolio-page-navigate', navigateLocally)
     window.addEventListener('pageshow', restore)
+    window.addEventListener('popstate', cancelPending)
     return () => {
       disposed = true
       cancelAnimationFrame(frame)
@@ -77,6 +86,7 @@ export default function PageTransition() {
       document.removeEventListener('click', navigate, true)
       window.removeEventListener('portfolio-page-navigate', navigateLocally)
       window.removeEventListener('pageshow', restore)
+      window.removeEventListener('popstate', cancelPending)
     }
   }, [])
 

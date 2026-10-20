@@ -169,6 +169,31 @@
     left: 11.8%;
   }
 
+  .hero-section > a.sparkle-mark {
+    --twinkle-duration: 1.8s;
+    --twinkle-delay: -0.4s;
+
+    &:nth-child(3n) {
+      --twinkle-duration: 2s;
+      --twinkle-delay: -1.2s;
+    }
+
+    &:nth-child(3n + 1) {
+      --twinkle-duration: 1.6s;
+      --twinkle-delay: -0.8s;
+    }
+
+    .sparkle-mark__icon {
+      transform-origin: center;
+      animation: sparkle-twinkle var(--twinkle-duration) ease-in-out var(--twinkle-delay) infinite;
+    }
+  }
+
+  @keyframes :global(sparkle-twinkle) {
+    0%, 100% { transform: scale(0.88); }
+    30%, 55% { transform: scale(1.14); }
+  }
+
   a.sparkle-mark {
     text-decoration: none;
     transform-origin: center;
@@ -188,6 +213,7 @@
 
   @media (prefers-reduced-motion: reduce) {
     a.sparkle-mark { transition: none; }
+    .hero-section > a.sparkle-mark .sparkle-mark__icon { animation: none; }
   }
 
   .sparkle-mark--preview {

@@ -2,12 +2,13 @@ import { useEffect, useId, useLayoutEffect, useState } from 'react'
 import { createWavePath } from './waveGeometry'
 import { markInitialLoadingComplete, prepareStartupAssets } from '../data/startupAssets'
 import styles from './InitialLoader.module.scss'
+import { appReadyProgress } from '../data/loadingConfig'
 
 const wavePath = createWavePath()
 
 export default function InitialLoader({ onComplete }) {
   const gradientId = useId()
-  const [progress, setProgress] = useState(0)
+  const [progress, setProgress] = useState(appReadyProgress)
   const [opening, setOpening] = useState(false)
   const [viewport, setViewport] = useState(() => ({ height: window.innerHeight, waveHeight: window.innerWidth <= 900 ? 42 : 56 }))
 
@@ -17,6 +18,10 @@ export default function InitialLoader({ onComplete }) {
       setViewport({ height: window.innerHeight, waveHeight: wave ? parseFloat(getComputedStyle(wave).height) : window.innerWidth <= 900 ? 42 : 56 })
     }
     measure()
+    // The React loader is painted before the early HTML loader is removed.
+    document.getElementById('boot-loader')?.remove()
+    document.documentElement.removeAttribute('data-boot-loading')
+    delete document.documentElement.dataset.bootProgress
     window.addEventListener('resize', measure)
     return () => window.removeEventListener('resize', measure)
   }, [])
@@ -26,8 +31,8 @@ export default function InitialLoader({ onComplete }) {
     let frame = 0
     let holdTimer = 0
     let finishTimer = 0
-    let target = 0
-    let displayed = 0
+    let target = appReadyProgress
+    let displayed = appReadyProgress
     let ready = false
     const started = performance.now()
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)')
@@ -39,7 +44,7 @@ export default function InitialLoader({ onComplete }) {
     window.addEventListener('wheel', blockScroll, { passive: false, capture: true })
     window.addEventListener('touchmove', blockScroll, { passive: false, capture: true })
     window.addEventListener('keydown', blockKeys, true)
-    const preparation = prepareStartupAssets(value => { target = value * 100 })
+    const preparation = prepareStartupAssets(value => { target = appReadyProgress + value * (100 - appReadyProgress) })
     preparation.ready.then(() => { if (!disposed) { ready = true; target = 100 } })
     const finish = () => {
       if (disposed) return

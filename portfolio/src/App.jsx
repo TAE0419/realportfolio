@@ -219,10 +219,11 @@ function App() {
       scrollFrame = window.requestAnimationFrame(scroll)
     }
     const onWheel = (event) => {
+      if (event.target.closest?.('dialog, [data-scroll-region], [data-custom-scrollbar], textarea, input, select')) return
       if (!event.ctrlKey && Math.abs(event.deltaY) > Math.abs(event.deltaX)) advance(event, event.deltaY)
     }
     const onTouchStart = (event) => {
-      touchY = event.touches.length === 1 && !event.target.closest('[data-custom-scrollbar]') ? event.touches[0].clientY : null
+      touchY = event.touches.length === 1 && !event.target.closest('dialog, [data-scroll-region], [data-custom-scrollbar], textarea, input, select') ? event.touches[0].clientY : null
     }
     const onTouchMove = (event) => {
       if (touchY !== null && event.touches.length === 1) {

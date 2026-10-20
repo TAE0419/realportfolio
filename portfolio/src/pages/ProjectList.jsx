@@ -8,6 +8,7 @@ import industrialData from '../data/industrialDesign.json'
 import { filterProjects } from '../data/projectFilters'
 import { createWavePath } from '../components/waveGeometry'
 import styles from './ProjectList.module.scss'
+import usePageMetadata from '../components/usePageMetadata'
 
 const categories = {
   frontend: ['javascript', 'react', 'next', 'canvas'],
@@ -15,6 +16,7 @@ const categories = {
 }
 
 export default function ProjectList({ title }) {
+  usePageMetadata(title, `김태은의 ${title === 'FRONTEND' ? '프론트엔드 개발' : '산업디자인'} 프로젝트 목록입니다.`)
   const titleRef = useRef(null)
   const titleMotionRef = useRef(null)
   const waveRef = useRef(null)

@@ -1,5 +1,6 @@
 import { createHash } from 'node:crypto'
-import { access, mkdir, readFile, stat, writeFile } from 'node:fs/promises'
+import { access, mkdir, readFile, writeFile } from 'node:fs/promises'
+import { createReadStream } from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { createCanvas } from '@napi-rs/canvas'
@@ -8,8 +9,9 @@ import { getDocument } from 'pdfjs-dist/legacy/build/pdf.mjs'
 const pdfRoot = path.dirname(fileURLToPath(import.meta.resolve('pdfjs-dist/package.json')))
 
 export async function pdfPages(filename, cacheDirectory) {
-  const source = await stat(filename)
-  const key = createHash('sha256').update(`v1:${filename}:${source.size}:${source.mtimeMs}`).digest('hex').slice(0, 20)
+  const hash = createHash('sha256').update('v2:webp90:2400:4096')
+  for await (const chunk of createReadStream(filename)) hash.update(chunk)
+  const key = hash.digest('hex').slice(0, 20)
   const directory = path.join(cacheDirectory, key)
   const manifest = path.join(directory, 'pages.json')
   try {

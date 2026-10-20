@@ -1,12 +1,13 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react'
 import frontendData from '../data/frontend.json'
 import industrialData from '../data/industrialDesign.json'
-import { projectImage } from '../data/projectAssets'
+import { projectImage, projectDetailImage } from '../data/projectAssets'
 import { isProjectVideo, isProjectVideoPage, isProjectPdf } from '../data/projectMedia'
 import SparkleShape from '../components/SparkleShape'
 import ProjectSidebar from '../components/ProjectSidebar'
 import ProjectPdf from '../components/ProjectPdf'
 import styles from './projectDetail.module.scss'
+import usePageMetadata from '../components/usePageMetadata'
 
 function readProjectPage(pages) {
   const key = window.location.pathname.split('/').filter(Boolean)[2] || 'project'
@@ -15,11 +16,12 @@ function readProjectPage(pages) {
 
 function DetailImage({ path, label, first }) {
   const [failedImage, setFailedImage] = useState(null)
-  const src = projectImage(path)
+  const { src, srcSet, width, height } = projectDetailImage(path)
   const failed = failedImage === src
   return (
     <figure className={`${styles.image} ${!src || failed ? styles.missingImage : ''}`} aria-label={!src || failed ? `${label}: 이미지 없음` : undefined}>
-      {src && !failed && <img src={src} alt={label} loading={first ? 'eager' : 'lazy'} decoding="async" onError={() => setFailedImage(src)} />}
+      {src && !failed && <img src={src} srcSet={srcSet} sizes="(max-width: 700px) calc(100vw - 148px), (max-width: 1100px) calc(100vw - 252px), 80vw"
+        width={width} height={height} alt={label} fetchPriority={first ? 'high' : 'auto'} loading={first ? 'eager' : 'lazy'} decoding="async" onError={() => setFailedImage(src)} />}
     </figure>
   )
 }
@@ -55,6 +57,7 @@ export default function ProjectDetail() {
   const [sidebarPage, setSidebarPage] = useState(() => readProjectPage(pages))
   const details = pages.project
   const page = pages[activePage]
+  usePageMetadata(`${details?.title || 'PROJECT NOT FOUND'}${activePage !== 'project' ? ` · ${page?.pageName || ''}` : ''}`, details?.summary || '김태은의 프로젝트 상세 페이지입니다.')
   const videoPage = isProjectVideoPage(page)
   const description = details?.explain || details?.detail || {}
   const thumbnails = Object.entries(details || {}).filter(([key]) => /^thumbnail\d*$/.test(key))
@@ -77,6 +80,11 @@ export default function ProjectDetail() {
       const offsets = mainStyle.textShadow.replace(/rgba?\([^)]*\)/g, '').trim().split(/\s+/).map(parseFloat)
       const ratio = parseFloat(getComputedStyle(titleRef.current).fontSize) / parseFloat(mainStyle.fontSize)
       reference.remove()
+      const heading = titleRef.current.parentElement
+      const summary = heading.querySelector('p')
+      const available = heading.clientWidth
+      heading.style.setProperty('--mobile-title-fit', Math.min(1, available / Math.max(1, titleRef.current.scrollWidth)))
+      heading.style.setProperty('--mobile-summary-fit', summary ? Math.min(1, available / Math.max(1, summary.scrollWidth)) : 1)
       titleRef.current.style.setProperty('--title-shadow-x', `${offsets[0] * ratio}px`)
       titleRef.current.style.setProperty('--title-shadow-y', `${offsets[1] * ratio}px`)
     }
@@ -179,7 +187,8 @@ export default function ProjectDetail() {
               ? <DetailVideo key={`${image.url}-${index}`} path={image.url} label={`${details?.title || project.id} ${page.pageName}`} />
               : isProjectPdf(image.url)
                 ? <ProjectPdf key={`${image.url}-${index}`} path={image.url} label={`${details?.title || project.id} ${page.pageName} ${image.caption || index + 1}`} />
-              : <DetailImage key={`${image.url}-${index}`} path={image.url} label={image.caption || page.pageName} first={index === 0} />)}
+              : <DetailImage key={`${image.url}-${index}`} path={image.url}
+                label={`${details?.title || project.id} ${page.pageName} ${image.caption || index + 1}`} first={index === 0} />)}
           </div>
         )}
       </div>

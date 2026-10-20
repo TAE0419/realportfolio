@@ -15,7 +15,7 @@
 
             "explain": 
             {
-              "detail": "HTML, CSS, Javascript 활용"
+              "detail": "HTML, CSS, JavaScript 활용"
             },
 
             "thumbnail":"/frontend/calculator/product.png"
@@ -45,7 +45,7 @@
             "explain": 
             {
               "detail1": "펜 색상 변경, 배경 색상 변경, 선 굵기 조절, 지우기, 저장하기 기능이 구현되어 있습니다.",
-              "detail2": "HTML, CSS, Javascript 활용"
+              "detail2": "HTML, CSS, JavaScript 활용"
             },
 
             "thumbnail":"/frontend/drawing/product.png"
@@ -75,7 +75,7 @@
             "explain": 
             {
               "detail1": "서울, 부산, 인천, 대구의 실시간 날씨 정보와 이미지가 표시됩니다.",
-              "detail2": "HTML, CSS, Javascript, API 활용"
+              "detail2": "HTML, CSS, JavaScript, API 활용"
             },
 
             "thumbnail":"/frontend/weather/product.png"
@@ -105,7 +105,7 @@
             "explain":
             {
               "detail1": "검색 기능 및 매장 확인 가능한 지도 페이지입니다.",
-              "detail2": "HTML, CSS, Javascript, KAKAOMAP API 활용"
+              "detail2": "HTML, CSS, JavaScript, KAKAOMAP API 활용"
             },
 
             "thumbnail":"/frontend/map/product.png"
@@ -135,7 +135,7 @@
             "explain":
             {
               "detail": "LIV는 싱그러운 식물과 차분한 오브제로 일상에 작은 숲을 들이는 플랜트 쇼핑몰입니다.",
-              "detail2": "HTML, CSS, Javascript 활용"
+              "detail2": "HTML, CSS, JavaScript 활용"
             },
 
             "thumbnail":"/frontend/liv/product.png",
@@ -166,7 +166,7 @@
             "explain":
             {
               "detail": "특수목 전문 기업, 우딘의 웹페이지 구성을 모방하여 만든 사이트입니다.",
-              "detail2": "HTML, CSS, Javascript 활용"
+              "detail2": "HTML, CSS, JavaScript 활용"
             },
 
             "thumbnail":"/frontend/woodin/product.png",
@@ -198,7 +198,7 @@
             "explain":
             {
               "detail": "4명이 참여한 팀 프로젝트로, 웹디자인 컨셉 구축과 브랜드스토리 페이지 구현 및 팀장으로서의 팀원 매니징을 맡았습니다. 찜/장바구니 추가, 회원가입/로그인, 지도 API, 스크롤 애니메이션 등의 기능이 있습니다.",
-              "detail2": "HTML, CSS, Javascript, Canvas 활용"
+              "detail2": "HTML, CSS, JavaScript, Canvas 활용"
             },
 
             "thumbnail":"/frontend/forlog/product3.png",
@@ -276,7 +276,7 @@
             "explain":
             {
               "detail": "캔버스를 활용하여 벽돌 깨기 게임을 구현한 페이지입니다.",
-              "detail2": "HTML, CSS, Javascript, Canvas 활용"
+              "detail2": "HTML, CSS, JavaScript, Canvas 활용"
             },
 
             "thumbnail":"/frontend/brick/product.png"
@@ -452,7 +452,7 @@
             "explain":
             {
               "detail": "4명이 참여한 팀 프로젝트로, 메인 페이지 구현 및 팀장으로서의 팀원 매니징을 맡았습니다. 회원가입/로그인, 팔로우/좋아요/다운로드, 음원 재생 등의 기능이 있습니다.",
-              "detail2": "HTML, CSS, Javascript 활용"
+              "detail2": "HTML, CSS, JavaScript 활용"
             },
 
             "thumbnail":"/frontend/midnightchord/product.png",
@@ -525,7 +525,7 @@
 
             "explain":
             {
-              "detail": "5명이 참여한 팀 프로젝트로, 제품/이벤트 페이지 구현 및 전반적 관리를 수행했습니다. 회원가입/로그인, 취향 소집 및 AI 큐레이션, 주막 영업 게임, 룰렛/카드 맞추기/OX퀴즈 이벤트, 찜/장바구니 추가, 공지사항/문의 등의 기능이 있습니다.",
+              "detail": "5명이 참여한 팀 프로젝트로, 제품/이벤트 페이지 구현 및 전반적 관리를 수행했습니다. 회원가입/로그인, 취향 수집 및 AI 큐레이션, 주막 영업 게임, 룰렛/카드 맞추기/OX퀴즈 이벤트, 찜/장바구니 추가, 공지사항/문의 등의 기능이 있습니다.",
               "detail2": "HTML, SASS, React, Canvas 활용"
             },
 

@@ -1,4 +1,21 @@
 .viewport { position: relative; z-index: 2; width: 100%; min-width: 0; overflow: hidden; }
+.pause {
+  position: absolute;
+  top: 6px;
+  right: 10px;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--point-color);
+  border-radius: 50%;
+  background: var(--dark-color);
+  color: var(--point-color);
+  cursor: pointer;
+  &:hover, &:focus-visible { color: var(--white-color); border-color: var(--white-color); }
+}
 .track {
   display: flex;
   width: max-content;
@@ -36,6 +53,7 @@
   .reverse .thumbnail { border-radius: 0 20px 0 20px; }
 }
 @media (prefers-reduced-motion: reduce) {
+  .pause { display: none; }
   .viewport { overflow-x: auto; }
   .track { animation: none; }
   .group[aria-hidden='true'] { display: none; }

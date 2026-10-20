@@ -52,7 +52,7 @@ export default function PortfolioCard({ project, index, visible }) {
         <div className={styles.flipper}>
           <div className={`${styles.face} ${styles.front}`} aria-hidden={flipped}>
             {thumbnail.src && failedImage !== thumbnail.src
-              ? <img src={thumbnail.src} srcSet={thumbnail.srcSet} sizes="(max-width: 480px) 80vw, (max-width: 1100px) 40vw, 22vw" width={480} height={270} alt={title} decoding="async" onError={() => setFailedImage(thumbnail.src)} />
+              ? <img src={thumbnail.src} srcSet={thumbnail.srcSet} sizes="(max-width: 480px) 80vw, (max-width: 1100px) 40vw, 22vw" width={480} height={270} alt={title} loading={index < 4 ? 'eager' : 'lazy'} decoding="async" onError={() => setFailedImage(thumbnail.src)} />
               : <span className={styles.placeholder}>{title}</span>}
           </div>
           <div className={`${styles.face} ${styles.back}`} inert={!flipped} aria-hidden={!flipped}>

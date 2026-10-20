@@ -11,7 +11,7 @@
           "summary": "긴귀박쥐 스피커 로봇",
           "explain": {
             "detail":"동물 로봇화 프로젝트로, 긴귀박쥐의 외형적, 성향적 특징을 참고해 블루투스 스피커를 디자인하였습니다.",
-            "detail2":"Rhino, Keyshot, Illustrator 활용"
+            "detail2":"Rhino, KeyShot, Illustrator 활용"
           },
           "thumbnail": "/industrialdesign/industrialdesign/batguy/main.png"
         },
@@ -41,7 +41,7 @@
           "summary": "1인 가구의 식생활을 돕는 브랜드(TEAM)",
           "explain": {
             "detail":"4명이 참여한 팀프로젝트로, '갓밥'은 바쁜 현대인들이 직접 만든 건강한 식사를 하도록 도울 수 있는 방법을 제안합니다. 개인 아이템으로 다용도 냉동 야채를 간편하게 보관/사용할 수 있는 컨테이너 '포레시'를 디자인했습니다.",
-            "detail2":"Rhino, Keyshot, Indesign, Figma 활용"
+            "detail2":"Rhino, KeyShot, InDesign, Figma 활용"
           },
           "thumbnail": "/industrialdesign/industrialdesign/gotbob/product3.png",
           "thumbnail2": "/industrialdesign/industrialdesign/gotbob/product4.png",
@@ -104,7 +104,7 @@
           "summary": "독서 보조 용품(TEAM)",
           "explain": {
             "detail":"3명이 참여한 팀프로젝트로, '스밈'은 리딩테인먼트를 주제로 즐거운 독서 환경을 조성할 수 있는 독서 보조 용품 세트를 제안합니다.",
-            "detail2":"Rhino, Keyshot, Illustrator, Figma 활용"
+            "detail2":"Rhino, KeyShot, Illustrator, Figma 활용"
           },
           "thumbnail": "/industrialdesign/industrialdesign/smim/product2.png",
           "thumbnail2": "/industrialdesign/industrialdesign/smim/product.png"
@@ -154,7 +154,7 @@
           ]
         },
         "leaflet": {
-          "pageName": "리플렛",
+          "pageName": "리플릿",
           "images": [
             { "caption": "1", "url": "/industrialdesign/industrialdesign/smim/leaflet/1.png" },
             { "caption": "2", "url": "/industrialdesign/industrialdesign/smim/leaflet/2.png" }
@@ -179,7 +179,7 @@
           "summary": "직관적인 사용성의 정수기(TEAM)",
           "explain": {
             "detail":"5명이 참여한 팀프로젝트로, '틂'은 수도꼭지를 모티브로 누구나 쉽게 사용할 수 있는 1인 가구용 정수기를 제안합니다.",
-            "detail2":"Rhino, Keyshot, Illustrator 활용"
+            "detail2":"Rhino, KeyShot, Illustrator 활용"
           },
           "thumbnail": "/industrialdesign/industrialdesign/tlm/product5.png",
           "thumbnail2": "/industrialdesign/industrialdesign/tlm/product.png"
@@ -214,7 +214,7 @@
           "summary": "샤오미 프로모션 영상",
           "explain": {
             "detail":"샤오미의 깔끔하고 컴팩트한 외관, 간편한 성능을 강조한 프로모션 영상을 제작했습니다.",
-            "detail2":"Rhino, Keyshot, AfterEffect 활용"
+            "detail2":"Rhino, KeyShot, After Effects 활용"
           },
           "thumbnail": "/industrialdesign/industrialdesign/mi/product1.gif",
           "thumbnail2": "/industrialdesign/industrialdesign/mi/product3.png"
@@ -278,8 +278,8 @@
           "title": "NE",
           "summary": "전자기기 의존도 저하를 돕는 디지털 디톡스 제품(TEAM)",
           "explain": {
-            "detail":"5명이 참여한 팀프로젝트로, '네'는 디지털 중독 완화를 위해 일상 보조 기능을 탑제한 스마트폰 감옥을 제안합니다. 또한 개인 아이템으로 스마트폰 사용 루틴을 엄격히 관리하는 폭탄 AI 스피커, 'BOB'을 디자인하였습니다.",
-            "detail2":"Rhino, Keyshot, Illustrator, AfterEffect, Figma 활용"
+            "detail":"5명이 참여한 팀프로젝트로, '네'는 디지털 중독 완화를 위해 일상 보조 기능을 탑재한 스마트폰 감옥을 제안합니다. 또한 개인 아이템으로 스마트폰 사용 루틴을 엄격히 관리하는 폭탄 AI 스피커, 'BOB'을 디자인하였습니다.",
+            "detail2":"Rhino, KeyShot, Illustrator, After Effects, Figma 활용"
           },
           "thumbnail": "/industrialdesign/industrialdesign/ne/product4.png",
           "thumbnail2": "/industrialdesign/industrialdesign/ne/product3.png"
@@ -339,7 +339,7 @@
           ]
         },
         "leaflet": {
-          "pageName": "리플렛",
+          "pageName": "리플릿",
           "images": [
             { "caption": "1", "url": "/industrialdesign/industrialdesign/ne/leaflet/1.png" },
             { "caption": "2", "url": "/industrialdesign/industrialdesign/ne/leaflet/2.png" }
@@ -364,7 +364,7 @@
           "summary": "단청 모티브 화병(TEAM)",
           "explain": {
             "detail":"4명이 참여한 팀프로젝트로, 한국의 단청 문양을 활용하여 화병을 디자인했습니다. 또한 한국적인 육각 구조와 단청이 연상되는 색감의 패키지를 제작했습니다.",
-            "detail2":"Rhino, Keyshot 활용"
+            "detail2":"Rhino, KeyShot 활용"
           },
           "thumbnail": "/industrialdesign/industrialdesign/dancheong/product.jpg",
           "thumbnail2": "/industrialdesign/industrialdesign/dancheong/product2.jpg"
@@ -396,7 +396,7 @@
           "summary": "'조용한'여행을 돕는 패키지(TEAM)",
           "explain": {
             "detail":"4명이 참여한 팀프로젝트로, '뮤트'는 심리적으로 평온한 여행을 돕는 여행 키트를 제안합니다. 그중 보안을 키워드로 정해, 여행 중 일어날 수 있는 다양한 위험들을 사용자 대신 감지하는 'LOCKI'를 디자인했습니다.",
-            "detail2":"Rhino, Keyshot, Illustrator, AfterEffect, Figma 활용"
+            "detail2":"Rhino, KeyShot, Illustrator, After Effects, Figma 활용"
           },
           "thumbnail": "/industrialdesign/industrialdesign/mute/product3.png",
           "thumbnail2": "/industrialdesign/industrialdesign/mute/1.png"
@@ -432,7 +432,7 @@
           ]
         },
         "leaflet": {
-          "pageName": "리플렛",
+          "pageName": "리플릿",
           "images": [
             { "caption": "1", "url": "/industrialdesign/industrialdesign/mute/leaflet/1.png" },
             { "caption": "2", "url": "/industrialdesign/industrialdesign/mute/leaflet/2.png" },
@@ -467,7 +467,7 @@
           "summary": "아동용 흘림 방지 그릇 리디자인(TEAM)",
           "explain": {
             "detail":"4명이 참여한 팀프로젝트로 '그레이 그린'을 주제로 선정하고, 개인 아이템으로 아동용 흘림 방지 그릇을 시니어층에게 맞춰 적합한 CMF로 리디자인하는 작업을 진행했습니다. ",
-            "detail2":"Rhino, Keyshot, Photoshop, Figma 활용"
+            "detail2":"Rhino, KeyShot, Photoshop, Figma 활용"
           },
           "thumbnail": "/industrialdesign/industrialdesign/gyroball/product.png",
           "thumbnail2": "/industrialdesign/industrialdesign/gyroball/product4.png"
@@ -504,7 +504,7 @@
           "summary": "UFO 모티브 스피커 겸 독서등(TEAM)",
           "explain": {
             "detail":"4명이 참여한 팀프로젝트로, 아래 피규어를 넣어 UFO에게 납치되는 듯한 연출을 할 수 있는 독서용 투피스 스피커입니다. 패키지와 함께 디자인하여 실제로 작동하도록 목업을 진행했습니다.",
-            "detail2":"Rhino, Keyshot, Illustrator, AfterEffect, Figma 활용"
+            "detail2":"Rhino, KeyShot, Illustrator, After Effects, Figma 활용"
           },
           "thumbnail": "/industrialdesign/industrialdesign/uro/product2.png",
           "thumbnail2": "/industrialdesign/industrialdesign/uro/product.png"
@@ -576,8 +576,8 @@
           "title": "POCKETPOOPY",
           "summary": "반려견 배변 검사기",
           "explain": {
-            "detail":"4명이 참여한 팀프로젝트로, '키트-잇'은 중소형 숙소 운영자가 해당 지역의 특색을 담아 어메니티의 형태로 투숙객에게 제공할 수 있는 DIY 키트를 제안합니다. 다양하게 조합하여 활용할 수 있는 모듈 세트 'UNIT-', 원하는 재료와 모양으로 만들 수 있는 왁스타블렛 틀 'MIX-It'으로 이루어져있습니다.",
-            "detail2":"Rhino, Keyshot, Illustrator, AfterEffect, Figma 활용"
+            "detail":"다양한 AI 도구를 활용하여 제품 디자인을 진행하였습니다. '포켓푸피'는 변을 상시 관찰해 반려견의 건강을 예측합니다. 변을 채취한 칩을 삽입하여 더욱 정밀한 검사가 가능합니다.",
+            "detail2":"NotebookLM, NanoBanana, Viscom, Grog 등 활용"
           },
           "thumbnail": "/industrialdesign/industrialdesign/pocketpoopy/product.png",
           "thumbnail2": "/industrialdesign/industrialdesign/pocketpoopy/product2.png"
@@ -630,8 +630,8 @@
           "title": "KIT",
           "summary": "중소형 숙소용 로컬 어메니티 DIY 키트(TEAM)",
           "explain": {
-            "detail":"다양한 AI 도구를 활용하여 제품 디자인을 진행하였습니다. '포켓푸피'는 변을 상시 관찰해 반려견의 건강을 예측합니다. 변을 채취한 칩을 삽입하여 더욱 정밀한 검사가 가능합니다.",
-            "detail2":"NotebookLM, NanoBanana, Viscom, Grog 등 활용"
+            "detail":"4명이 참여한 팀프로젝트로, '키트-잇'은 중소형 숙소 운영자가 해당 지역의 특색을 담아 어메니티의 형태로 투숙객에게 제공할 수 있는 DIY 키트를 제안합니다. 다양하게 조합하여 활용할 수 있는 모듈 세트 'UNIT-', 원하는 재료와 모양으로 만들 수 있는 왁스타블렛 틀 'MIX-It'으로 이루어져있습니다.",
+            "detail2":"Rhino, KeyShot, Illustrator, After Effects, Figma 활용"
           },
           "thumbnail": "/industrialdesign/industrialdesign/kit/product.png",
           "thumbnail2": "/industrialdesign/industrialdesign/kit/product2.png"
@@ -694,7 +694,7 @@
           ]
         },
         "leaflet": {
-          "pageName": "리플렛",
+          "pageName": "리플릿",
           "images": [
             { "caption": "1", "url": "/industrialdesign/industrialdesign/kit/brochure.pdf" },
             { "caption": "2", "url": "/industrialdesign/industrialdesign/kit/brochure2.pdf" },

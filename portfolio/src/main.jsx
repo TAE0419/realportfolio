@@ -23,10 +23,20 @@ const Page = pathname === '/frontend'
       : App
 
 const initialLoading = needsInitialLoading()
-if (initialLoading) document.documentElement.setAttribute('data-initial-loading', '')
+if (initialLoading) {
+  document.documentElement.setAttribute('data-initial-loading', '')
+} else document.getElementById('boot-loader')?.remove()
 
-createRoot(document.getElementById(styles.rootId)).render(
-  <StrictMode>
-    <Site Page={Page} initialLoading={initialLoading} />
-  </StrictMode>,
-)
+const bootStyles = [...document.querySelectorAll('link[data-boot-stylesheet]')]
+Promise.all(bootStyles.filter(link => !link.sheet).map(link => new Promise(resolve => {
+  link.addEventListener('load', resolve, { once: true })
+  link.addEventListener('error', resolve, { once: true })
+}))).then(() => {
+  bootStyles.forEach(link => { link.media = 'all'; link.dataset.bootStylesheet = 'ready' })
+  if (initialLoading) window.dispatchEvent(new Event('portfolio-app-ready'))
+  createRoot(document.getElementById(styles.rootId)).render(
+    <StrictMode>
+      <Site Page={Page} initialLoading={initialLoading} />
+    </StrictMode>,
+  )
+})
